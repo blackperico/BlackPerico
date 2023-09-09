@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Perico</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="logo">
+        <a id='site-title' href="index.html">Black Perico</a>
+    </header>
+
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="./pages/shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+
+            </div>
+        </div>
+        
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="./pages/components/cpu.html">CPU</a></li>
+                <li><a href="./pages/components/gpu.html">GPU</a></li>
+                <li><a href="./pages/components/motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="./pages/peripherals/mouse.html">Mouse</a></li>
+                <li><a href="./pages/peripherals/keyboard.html">Keyboard</a></li>
+                <li><a href="./pages/peripherals/headphones.html">Headphones</a></li>
+                <li><a href="./pages/peripherals/speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+        <div id = "ad">
+            <img id="previous-image" src="images/ads/ad0.jpg" alt="ad pic">
+            <img id="ad-image" src="images/ads/ad0.jpg" alt="ad pic">
+            <div class="dots" data-id="0" style="background-color: #000;">
+            </div>
+            <div class="dots" data-id="1">
+            </div>
+            <div class="dots" data-id="2">
+            </div>
+        </div>
+
+        <div id="main-menu-text">
+            <h2>Choose your style: </h2>
+            <h2>Choose your power: </h2>
+        </div>
+        <div id="main-menu">
+            <div id="main-menu-peripherals">
+                <div id="peripherals-container">
+                    <h2><a href="./pages/peripherals.html">Peripherals</a></h2>
+                    <ul>
+                        <li><a href="./pages/peripherals/mouse.html">Mouse</a></li>
+                        <li><a href="./pages/peripherals/keyboard.html">Keyboard</a></li>
+                        <li><a href="./pages/peripherals/headphones.html">Headphones</a></li>
+                        <li><a href="./pages/peripherals/speakers.html">Speakers</a></li>
+                    </ul>
+                </div>
+                <img src="images/menuNav/peripherals.jpeg">
+            </div>
+
+            <div id="main-menu-components">
+                <div id="components-container">
+                    <h2><a href="./pages/components.html">Components</a></h2>
+                    <ul>
+                        <li><a href="./pages/components/cpu.html">CPU</a></li>
+                        <li><a href="./pages/components/gpu.html">GPU</a></li>
+                        <li><a href="./pages/components/motherboard.html">Motherboard</a></li>
+                    </ul>
+                </div>
+                <img src="images/menuNav/components.jpg">
+            </div>
+        </div>
+
+        <div id="cat-container">
+            <div id="cat-top">
+                <div id="cat-top-wrap">
+                    
+                </div>
+            </div>
+
+            <div id="cat-left" class="cat-side">
+                <div class="side-element" 
+                data-id="0"
+                data-price="12.99" 
+                data-text="An incredible open world experience, experience the life from perspective of an drengr! Advanced combat mechanics, immersive environment.">
+                    <p class="side-element-title">Assassin's Creed: Valhalla Wrath of Druids</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: Sony Entertainment, Ubisoft</p>
+                        <p class="side-element-tags">Genre: RPG, Action, Adventure, Open-World</p>
+                        <p class="side-element-release-date">Released: 27. Aug 2018</p>
+                    </div>
+                    <img src="./images/sideElement/valhalla.jpg" alt="AC Valhalla" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="1" 
+                data-price="9.99"
+                data-text="Tom Clancy's Ghost Recon Wildlands is a third-person tactical shooter video game developed by Ubisoft Paris in collaboration with Ubisoft Bucharest, Ubisoft Reflections, Ubisoft Montpellier, Ubisoft Annecy, Ubisoft Milan and Ubisoft Belgrade, and published by Ubisoft.">
+                    <p class="side-element-title">Ghost Recon's Wildlands</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: Sony Entertainment, Ubisoft</p>
+                        <p class="side-element-tags">Genre: Open-World, RPG, Shooter</p>
+                        <p class="side-element-release-date">Released: 14. Apr 2018</p>
+                    </div>
+                    <img src="./images/sideElement/wildlands.jpg" alt="Wildlands" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="2"
+                data-price="24.99"
+                data-text="WarCraft III: Reforged is a remastered edition of the 2002 real-time strategy video game Warcraft III: Reign of Chaos and its expansion The Frozen Throne. Released on January 28, 2020, it adds revamped graphics, new campaign gameplay settings as well as modern online Battle.net features.">
+                    <p class="side-element-title">Warcraft 3: Reforged</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: Blizzard Entertainment</p>
+                        <p class="side-element-tags">Genre: Strategy</p>
+                        <p class="side-element-release-date">Released: 18. Aug 2019</p>
+                    </div>
+                    <img src="./images/sideElement/warcraft3reforged.jpg" alt="Warcraft 3 Reforged" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="3"
+                data-price="39.99"
+                data-text="Dying Light 2 Stay Human is a 2022 action role-playing game developed and published by Techland. The sequel to Dying Light, the game was released on February 4, 2022 for PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S. A Nintendo Switch version for the cloud is in development.">
+                    <p class="side-element-title">Dying Light: 2 Stay Human Super</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: Techland</p>
+                        <p class="side-element-tags">Genre: Zombie Apocalypse, First-Person, RPG, Open-World</p>
+                        <p class="side-element-release-date">Released: 4. Feb 2022</p>
+                    </div>
+                    <img src="./images/sideElement/dyinglight2.jpg" alt="Dying Light 2" draggable="false">
+                </div>
+            </div>
+
+            <div id="cat-middle">
+                <div id="animation-container">
+                    <img src="">
+                    <div class="cat-title-container">
+                        <p class="cat-title"></p>
+                    </div>
+                    <button class="buy-button">Buy now
+                        <p class="price-prefix">Starting at</p><p class="cat-price">
+                            </p>
+                    </button>
+                    <p class="cat-text"></p>
+                </div>
+            </div>
+
+            <div id="cat-right" class="cat-side">
+                <div class="side-element"
+                data-id="4" 
+                data-price="9.99"
+                data-text="Soviet soul, post-nuclear apocalypse. Venture through undergrounds and radiated areas of mother Russia full of monsters and challenges.">
+                    <p class="side-element-title">Metro: Exodus</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: 4A Games</p>
+                        <p class="side-element-tags">Genre: Post-Nuclear, Apocalypse, Metro, Shooter</p>
+                        <p class="side-element-release-date">Released: 15. Feb 2019</p>
+                    </div>
+                    <img src="./images/sideElement/metroexodus.jpg" alt="Metro Exodus" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="5" 
+                data-price="7.99"
+                data-text="Metro: Last Light is a first-person shooter video game developed by 4A Games and published by Deep Silver for Microsoft Windows, PlayStation 3 and Xbox 360 in May 2013. A sequel to the video game Metro 2033, its story follows Artyom, a young soldier living in the Moscow Metro after a devastating nuclear war.">
+                    <p class="side-element-title">Metro: Last Light</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: 4A Games</p>
+                        <p class="side-element-tags">Genre: Post-Nuclear, Apocalypse, Metro, Shooter</p>
+                        <p class="side-element-release-date">Released: 15. Feb 2014</p>
+                    </div>
+                    <img src="./images/sideElement/metrolastlight.jpg" alt="Metro Last Light" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="6" 
+                data-price="4.99"
+                data-text="Metro 2033 is a Post-Apocalyptic Survival Horror and First Person Shooter video game based on the novel of the same name, Metro 2033, by Russian author Dmitry Glukhovsky.">
+                    <p class="side-element-title">Metro: 2033</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: 4A Games</p>
+                        <p class="side-element-tags">Genre: Post-Nuclear, Apocalypse, Metro, Shooter</p>
+                        <p class="side-element-release-date">Released: 16. Mar 2010</p>
+                    </div>
+                    <img src="./images/sideElement/metro2033.jpg" alt="Metro 2033" draggable="false">
+                </div>
+                <div class="side-element"
+                data-id="7" 
+                data-price="11.99"
+                data-text="Assassin's Creed Origins is a 2017 action role-playing video game developed by Ubisoft Montreal and published by Ubisoft. It is the tenth major installment in the Assassin's Creed series, following 2015's Assassin's Creed Syndicate.">
+                    <p class="side-element-title">Assassin's Creed Origins</p>
+                    <div class="side-element-wrap">
+                        <p class="side-element-developer">Developers: Ubisoft Montreal</p>
+                        <p class="side-element-tags">Genre: Open-World, RPG, Rogue-Like, Historical</p>
+                        <p class="side-element-release-date">Released: 27. Oct 2017</p>
+                    </div>
+                    <img src="./images/sideElement/origins.jpg" alt="AC Origins" draggable="false">
+                </div>
+            </div>
+        </div>
+        
+        <div id="category">
+            <div id="category-upper">
+                <div class="category-item"
+                data-price="&euro;249.99">
+                    <img src="./images/categoryItem/2060.jpg" alt="RTX 2060" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">RTX 2060 Asus TUF</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 14000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;349.99">
+                    <img src="./images/categoryItem/2070.jpg" alt="RTX 2070" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">RTX 2070 OC Gigabyte Nvision</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 8GB GDDR6</li>
+                            <li>GPU Boost Clock: 1885 MHz, GPU Base Clock: 1495</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 15000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;449.99">
+                    <img src="./images/categoryItem/2070ti.jpg" alt="RTX 2070Ti" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">RTX 2070-Ti Asus Republic of Gamers</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 12GB GDDR6</li>
+                            <li>GPU Boost Clock: 1985 MHz, GPU Base Clock: 1695</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 18000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;549.99">
+                    <img src="./images/categoryItem/2080.jpg" alt="RTX 2080" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">RTX 2080 MSI Gaming Z Trio</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 14000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="category-lower">
+                <div class="category-item"
+                data-price="&euro;269.99">
+                    <img src="./images/categoryItem/550.jpg" alt="RX 550" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">Radeon RX 550X</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 14000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;369.99">
+                    <img src="./images/categoryItem/560.jpg" alt="RX 560" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">Radeon RX 560X</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 16000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;469.99">
+                    <img src="./images/categoryItem/570.jpg" alt="RX 570" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">Radeon RX 570X</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 17000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+                <div class="category-item"
+                data-price="&euro;569.99">
+                    <img src="./images/categoryItem/580.jpg" alt="RX 580" draggable="false">
+                    <div class="specs">
+                        <p class="specs-title">Radeon RX 580X</p>
+                        <ul class="specs-desc">
+                            <li>Video Memory: 6GB GDDR6</li>
+                            <li>GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395</li>
+                            <li>CUDA Core: 1920</li>
+                            <li>Memory Speed: 19000 MHz</li>
+                            <li>Memory Interface: 192-bit</li>
+                        </ul>
+                        <button class="buy-button">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <img src="images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+    </main>
+</body>
+<script type="text/javascript" src="./scripts/index.js"></script>
+</html>

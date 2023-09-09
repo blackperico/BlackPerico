@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPU | Black Perico</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../../images/logo.png" alt="logo">
+        <a id='site-title' href="../../index.html">Black Perico</a>
+    </header>
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+                
+            </div>
+        </div>
+
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="./cpu.html">CPU</a></li>
+                <li><a href="./gpu.html">GPU</a></li>
+                <li><a href="./motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="../peripherals/mouse.html">Mouse</a></li>
+                <li><a href="../peripherals/keyboard.html">Keyboard</a></li>
+                <li><a href="../peripherals/headphones.html">Headphones</a></li>
+                <li><a href="../peripherals/speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../../index.html">Home</a> > <a href="../shop.html">Shop</a> > <a href="../components.html">Components</a> > <a href="#">GPU</a></p>
+            <h2>GPU</h2>
+        </div>
+
+        <section id="shop-wrap">
+            <div id="shop-container-filter">
+                <div id="close-filter"><span>Filters</span> <i class="fa fa-xmark"></i></div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Manufacturer<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer1" name="AMD"><label for="manufacturer1">AMD</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer2" name="NVidia"><label for="manufacturer2">NVidia</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Interface<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="interface1" name="PCI Express 2.0"><label for="interface1">PCI Express 2.0</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="interface2" name="PCI Express 3.0"><label for="interface2">PCI Express 3.0</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="interface3" name="PCI Express 4.0"><label for="interface3">PCI Express 4.0</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Memory Type<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="memory-type1" name="GDDR5"><label for="memory-type1">GDDR5</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-type2" name="GDDR5X"><label for="memory-type2">GDDR5X</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-type3" name="GDDR6"><label for="memory-type3">GDDR6</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-type4" name="GDDR6x"><label for="memory-type4">GDDR6x</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Video Memory<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory1" name="2GB"><label for="video-memory1">2GB</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory2" name="4GB"><label for="video-memory2">4GB</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory3" name="6GB"><label for="video-memory3">6GB</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory4" name="8GB"><label for="video-memory4">8GB</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory5" name="10GB"><label for="video-memory5">10GB</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="video-memory6" name="12GB"><label for="video-memory6">12GB</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Memory Bus<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus1" name="64bit"><label for="memory-bus1">64bit</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus2" name="128bit"><label for="memory-bus2">128bit</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus3" name="160bit"><label for="memory-bus3">160bit</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus4" name="192bit"><label for="memory-bus4">192bit</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus5" name="256bit"><label for="memory-bus5">256bit</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-bus6" name="320bit"><label for="memory-bus6">320bit</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">CUDA Processors<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors1" name="896"><label for="cuda-processors1">896</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors2" name="1024"><label for="cuda-processors2">1024</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors3" name="2560"><label for="cuda-processors3">2560</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors4" name="5888"><label for="cuda-processors4">5888</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors5" name="7680"><label for="cuda-processors5">7680</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="cuda-processors6" name="16384"><label for="cuda-processors6">16384</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Stream Processors<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors1" name="1024"><label for="stream-processors1">1024</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors2" name="2048"><label for="stream-processors2">2048</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors3" name="2560"><label for="stream-processors3">2560</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors4" name="3840"><label for="stream-processors4">3840</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors5" name="5120"><label for="stream-processors5">5120</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="stream-processors6" name="6144"><label for="stream-processors6">6144</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">VGA<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="vga1" name="1"><label for="vga1">1</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="vga2" name="No"><label for="vga2">No</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">DVI<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="dvi1" name="1"><label for="dvi1">1</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="dvi2" name="No"><label for="dvi2">No</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">HDMI<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="hdmi1" name="1"><label for="hdmi1">1</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="hdmi2" name="2"><label for="hdmi2">2</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="hdmi3" name="4"><label for="hdmi3">4</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="hdmi4" name="No"><label for="hdmi4">No</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">DisplayPort<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="display-port1" name="1"><label for="display-port1">1</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="display-port2" name="2"><label for="display-port2">2</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="display-port3" name="3"><label for="display-port3">3</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="display-port4" name="No"><label for="display-port4">No</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div id="shop-container">
+                <div id="filter-sort-wrap">
+                    <div id="sort-container">
+                        <select name="sort" id="sort">
+                            <option value="default">Sort by: </option>
+                            <option value="price-descending">Price Descending</option>
+                            <option value="price-ascending">Price Ascending</option>
+                        </select>
+                    </div>
+                    <p class="remove-filters">Remove filters</p>
+                    <div id="filter-container">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 3.0"
+                data-memory-type="gddr5x"
+                data-video-memory="4gb"
+                data-memory-bus="160bit"
+                data-cuda-processors="2560"
+                data-stream-processors="2048"
+                data-vga="1"
+                data-dvi="1"
+                data-hdmi="1"
+                data-displayport="no"
+                >
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 2060</p>
+                        <p class = "product-price">249.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 3.0"
+                data-memory-type="gddr5x"
+                data-video-memory="6gb"
+                data-memory-bus="160bit"
+                data-cuda-processors="2560"
+                data-stream-processors="2048"
+                data-vga="no"
+                data-dvi="1"
+                data-hdmi="1"
+                data-displayport="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 2070</p>
+                        <p class = "product-price">329.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero error accusantium odit iure velit! Accusantium itaque hic quo fuga delectus nesciunt dolorum dicta eligendi, ab explicabo aspernatur? Est, pariatur sunt! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 3.0"
+                data-memory-type="gddr5x"
+                data-video-memory="6gb"
+                data-memory-bus="192bit"
+                data-cuda-processors="2560"
+                data-stream-processors="3840"
+                data-vga="no"
+                data-dvi="1"
+                data-hdmi="no"
+                data-displayport="1">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 2070Ti</p>
+                        <p class = "product-price">399.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 3.0"
+                data-memory-type="gddr5x"
+                data-video-memory="8gb"
+                data-memory-bus="192bit"
+                data-cuda-processors="2560"
+                data-stream-processors="3840"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="2"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 2080</p>
+                        <p class = "product-price">499.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit ducimus placeat minus dolores illum? Unde, vel atque ullam repudiandae, quia neque amet similique sequi, sint a itaque. Laboriosam, labore accusamus? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6"
+                data-video-memory="4gb"
+                data-memory-bus="160bit"
+                data-cuda-processors="2560"
+                data-stream-processors="2560"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="2"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 3050</p>
+                        <p class = "product-price">229.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit ducimus placeat minus dolores illum? Unde, vel atque ullam repudiandae, quia neque amet similique sequi, sint a itaque. Laboriosam, labore accusamus? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6"
+                data-video-memory="8gb"
+                data-memory-bus="256bit"
+                data-cuda-processors="5888"
+                data-stream-processors="5120"
+                data-vga="no"
+                data-dvi="1"
+                data-hdmi="1"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 3060</p>
+                        <p class = "product-price">539.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6"
+                data-video-memory="8gb"
+                data-memory-bus="320bit"
+                data-cuda-processors="7680"
+                data-stream-processors="5120"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="2"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 3070</p>
+                        <p class = "product-price">729.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero error accusantium odit iure velit! Accusantium itaque hic quo fuga delectus nesciunt dolorum dicta eligendi, ab explicabo aspernatur? Est, pariatur sunt! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6"
+                data-video-memory="12gb"
+                data-memory-bus="320bit"
+                data-cuda-processors="16384"
+                data-stream-processors="6144"
+                data-vga="no"
+                data-dvi="1"
+                data-hdmi="1"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 3080</p>
+                        <p class = "product-price">1199.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="2gb"
+                data-memory-bus="64bit"
+                data-cuda-processors="896"
+                data-stream-processors="1024"
+                data-vga="1"
+                data-dvi="1"
+                data-hdmi="no"
+                data-displayport="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 1060</p>
+                        <p class = "product-price">139.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="4gb"
+                data-memory-bus="128bit"
+                data-cuda-processors="1024"
+                data-stream-processors="2560"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="4"
+                data-displayport="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 1070</p>
+                        <p class = "product-price">199.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="nvidia"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="10gb"
+                data-memory-bus="128bit"
+                data-cuda-processors="2560"
+                data-stream-processors="2560"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="no"
+                data-displayport="3">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RTX 1080</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="2gb"
+                data-memory-bus="64bit"
+                data-cuda-processors="896"
+                data-stream-processors="1024"
+                data-vga="1"
+                data-dvi="1"
+                data-hdmi="no"
+                data-displayport="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 7600</p>
+                        <p class = "product-price">239.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="4gb"
+                data-memory-bus="128bit"
+                data-cuda-processors="5888"
+                data-stream-processors="2560"
+                data-vga="1"
+                data-dvi="1"
+                data-hdmi="2"
+                data-displayport="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 7900 XT</p>
+                        <p class = "product-price">239.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="10gb"
+                data-memory-bus="256bit"
+                data-cuda-processors="7680"
+                data-stream-processors="5120"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="4"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 6500 XT</p>
+                        <p class = "product-price">389.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 2.0"
+                data-memory-type="gddr5"
+                data-video-memory="8gb"
+                data-memory-bus="128bit"
+                data-cuda-processors="5888"
+                data-stream-processors="2560"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="2"
+                data-displayport="2">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 6650 XT</p>
+                        <p class = "product-price">459.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6x"
+                data-video-memory="10gb"
+                data-memory-bus="256bit"
+                data-cuda-processors="5888"
+                data-stream-processors="2560"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="4"
+                data-displayport="1">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 6700 XT</p>
+                        <p class = "product-price">689.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="amd"
+                data-interface="pci express 4.0"
+                data-memory-type="gddr6x"
+                data-video-memory="12gb"
+                data-memory-bus="320bit"
+                data-cuda-processors="16384"
+                data-stream-processors="6144"
+                data-vga="no"
+                data-dvi="no"
+                data-hdmi="4"
+                data-displayport="3">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">RX 6950 XT</p>
+                        <p class = "product-price">239.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <footer>
+            <img src="../../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+        <div id="overlay"></div>
+    </main>
+</body>
+<script type="text/javascript" src="../../scripts/shop.js"></script>
+</html>

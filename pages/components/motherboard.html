@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motherboards | Black Perico</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../../images/logo.png" alt="logo">
+        <a id='site-title' href="../../index.html">Black Perico</a>
+    </header>
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+                
+            </div>
+        </div>
+
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="./cpu.html">CPU</a></li>
+                <li><a href="./gpu.html">GPU</a></li>
+                <li><a href="./motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="../peripherals/mouse.html">Mouse</a></li>
+                <li><a href="../peripherals/keyboard.html">Keyboard</a></li>
+                <li><a href="../peripherals/headphones.html">Headphones</a></li>
+                <li><a href="../peripherals/speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../../index.html">Home</a> > <a href="../shop.html">Shop</a> > <a href="../components.html">Components</a> > <a href="#">Motherboards</a></p>
+            <h2>Motherboards</h2>
+        </div>
+
+        <section id="shop-wrap">
+            <div id="shop-container-filter">
+                <div id="close-filter"><span>Filters</span> <i class="fa fa-xmark"></i></div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Manufacturer<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer1" name="Asus"><label for="manufacturer1">Asus</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer2" name="MSI"><label for="manufacturer2">MSI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer3" name="Gigabyte"><label for="manufacturer3">Gigabyte</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer4" name="AS Rock"><label for="manufacturer4">AS Rock</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Processor Type<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type1" name="Intel"><label for="processor-type1">Intel</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type2" name="AMD"><label for="processor-type2">AMD</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Socket<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="socket1" name="1151"><label for="socket1">Intel&#174; 1151(8th and 9th gen.)</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket2" name="1200"><label for="socket2">Intel&#174; 1200</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket3" name="1700"><label for="socket3">Intel&#174; 1700</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket4" name="AM4"><label for="socket4">AMD&#174; AM4</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket5" name="AM5"><label for="socket5">AMD&#174; AM5</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Chipset<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="chipset1" name="Z490"><label for="chipset1">Intel&#174; Z490</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="chipset2" name="B560"><label for="chipset2">Intel&#174; B560</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="chipset3" name="H670"><label for="chipset3">Intel&#174; H670</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="chipset4" name="B550"><label for="chipset4">AMD&#174; B550</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="chipset5" name="B650"><label for="chipset5">AMD&#174; B650</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Form Factor<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="form-factor1" name="Mini ITX"><label for="form-factor1">Mini ITX</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="form-factor2" name="Micro ATX"><label for="form-factor2">Micro ATX</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="form-factor3" name="ATX"><label for="form-factor3">ATX</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="form-factor4" name="E-ATX"><label for="form-factor4">E-ATX</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Memory Support<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="memory-support1" name="DDR3"><label for="memory-support1">DDR3</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-support2" name="DDR4"><label for="memory-support2">DDR4</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="memory-support3" name="DDR5"><label for="memory-support3">DDR5</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Dual Channel<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="dual-channel1" name="Yes"><label for="dual-channel1">Yes</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="dual-channel2" name="No"><label for="dual-channel2">No</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shop-container">
+                <div id="filter-sort-wrap">
+                    <div id="sort-container">
+                        <select name="sort" id="sort">
+                            <option value="default">Sort by: </option>
+                            <option value="price-descending">Price Descending</option>
+                            <option value="price-ascending">Price Ascending</option>
+                        </select>
+                    </div>
+                    <p class="remove-filters">Remove filters</p>
+                    <div id="filter-container">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="product"
+                data-manufacturer="asus"
+                data-processor-type="intel"
+                data-socket="1151"
+                data-chipset="z490"
+                data-form-factor="atx"
+                data-memory-support="DDR4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus Prime Z490M-Plus D4</p>
+                        <p class = "product-price">389.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-processor-type="intel"
+                data-socket="1700"
+                data-chipset="b560"
+                data-form-factor="e-atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus TUF B560M-Plus</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="h670"
+                data-form-factor="mini itx"
+                data-memory-support="ddr4"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus Prime H670M-Plus D4</p>
+                        <p class = "product-price">189.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="b550"
+                data-form-factor="micro atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus Prime B550-Plus D8</p>
+                        <p class = "product-price">129.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-processor-type="amd"
+                data-socket="am5"
+                data-chipset="z650"
+                data-form-factor="atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus Prime B650-Plus D2</p>
+                        <p class = "product-price">109.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="msi"
+                data-processor-type="intel"
+                data-socket="1200"
+                data-chipset="z490"
+                data-form-factor="e-atx"
+                data-memory-support="ddr4"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">MSI Prime Z490M-Plus D4</p>
+                        <p class = "product-price">389.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="msi"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="b560"
+                data-form-factor="mini itx"
+                data-memory-support="ddr3"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">MSI TUF B560M-Plus</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="msi"
+                data-processor-type="amd"
+                data-socket="am5"
+                data-chipset="h670"
+                data-form-factor="micro atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">MSI Prime H670M-Plus D4</p>
+                        <p class = "product-price">189.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="msi"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="b550"
+                data-form-factor="e-atx"
+                data-memory-support="ddr3"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">MSI Prime B550-Plus D8</p>
+                        <p class = "product-price">129.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="msi"
+                data-processor-type="amd"
+                data-socket="am5"
+                data-chipset="b650"
+                data-form-factor="atx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">MSI Prime B650-Plus D2</p>
+                        <p class = "product-price">109.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="gigabyte"
+                data-processor-type="intel"
+                data-socket="1700"
+                data-chipset="z490"
+                data-form-factor="atx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Gigabyte Prime Z490M-Plus D4</p>
+                        <p class = "product-price">389.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="gigabyte"
+                data-processor-type="intel"
+                data-socket="1200"
+                data-chipset="b560"
+                data-form-factor="mini itx"
+                data-memory-support="ddr4"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Gigabyte TUF B560M-Plus</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="gigabyte"
+                data-processor-type="intel"
+                data-socket="1700"
+                data-chipset="h670"
+                data-form-factor="micro atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Gigabyte Prime H670M-Plus D4</p>
+                        <p class = "product-price">189.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="gigabyte"
+                data-processor-type="intel"
+                data-socket="1151"
+                data-chipset="b550"
+                data-form-factor="atx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Gigabyte Prime B550-Plus D8</p>
+                        <p class = "product-price">129.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="gigabyte"
+                data-processor-type="intel"
+                data-socket="1200"
+                data-chipset="b650"
+                data-form-factor="mini itx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Gigabyte Prime B650-Plus D2</p>
+                        <p class = "product-price">109.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="as rock"
+                data-processor-type="intel"
+                data-socket="1700"
+                data-chipset="z490"
+                data-form-factor="atx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AS Rock Prime Z490M-Plus D4</p>
+                        <p class = "product-price">389.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="as rock"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="b560"
+                data-form-factor="micro atx"
+                data-memory-support="ddr4"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AS Rock TUF B560M-Plus</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="as rock"
+                data-processor-type="amd"
+                data-socket="am5"
+                data-chipset="h670"
+                data-form-factor="e-atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AS Rock Prime H670M-Plus D4</p>
+                        <p class = "product-price">189.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="as rock"
+                data-processor-type="amd"
+                data-socket="am4"
+                data-chipset="b550"
+                data-form-factor="mini itx"
+                data-memory-support="ddr4"
+                data-dual-channel="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AS Rock Prime B550-Plus D8</p>
+                        <p class = "product-price">129.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="as rock"
+                data-processor-type="amd"
+                data-socket="am5"
+                data-chipset="b650"
+                data-form-factor="atx"
+                data-memory-support="ddr5"
+                data-dual-channel="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AS Rock Prime B650-Plus D2</p>
+                        <p class = "product-price">109.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <footer>
+            <img src="../../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+        <div id="overlay"></div>
+    </main>
+</body>
+<script type="text/javascript" src="../../scripts/shop.js"></script>
+</html>

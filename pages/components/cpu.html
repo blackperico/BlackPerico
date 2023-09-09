@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU | Black Perico</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../../images/logo.png" alt="logo">
+        <a id='site-title' href="../../index.html">Black Perico</a>
+    </header>
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+                
+            </div>
+        </div>
+
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="./cpu.html">CPU</a></li>
+                <li><a href="./gpu.html">GPU</a></li>
+                <li><a href="./motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="../peripherals/mouse.html">Mouse</a></li>
+                <li><a href="../peripherals/keyboard.html">Keyboard</a></li>
+                <li><a href="../peripherals/headphones.html">Headphones</a></li>
+                <li><a href="../peripherals/speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../../index.html">Home</a> > <a href="../shop.html">Shop</a> > <a href="../components.html">Components</a> > <a href="#">CPU</a></p>
+            <h2>CPU</h2>
+        </div>
+
+        <section id="shop-wrap">
+            <div id="shop-container-filter">
+                <div id="close-filter"><span>Filters</span> <i class="fa fa-xmark"></i></div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Manufacturer<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer1" name="Ryzen"><label for="manufacturer1">Ryzen</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer2" name="Intel"><label for="manufacturer2">Intel</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Socket<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="socket1" name="LGA 1700"><label for="socket1">LGA 1700</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket2" name="LGA 1200"><label for="socket2">LGA 1200</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket3" name="LGA 1151"><label for="socket3">LGA 1151</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="socket4" name="AM4"><label for="socket4">AM4</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Processor Type<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type1" name="i3"><label for="processor-type1">Intel&#174; Core&#8482; i3</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type2" name="i5"><label for="processor-type2">Intel&#174; Core&#8482; i5</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type3" name="i7"><label for="processor-type3">Intel&#174; Core&#8482; i7</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type4" name="i9"><label for="processor-type4">Intel&#174; Core&#8482; i9</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type5" name="ryzen 3"><label for="processor-type5">AMD&#174; Ryzen 3</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type6" name="ryzen 5"><label for="processor-type6">AMD&#174; Ryzen 5</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type7" name="ryzen 7"><label for="processor-type7">AMD&#174; Ryzen 7</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="processor-type8" name="ryzen 9"><label for="processor-type8">AMD&#174; Ryzen 9</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Core Number<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="core-number1" name="2"><label for="core-number1">2</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number2" name="4"><label for="core-number2">4</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number3" name="6"><label for="core-number3">6</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number4" name="8"><label for="core-number4">8</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number5" name="10"><label for="core-number5">10</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number6" name="12"><label for="core-number6">12</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number7" name="16"><label for="core-number7">16</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="core-number8" name="24"><label for="core-number8">24</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Threads<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="threads1" name="2"><label for="threads1">2</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="threads2" name="4"><label for="threads2">4</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="threads3" name="8"><label for="threads3">8</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="threads4" name="12"><label for="threads4">12</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="threads5" name="16"><label for="threads5">16</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="threads6" name="20"><label for="threads6">20</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Frequency<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="frequency1" name="3.2GHz"><label for="frequency1">3.2GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="frequency2" name="3.4GHz"><label for="frequency2">3.4GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="frequency3" name="3.6GHz"><label for="frequency3">3.6GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="frequency4" name="3.8GHz"><label for="frequency4">3.8GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="frequency5" name="4.0GHz"><label for="frequency5">4.0GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="frequency6" name="4.1GHz"><label for="frequency6">4.1GHz</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Turbo Frequency<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency1" name="4.4GHz"><label for="turbo-frequency1">4.4GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency2" name="4.6GHz"><label for="turbo-frequency2">4.6GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency3" name="4.8GHz"><label for="turbo-frequency3">4.8GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency4" name="5.0GHz"><label for="turbo-frequency4">5.0GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency5" name="5.2GHz"><label for="turbo-frequency5">5.2GHz</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="turbo-frequency6" name="5.4GHz"><label for="turbo-frequency6">5.4GHz</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shop-container">
+                <div id="filter-sort-wrap">
+                    <div id="sort-container">
+                        <select name="sort" id="sort">
+                            <option value="default">Sort by: </option>
+                            <option value="price-descending">Price Descending</option>
+                            <option value="price-ascending">Price Ascending</option>
+                        </select>
+                    </div>
+                    <p class="remove-filters">Remove filters</p>
+                    <div id="filter-container">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1700"
+                data-processor-type="i7"
+                data-core-number="16"
+                data-threads="16">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I7-11700</p>
+                        <p class = "product-price">499.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum dicta culpa quisquam expedita et! Recusandae, accusamus! Tempore saepe cum quo labore repellendus similique aliquam provident.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1200"
+                data-processor-type="i7"
+                data-core-number="16"
+                data-threads="16"
+                data-frequency="3.8ghz"
+                data-turbo-frequency="4.8ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I7-10700K</p>
+                        <p class = "product-price">399.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1151"
+                data-processor-type="i7"
+                data-core-number="12"
+                data-threads="12"
+                data-frequency="3.6ghz"
+                data-turbo-frequency="4.8ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I7-11700KF</p>
+                        <p class = "product-price">349.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, maiores?</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1700"
+                data-processor-type="i5"
+                data-core-number="8"
+                data-threads="4"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I5-11700K</p>
+                        <p class = "product-price">299.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat vel ab cumque praesentium molestiae rem.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1200"
+                data-processor-type="i5"
+                data-core-number="6"
+                data-threads="2"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I5-10700</p>
+                        <p class = "product-price">199.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis sapiente neque optio repudiandae aliquid, alias maxime ullam dolore voluptatibus asperiores.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1151"
+                data-processor-type="i5"
+                data-core-number="4"
+                data-threads="2"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.6ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I5-11700KF</p>
+                        <p class = "product-price">149.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas commodi fuga repellendus omnis iure soluta numquam ipsum eos facilis ipsam? Beatae, non suscipit modi repellendus dignissimos facilis voluptatum nihil eaque?</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1700"
+                data-processor-type="i9"
+                data-core-number="24"
+                data-threads="20"
+                data-frequency="4.1ghz"
+                data-turbo-frequency="5.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I9-11700K</p>
+                        <p class = "product-price">699.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam similique asperiores id esse labore saepe consequatur perferendis cupiditate aliquid doloremque officia a molestias, officiis magni molestiae odit, eaque iusto qui!</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1200"
+                data-processor-type="i9"
+                data-core-number="24"
+                data-threads="20"
+                data-frequency="4.0ghz"
+                data-turbo-frequency="5.0ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I9-11700KF</p>
+                        <p class = "product-price">539.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quae esse rerum! Deleniti expedita quia magnam ex non, culpa impedit animi similique dolorum porro aliquam! Ducimus cumque sunt quo odio corrupti, illum fuga debitis cupiditate.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1151"
+                data-processor-type="i9"
+                data-core-number="24"
+                data-threads="16"
+                data-frequency="4.0ghz"
+                data-turbo-frequency="5.2ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I9-10700</p>
+                        <p class = "product-price">379.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet repellendus consequatur nulla minima ad dolorem maiores ipsam ex molestias eveniet incidunt, alias quisquam nemo nesciunt id, cum aperiam iusto aut eaque optio iure, asperiores voluptates ab! Ex ratione fuga molestias.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1700"
+                data-processor-type="i7"
+                data-core-number="12"
+                data-threads="12"
+                data-frequency="3.8ghz"
+                data-turbo-frequency="5.0ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I7-9900K</p>
+                        <p class = "product-price">379.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="intel"
+                data-socket="lga 1151"
+                data-processor-type="i3"
+                data-core-number="2"
+                data-threads="2"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">I3-10105</p>
+                        <p class = "product-price">79.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 7"
+                data-core-number="12"
+                data-threads="8"
+                data-frequency="3.6ghz"
+                data-turbo-frequency="4.6ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 7 7700</p>
+                        <p class = "product-price">449.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 7"
+                data-core-number="10"
+                data-threads="16"
+                data-frequency="3.8ghz"
+                data-turbo-frequency="4.6ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 7 7800</p>
+                        <p class = "product-price">569.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 5"
+                data-core-number="6"
+                data-threads="4"
+                data-frequency="3.4ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 5 3400G</p>
+                        <p class = "product-price">101.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 9"
+                data-core-number="16"
+                data-threads="8"
+                data-frequency="4.0ghz"
+                data-turbo-frequency="5.2ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 9 7900</p>
+                        <p class = "product-price">599.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 7"
+                data-core-number="12"
+                data-threads="8"
+                data-frequency="3.8ghz"
+                data-turbo-frequency="5.0ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 7 7700X</p>
+                        <p class = "product-price">499.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 5"
+                data-core-number="8"
+                data-threads="4"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.6ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 5 5600</p>
+                        <p class = "product-price">199.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 9"
+                data-core-number="24"
+                data-threads="20"
+                data-frequency="4.1ghz"
+                data-turbo-frequency="5.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 9 5950X</p>
+                        <p class = "product-price">649.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 5"
+                data-core-number="8"
+                data-threads="4"
+                data-frequency="3.6ghz"
+                data-turbo-frequency="4.6ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 5 3500X</p>
+                        <p class = "product-price">209.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 5"
+                data-core-number="6"
+                data-threads="2"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 5 5500</p>
+                        <p class = "product-price">139.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 5"
+                data-core-number="4"
+                data-threads="2"
+                data-frequency="3.4ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 5 4500G</p>
+                        <p class = "product-price">129.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="ryzen"
+                data-socket="am4"
+                data-processor-type="ryzen 3"
+                data-core-number="2"
+                data-threads="2"
+                data-frequency="3.2ghz"
+                data-turbo-frequency="4.4ghz">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">AMD Ryzen 3 4100</p>
+                        <p class = "product-price">59.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit cupiditate temporibus quod itaque? Commodi ex ducimus consequuntur libero officia impedit, saepe illo sed placeat maiores earum repudiandae fugit voluptate mollitia non expedita dolore, odit facere voluptates, vero recusandae eos inventore iste dignissimos? Omnis adipisci dignissimos obcaecati asperiores laboriosam eveniet est, quos eius exercitationem illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <footer>
+            <img src="../../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+        <div id="overlay"></div>
+    </main>
+</body>
+<script type="text/javascript" src="../../scripts/shop.js"></script>
+</html>

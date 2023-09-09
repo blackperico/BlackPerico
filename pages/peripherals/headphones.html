@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headphones | Black Perico</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../../images/logo.png" alt="logo">
+        <a id='site-title' href="../../index.html">Black Perico</a>
+    </header>
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+                
+            </div>
+        </div>
+
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="../components/cpu.html">CPU</a></li>
+                <li><a href="../components/gpu.html">GPU</a></li>
+                <li><a href="../components/motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="./mouse.html">Mouse</a></li>
+                <li><a href="./keyboard.html">Keyboard</a></li>
+                <li><a href="./headphones.html">Headphones</a></li>
+                <li><a href="./speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../../index.html">Home</a> > <a href="../shop.html">Shop</a> > <a href="../peripherals.html">Peripherals</a> > <a href="#">Headphones</a></p>
+            <h2>Headphones</h2>
+        </div>
+
+        <section id="shop-wrap">
+            <div id="shop-container-filter">
+                <div id="close-filter"><span>Filters</span> <i class="fa fa-xmark"></i></div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Manufacturer<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer1" name="A4 Tech"><label for="manufacturer1">A4 Tech</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer2" name="Asus"><label for="manufacturer2">Asus</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer3" name="Beats"><label for="manufacturer3">Beats</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer4" name="Celly"><label for="manufacturer4">Celly</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer5" name="JBL"><label for="manufacturer5">JBL</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Type<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="type1" name="Wired"><label for="type1">Wired</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="type2" name="Wireless"><label for="type2">Wireless</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Color<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="color1" name="Black"><label for="color1">Black</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color2" name="Gray"><label for="color2">Gray</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color3" name="White"><label for="color3">White</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color4" name="Red"><label for="color4">Red</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color5" name="Blue"><label for="color5">Blue</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color6" name="Green"><label for="color6">Green</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="color7" name="Yellow"><label for="color7">Yellow</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Noice-Cancelling<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="noice-cancelling1" name="Yes"><label for="noice-cancelling1">Yes</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="noice-cancelling2" name="No"><label for="noice-cancelling2">No</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Microphone Positioning<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="microphone-positioning1" name="On Headphones"><label for="microphone-positioning1">On Headphones</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="microphone-positioning2" name="On Cabel"><label for="microphone-positioning2">On Cabel</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="microphone-positioning3" name="On Handle"><label for="microphone-positioning3">On Handle</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shop-container">
+                <div id="filter-sort-wrap">
+                    <div id="sort-container">
+                        <select name="sort" id="sort">
+                            <option value="default">Sort by: </option>
+                            <option value="price-descending">Price Descending</option>
+                            <option value="price-ascending">Price Ascending</option>
+                        </select>
+                    </div>
+                    <p class="remove-filters">Remove filters</p>
+                    <div id="filter-container">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wired"
+                data-color="black"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech FStyler</p>
+                        <p class = "product-price">32.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wireless"
+                data-color="gray"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech G573</p>
+                        <p class = "product-price">51.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wired"
+                data-color="white"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on handle">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech J200S</p>
+                        <p class = "product-price">29.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wireless"
+                data-color="red"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech G528C</p>
+                        <p class = "product-price">62.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wired"
+                data-color="blue"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech BH300</p>
+                        <p class = "product-price">42.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-type="wireless"
+                data-color="green"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus ROG Cetra</p>
+                        <p class = "product-price">132.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-type="wired"
+                data-color="yellow"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on handle">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus ROG Delta S</p>
+                        <p class = "product-price">212.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-type="wireless"
+                data-color="black"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus TUF H3</p>
+                        <p class = "product-price">102.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-type="wired"
+                data-color="gray"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus TUF H1</p>
+                        <p class = "product-price">54.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="asus"
+                data-type="wireless"
+                data-color="white"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Asus ROG Fusion II 300</p>
+                        <p class = "product-price">152.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="beats"
+                data-type="wired"
+                data-color="red"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Beats Studio TWS</p>
+                        <p class = "product-price">232.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="beats"
+                data-type="wireless"
+                data-color="blue"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on handle">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Beats Fit Pro TWS</p>
+                        <p class = "product-price">352.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="beats"
+                data-type="wired"
+                data-color="green"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Beats Solo3</p>
+                        <p class = "product-price">332.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="beats"
+                data-type="wireless"
+                data-color="yellow"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on handle">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Beats Flex All Day</p>
+                        <p class = "product-price">99.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="celly"
+                data-type="wired"
+                data-color="black"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Celly Slide 1</p>
+                        <p class = "product-price">52.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="celly"
+                data-type="wireless"
+                data-color="gray"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Celly CyberWired</p>
+                        <p class = "product-price">26.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="celly"
+                data-type="wired"
+                data-color="white"
+                data-noice-cancelling="no"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Celly Shape1</p>
+                        <p class = "product-price">46.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="celly"
+                data-type="wired"
+                data-color="red"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Celly Ultrabeat ANC</p>
+                        <p class = "product-price">99.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="jbl"
+                data-type="wireless"
+                data-color="blue"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">JBL Reflect Mini TWS</p>
+                        <p class = "product-price">199.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="jbl"
+                data-type="wired"
+                data-color="green"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on headphones">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">JBL Tune Flex</p>
+                        <p class = "product-price">119.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="jbl"
+                data-type="wireless"
+                data-color="yellow"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on cabel">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">JBL Tour one</p>
+                        <p class = "product-price">289.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="jbl"
+                data-type="wireless"
+                data-color="black"
+                data-noice-cancelling="yes"
+                data-microphone-positioning="on handle">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">JBL Quantum 910P</p>
+                        <p class = "product-price">399.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <footer>
+            <img src="../../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+        <div id="overlay"></div>
+    </main>
+</body>
+<script type="text/javascript" src="../../scripts/shop.js"></script>
+</html>

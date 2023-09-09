@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components | Black Perico</title>
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="logo">
+        <a id='site-title' href="../index.html">Black Perico</a>
+    </header>
+
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+
+            </div>
+        </div>
+        
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="./components/cpu.html">CPU</a></li>
+                <li><a href="./components/gpu.html">GPU</a></li>
+                <li><a href="./components/motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="./peripherals/mouse.html">Mouse</a></li>
+                <li><a href="./peripherals/keyboard.html">Keyboard</a></li>
+                <li><a href="./peripherals/headphones.html">Headphones</a></li>
+                <li><a href="./peripherals/speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../index.html">Home</a> > <a href="./shop.html">Shop</a> > <a href="./components.html">Components</a></p>
+            <h2>Components</h2>
+        </div>
+        
+        <div id="comper-wrap">
+            <a href="./components/cpu.html">
+                <div class="comper-item">
+                    <h3>CPU</h3>
+                    <img src="../images/components/cpu.jpg">
+                </div>
+            </a>
+            <a href="./components/gpu.html">
+                <div class="comper-item">
+                    <h3>GPU</h3>
+                    <img src="../images/components/gpu.jpg">
+                </div>
+            </a>
+            <a href="./components/motherboard.html">
+                <div class="comper-item">
+                    <h3>Motherboards</h3>
+                    <img src="../images/components/motherboard.jpg">
+                </div>
+            </a>
+        </div>
+
+        <footer>
+            <img src="../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+    </main>
+</body>
+<script type="text/javascript" src="../scripts/comper.js"></script>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouses | Black Perico</title>
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Architects Daughter">
+</head>
+<body>
+    <header>
+        <img src="../../images/logo.png" alt="logo">
+        <a id='site-title' href="../../index.html">Black Perico</a>
+    </header>
+    <nav>
+        <ul>
+            <li>Menu<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"/></svg></li>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><input type="text" id="search" value="Search..."></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="cart">
+            <i class="fa fa-cart-shopping"></i>
+            <p id="cart-count"></p>
+            <div id="cart-block">
+                
+            </div>
+        </div>
+
+        <div id = "menu">
+            <div class = "menu-element" tabindex="0">
+                <p>PC Components</p>
+            </div>
+            <ul class = "menu-drop-down">
+                <li><a href="../components/cpu.html">CPU</a></li>
+                <li><a href="../components/gpu.html">GPU</a></li>
+                <li><a href="../components/motherboard.html">Motherboard</a></li>
+            </ul>
+            <div class = "menu-element" tabindex="0">
+                <p>Peripherals</p>
+            </div>
+            <ul class="menu-drop-down">
+                <li><a href="./mouse.html">Mouse</a></li>
+                <li><a href="./keyboard.html">Keyboard</a></li>
+                <li><a href="./headphones.html">Headphones</a></li>
+                <li><a href="./speakers.html">Speakers</a></li>
+            </ul>
+        </div>
+
+        <div id="above-shop">
+            <p class="nav-path"><a href="../../index.html">Home</a> > <a href="../shop.html">Shop</a> > <a href="../peripherals.html">Peripherals</a> > <a href="#">Mouses</a></p>
+            <h2>Mouses</h2>
+        </div>
+
+        <section id="shop-wrap">
+            <div id="shop-container-filter">
+                <div id="close-filter"><span>Filters</span> <i class="fa fa-xmark"></i></div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Manufacturer<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer1" name="Logitech"><label for="manufacturer1">Logitech</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer2" name="A4 Tech"><label for="manufacturer2">A4 Tech</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer3" name="Genesis"><label for="manufacturer3">Genesis</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="manufacturer4" name="HP"><label for="manufacturer4">HP</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Type<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="type1" name="Wired"><label for="type1">Wired</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="type2" name="Wireless"><label for="type2">Wireless</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Sensor<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="sensor1" name="Optical"><label for="sensor1">Optical</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="sensor2" name="Laser"><label for="sensor2">Laser</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Resolution<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="resolution1" name="1000"><label for="resolution1">1000 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution2" name="1200"><label for="resolution2">1200 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution3" name="1600"><label for="resolution3">1600 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution4" name="3000"><label for="resolution4">3000 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution5" name="3200"><label for="resolution5">3200 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution6" name="3600"><label for="resolution6">3600 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution7" name="7200"><label for="resolution7">7200 DPI</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="resolution8" name="8200"><label for="resolution8">8200 DPI</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Button Number<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="button-number1" name="3"><label for="button-number1">3 buttons</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="button-number2" name="5"><label for="button-number2">5 buttons</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="button-number3" name="6"><label for="button-number3">6 buttons</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="button-number4" name="7"><label for="button-number4">7 buttons</label></div>
+                    </div>
+                </div>
+                <div class="collapsible">
+                    <span class="collapsible-trigger">Background Light<i class="fa fa-caret-up"></i></span>
+                    <div class="collapsible-content">
+                        <div class="collapsible-item"><input type="checkbox" id="background-light1" name="Yes"><label for="background-light1">Yes</label></div>
+                        <div class="collapsible-item"><input type="checkbox" id="background-light2" name="No"><label for="background-light2">No</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="shop-container">
+                <div id="filter-sort-wrap">
+                    <div id="sort-container">
+                        <select name="sort" id="sort">
+                            <option value="default">Sort by: </option>
+                            <option value="price-descending">Price Descending</option>
+                            <option value="price-ascending">Price Ascending</option>
+                        </select>
+                    </div>
+                    <p class="remove-filters">Remove filters</p>
+                    <div id="filter-container">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="product"
+                data-manufacturer="logitech"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="1000"
+                data-button-number="3"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Logitech M330 Silent Plus</p>
+                        <p class = "product-price">42.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="logitech"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="1200"
+                data-button-number="5"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Logitech G502 X Plus</p>
+                        <p class = "product-price">183.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quis magni laudantium obcaecati. Quia necessitatibus quas laboriosam, quam iusto iure odit temporibus consequatur saepe consequuntur et ducimus quibusdam minus nostrum? illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="logitech"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="1600"
+                data-button-number="6"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Logitech Pebble M350</p>
+                        <p class = "product-price">24.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="3000"
+                data-button-number="7"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech W60</p>
+                        <p class = "product-price">38.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="3200"
+                data-button-number="3"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech J95s</p>
+                        <p class = "product-price">39.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="3600"
+                data-button-number="5"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech OP-720</p>
+                        <p class = "product-price">4.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="7200"
+                data-button-number="6"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech X5</p>
+                        <p class = "product-price">52.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="a4 tech"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="8200"
+                data-button-number="7"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">A4 Tech Wireless FG30S</p>
+                        <p class = "product-price">14.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic numquam odit tenetur, quasi odio distinctio officiis, reiciendis autem tempore harum dolorum expedita sit quisquam maxime quibusdam dolores quia perspiciatis. Ipsa.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="genesis"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="1000"
+                data-button-number="3"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Genesis Xenon 200</p>
+                        <p class = "product-price">20.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="genesis"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="1200"
+                data-button-number="5"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Genesis Krypton 700</p>
+                        <p class = "product-price">47.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="genesis"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="1600"
+                data-button-number="6"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Genesis Krypton 110</p>
+                        <p class = "product-price">12.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="genesis"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="3000"
+                data-button-number="7"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">Genesis Xenon 750</p>
+                        <p class = "product-price">48.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="hp"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="3200"
+                data-button-number="3"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">HP X220</p>
+                        <p class = "product-price">21.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="hp"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="3600"
+                data-button-number="5"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">HP Spectre 700</p>
+                        <p class = "product-price">69.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quis magni laudantium obcaecati. Quia necessitatibus quas laboriosam, quam iusto iure odit temporibus consequatur saepe consequuntur et ducimus quibusdam minus nostrum? illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="hp"
+                data-type="wired"
+                data-sensor="optical"
+                data-resolution="7200"
+                data-button-number="6"
+                data-background-light="no">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">HP 250</p>
+                        <p class = "product-price">23.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quis magni laudantium obcaecati. Quia necessitatibus quas laboriosam, quam iusto iure odit temporibus consequatur saepe consequuntur et ducimus quibusdam minus nostrum? illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+                <div class="product"
+                data-manufacturer="hp"
+                data-type="wireless"
+                data-sensor="laser"
+                data-resolution="8200"
+                data-button-number="7"
+                data-background-light="yes">
+                    <img src = "">
+                    <div class = "product-info">
+                        <p class = "product-name">HP Omen Vector</p>
+                        <p class = "product-price">39.99&euro;</p>
+                    </div>
+                    <div class = "desc-container">
+                        <p class = "product-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quis magni laudantium obcaecati. Quia necessitatibus quas laboriosam, quam iusto iure odit temporibus consequatur saepe consequuntur et ducimus quibusdam minus nostrum? illo minima repellat nam nisi quis! Ab praesentium iste quod maxime incidunt odit dolor eaque. Deserunt, praesentium.</p>
+                    </div>
+                    <div class = "button-container">
+                        <button>Order</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <footer>
+            <img src="../../images/logo.png" alt="BlackPerico logo" draggable="false">
+            <div id="right-footer">
+                <h1>Electronics</h1>
+                <h2>BlackPerico</h2>
+                <p>Location: Bar, Susanj 420</p>
+                <p>Tel: 068-430-139</p>
+            </div>
+        </footer>
+        <div id="overlay"></div>
+    </main>
+</body>
+<script type="text/javascript" src="../../scripts/shop.js"></script>
+</html>
