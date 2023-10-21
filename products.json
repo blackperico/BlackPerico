@@ -1,5 +1,5 @@
 {
-    "games": [
+    "gamesContainer": [
         {
             "attributes": {
                 "data-id": "",
@@ -120,5 +120,6 @@
                 "alt": "Assassin's Creed Origins"
             }
         }
-    ]
+    ],
+    "SomeOtherStuff": {}
 }
