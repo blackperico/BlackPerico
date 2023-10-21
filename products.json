@@ -1,0 +1,124 @@
+{
+    "games": [
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "12.99",
+                "data-text": "An incredible open world experience, experience the life from perspective of an drengr! Advanced combat mechanics, immersive environment."
+            },
+            "title": "Assassin's Creed: Valhalla Wrath of Druids",
+            "developers": "Developers: Sony Entertainment, Ubisoft",
+            "genre": "Genre: RPG, Action, Adventure, Open-World",
+            "date": "Released: 27. Aug 2018",
+            "image": {
+                "src": "./images/sideElement/valhalla.jpg",
+                "alt": "Assassin's Creed: Valhalla Wrath of Druids"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "9.99",
+                "data-text": "Tom Clancy's Ghost Recon Wildlands is a third-person tactical shooter video game developed by Ubisoft Paris in collaboration with Ubisoft Bucharest, Ubisoft Reflections, Ubisoft Montpellier, Ubisoft Annecy, Ubisoft Milan and Ubisoft Belgrade, and published by Ubisoft."
+            },
+            "title": "Ghost Recon's Wildlands",
+            "developers": "Developers: Sony Entertainment, Ubisoft",
+            "genre": "Genre: Open-World, RPG, Shooter",
+            "date": "Released: 14. Apr 2018",
+            "image": {
+                "src": "./images/sideElement/wildlands.jpg",
+                "alt": "Ghost Recon's Wildlands"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "24.99",
+                "data-text": "WarCraft III: Reforged is a remastered edition of the 2002 real-time strategy video game Warcraft III: Reign of Chaos and its expansion The Frozen Throne. Released on January 28, 2020, it adds revamped graphics, new campaign gameplay settings as well as modern online Battle.net features."
+            },
+            "title": "Warcraft 3: Reforged",
+            "developers": "Developers: Blizzard Entertainment",
+            "genre": "Genre: Strategy",
+            "date": "Released: 18. Aug 2019",
+            "image": {
+                "src": "./images/sideElement/warcraft3reforged.jpg",
+                "alt": "Warcraft 3: Reforged"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "39.99",
+                "data-text": "Dying Light 2 Stay Human is a 2022 action role-playing game developed and published by Techland. The sequel to Dying Light, the game was released on February 4, 2022 for PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S. A Nintendo Switch version for the cloud is in development."
+            },
+            "title": "Dying Light: 2 Stay Human Super",
+            "developers": "Developers: Techland",
+            "genre": "Genre: Zombie Apocalypse, First-Person, RPG, Open-World",
+            "date": "Released: 4. Feb 2022",
+            "image": {
+                "src": "./images/sideElement/dyinglight2.jpg",
+                "alt": "Dying Light 2 Stay  Human"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "9.99",
+                "data-text": "Soviet soul, post-nuclear apocalypse. Venture through undergrounds and radiated areas of mother Russia full of monsters and challenges."
+            },
+            "title": "Metro: Exodus",
+            "developers": "Developers: 4A Games",
+            "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
+            "date": "Released: 15. Feb 2019",
+            "image": {
+                "src": "./images/sideElement/metroexodus.jpg",
+                "alt": "Metro: Exodus"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "7.99",
+                "data-text": "Metro: Last Light is a first-person shooter video game developed by 4A Games and published by Deep Silver for Microsoft Windows, PlayStation 3 and Xbox 360 in May 2013. A sequel to the video game Metro 2033, its story follows Artyom, a young soldier living in the Moscow Metro after a devastating nuclear war."
+            },
+            "title": "Metro: Last Light",
+            "developers": "Developers: 4A Games",
+            "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
+            "date": "Released: 15. Feb 2014",
+            "image": {
+                "src": "./images/sideElement/metrolastlight.jpg",
+                "alt": "Metro: Last Light"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "4.99",
+                "data-text": "Metro 2033 is a Post-Apocalyptic Survival Horror and First Person Shooter video game based on the novel of the same name, Metro 2033, by Russian author Dmitry Glukhovsky."
+            },
+            "title": "Metro: 2033",
+            "developers": "Developers: 4A Games",
+            "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
+            "date": "Released: 16. Mar 2010",
+            "image": {
+                "src": "./images/sideElement/metro2033.jpg",
+                "alt": "Metro: 2033"
+            }
+        },
+        {
+            "attributes": {
+                "data-id": "",
+                "data-price": "11.99",
+                "data-text": "Assassin's Creed Origins is a 2017 action role-playing video game developed by Ubisoft Montreal and published by Ubisoft. It is the tenth major installment in the Assassin's Creed series, following 2015's Assassin's Creed Syndicate."
+            },
+            "title": "Assassin's Creed Origins",
+            "developers": "Developers: Ubisoft Montreal",
+            "genre": "Genre: Open-World, RPG, Rogue-Like, Historical",
+            "date": "Released: 27. Oct 2017",
+            "image": {
+                "src": "./images/sideElement/origins.jpg",
+                "alt": "Assassin's Creed Origins"
+            }
+        }
+    ]
+}
