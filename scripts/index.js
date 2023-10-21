@@ -129,8 +129,9 @@
         }
     });
 }
-/* Side elements JSON */
+/* Side elements JSON insertion */
 {
+    const gamesTop = document.querySelector('#games-top-wrap');
     const catLeft = document.querySelector('#cat-left');
     const catRight = document.querySelector('#cat-right');
     function createSideElementGames(index, game) {
@@ -148,9 +149,9 @@
         newDate.classList.add('side-element-release-date');
         const newImg = document.createElement('img');
 
-        newSideElement.setAttribute('data-id', ``);
-        newSideElement.setAttribute('data-id', ``);
-        newSideElement.setAttribute('data-id', ``);
+        newSideElement.setAttribute('data-id', `${index}`);
+        newSideElement.setAttribute('data-price', `${game.attributes.price}`);
+        newSideElement.setAttribute('data-text', `${game.attributes.text}`);
         newTitle.innerText = game.title;
         newDeveloper.innerText = game.developers;
         newGenre.innerText = game.genre;
@@ -159,10 +160,11 @@
         newImg.setAttribute('draggable', 'false');
         newImg.setAttribute('alt', `${game.image.alt}`);
 
+        
         if(index < 4)
-            catLeft.prepend(newSideElement);
+            catLeft.append(newSideElement);
             else
-            catRight.prepend(newSideElement);
+            catRight.append(newSideElement);
 
         newSideElement.append(newTitle);
         newSideElement.append(newWrap);
@@ -187,186 +189,184 @@
 {
     window.addEventListener("DOMContentLoaded", () => {
         const sideElements = document.querySelectorAll('.side-element');
-    sideElements.forEach(function(sideElement) {
-        let increment = 0, titleTimeOut;
-        let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-        let sideElementTitle = sideElement.querySelector('.side-element-title');
-        let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-        let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-        let mouseOverSideElement = function(e) {
-            clearTimeout(titleTimeOut);
-            sideElementTitle.style.transform = `translateX(${increment}px)`;
-            increment--;
-            titleTimeOut = setTimeout(mouseOverSideElement, 20);
-            if(increment <= (sideElementTitleOffset))
+        /* Title scroll */
+        sideElements.forEach(function(sideElement) {
+            let increment = 0, titleTimeOut;
+            let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+            let sideElementTitle = sideElement.querySelector('.side-element-title');
+            let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+            let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
+            let mouseOverSideElement = function(e) {
                 clearTimeout(titleTimeOut);
-        };
-        let mouseLeaveSideElement = function() {
-            clearTimeout(titleTimeOut);
-            sideElementTitle.style.transform = `translateX(${increment}px)`;
-            increment++;
-            titleTimeOut = setTimeout(mouseLeaveSideElement, 20);
-                if(increment >= 0)
+                sideElementTitle.style.transform = `translateX(${increment}px)`;
+                increment--;
+                titleTimeOut = setTimeout(mouseOverSideElement, 15);
+                if(increment <= (sideElementTitleOffset))
                     clearTimeout(titleTimeOut);
-        };
-        if(sideElementTitleOffset < 0) 
-        {
-            sideElement.addEventListener('mouseenter', mouseOverSideElement)
-            sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
-        }
-
-        window.addEventListener('resize', function(e) {
-            sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-            sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-            sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-            if(sideElementTitleOffset < 0) {
+            };
+            let mouseLeaveSideElement = function() {
+                clearTimeout(titleTimeOut);
+                sideElementTitle.style.transform = `translateX(${increment}px)`;
+                increment++;
+                titleTimeOut = setTimeout(mouseLeaveSideElement, 15);
+                    if(increment >= 0)
+                        clearTimeout(titleTimeOut);
+            };
+            if(sideElementTitleOffset < 0) 
+            {
                 sideElement.addEventListener('mouseenter', mouseOverSideElement)
                 sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
             }
-            else 
-            {
-                sideElement.removeEventListener('mouseenter', mouseOverSideElement)
-                sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
-            }
-        });
-    });
 
-    /* Need to change only .cat-middle-children-animation transition duration in CSS if subject to change */
-    document.querySelector('.side-element').classList.add('side-element-loading');
-    let timerLoop = getComputedStyle(document.querySelector('.side-element')).animationDuration;
-    timerLoop = timerLoop.replace('s', '') * 1000;
-    document.querySelector('.side-element').classList.replace('side-element-loading', 'side-element-selected-loading');
-    let timerSelect = getComputedStyle(document.querySelector('.side-element')).animationDuration;
-    timerSelect = timerSelect.replace('s', '') * 1000;
-    document.querySelector('.side-element').className = 'side-element';
-    
-    const catMiddle = document.querySelector('#cat-middle'), catMiddleImg = catMiddle.querySelector('img'), catMiddleTitle = catMiddle.querySelector('.cat-title'), catMiddlePrice = catMiddle.querySelector('.cat-price'), catMiddleText = catMiddle.querySelector('.cat-text');
-    const animationContainer = document.querySelector('#animation-container');
-    let loopThrough, sideElementId = 0;
-    let info = {
-        src: undefined,
-        title: undefined,
-        price: undefined,
-        text: undefined,
-    };
-    function catMiddleAnimation() {
-        catMiddleText.className = 'cat-text';
-        catMiddlePrice.className = 'cat-price';
-        animationContainer.className = '';
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                animationContainer.classList.add('cat-middle-animation');
-                catMiddleText.classList.add('cat-middle-children-animation');
-                catMiddlePrice.classList.add('cat-middle-children-animation');
-            })
-        })
-    }
-    function loopSelect(sideElementId) {
-        sideElements.forEach(sideElement => sideElement.className = 'side-element');
-        requestAnimationFrame(() => {
-            sideElements[sideElementId].classList.add('side-element-loading');
+            window.addEventListener('resize', function(e) {
+                sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+                sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+                sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
+                if(sideElementTitleOffset < 0) {
+                    sideElement.addEventListener('mouseenter', mouseOverSideElement)
+                    sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
+                }
+                else 
+                {
+                    sideElement.removeEventListener('mouseenter', mouseOverSideElement)
+                    sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
+                }
+            });
         });
-    };
-    function userSelect() {
-        sideElements.forEach((sideElement) => sideElement.className = 'side-element')
-        requestAnimationFrame(() => {
-            sideElements[sideElementId].classList.add('side-element-selected-loading');
-        });
-    };
-    function modifyCatMiddle (info) {
-        catMiddleAnimation()
-        catMiddleImg.src = info.src;
-        catMiddleTitle.innerHTML = info.title;
-        catMiddlePrice.innerHTML = info.price;
-        catMiddleText.innerHTML = info.text;
-    };
-    function collectInfo() {
-        info = {
-            src: sideElements[sideElementId].querySelector('img').src,
-            title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
-            price: sideElements[sideElementId].getAttribute('data-price'),
-            text: sideElements[sideElementId].getAttribute('data-text'),
+
+        /* Need to change only .cat-middle-children-animation transition duration in CSS if subject to change */
+        document.querySelector('.side-element').classList.add('side-element-loading');
+        let timerLoop = getComputedStyle(document.querySelector('.side-element')).animationDuration;
+        timerLoop = timerLoop.replace('s', '') * 1000;
+        document.querySelector('.side-element').classList.replace('side-element-loading', 'side-element-selected-loading');
+        let timerSelect = getComputedStyle(document.querySelector('.side-element')).animationDuration;
+        timerSelect = timerSelect.replace('s', '') * 1000;
+        document.querySelector('.side-element').className = 'side-element';
+        
+        const catMiddle = document.querySelector('#cat-middle'), catMiddleImg = catMiddle.querySelector('img'), catMiddleTitle = catMiddle.querySelector('.cat-title'), catMiddlePrice = catMiddle.querySelector('.cat-price'), catMiddleText = catMiddle.querySelector('.cat-text');
+        const animationContainer = document.querySelector('#animation-container');
+        let loopThrough, sideElementId = 0;
+        let info = {
+            src: undefined,
+            title: undefined,
+            price: undefined,
+            text: undefined,
         };
-        modifyCatMiddle(info);
-    };
-    function iterateOver() {
-        collectInfo();
-        loopSelect(sideElementId);
-        if(sideElementId < sideElements.length - 1)
-            sideElementId++;
-        else
-            sideElementId = 0;
-        loopThrough = setTimeout(() => iterateOver(), timerLoop);
-    };
-    iterateOver();
-
-    sideElements.forEach(function(sideElement) {
-        sideElement.addEventListener('click', (e) => {
-            sideElementId = sideElement.getAttribute('data-id');
-            collectInfo();
-            userSelect();
-            clearTimeout(loopThrough);
-            loopThrough = setTimeout(() => {
-                if(sideElementId < sideElements.length - 1)
-                    sideElementId++;
-                else
-                    sideElementId = 0;
-                iterateOver();
-            }, timerSelect);
-        });
-    });
-    /* Responsiveness */
-    const sides = document.querySelectorAll('.cat-side'), gamesTopWrap = document.querySelector('#games-top-wrap'), gamesTop = document.querySelector('#games-top');
-    const gamesTopWrapWidth = Number(getComputedStyle(gamesTopWrap).width.replace('px', ''));
-    let catTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), isClicked, drag = 0;
-    
-    gamesTop.addEventListener('mousedown', () => {
-        isClicked = 1;
-    });
-    window.addEventListener('mouseup', () => {
-        isClicked = 0;
-    });
-    window.addEventListener('mousemove', (e) => {
-        if(isClicked == 1 && drag >= -(1795 - catTopWidth) && drag <= 0)
-        {
-            gamesTopWrap.style.transform = `translateX(${drag}px)`;
-            drag = drag + e.movementX;
-            if(drag > 0)
-                drag = 0;
-            if(drag < -(1795 - catTopWidth))
-                drag = -(1795 - catTopWidth);
+        function catMiddleAnimation() {
+            catMiddleText.className = 'cat-text';
+            catMiddlePrice.className = 'cat-price';
+            animationContainer.className = '';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    animationContainer.classList.add('cat-middle-animation');
+                    catMiddleText.classList.add('cat-middle-children-animation');
+                    catMiddlePrice.classList.add('cat-middle-children-animation');
+                })
+            })
         }
-    });
-
-    window.addEventListener('DOMContentLoaded', (e) => {
-        if(window.innerWidth < 894)
-            {
-                sideElements.forEach((sideElement) => {
-                gamesTopWrap.append(sideElement);
-                });
-            }
-    });
-    window.addEventListener('resize', (e) => {
-        if(drag <= -(1795 - catTopWidth))
-            drag = -(1795 - catTopWidth - 1);
-        gamesTopWrap.style.transform = `translateX(${drag}px)`;
-        catTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', ''));
-        if(window.innerWidth <= 894 && getComputedStyle(gamesTop).display == 'block')
-            {
-                sideElements.forEach((sideElement) => {
-                gamesTopWrap.append(sideElement);
-                });
-            }
+        function loopSelect(sideElementId) {
+            sideElements.forEach(sideElement => sideElement.className = 'side-element');
+            requestAnimationFrame(() => {
+                sideElements[sideElementId].classList.add('side-element-loading');
+            });
+        };
+        function userSelect() {
+            sideElements.forEach((sideElement) => sideElement.className = 'side-element')
+            requestAnimationFrame(() => {
+                sideElements[sideElementId].classList.add('side-element-selected-loading');
+            });
+        };
+        function modifyCatMiddle (info) {
+            catMiddleAnimation()
+            catMiddleImg.src = info.src;
+            catMiddleTitle.innerHTML = info.title;
+            catMiddlePrice.innerHTML = info.price;
+            catMiddleText.innerHTML = info.text;
+        };
+        function collectInfo() {
+            info = {
+                src: sideElements[sideElementId].querySelector('img').src,
+                title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
+                price: sideElements[sideElementId].getAttribute('data-price').replace('', '&euro;'),
+                text: sideElements[sideElementId].getAttribute('data-text'),
+            };
+            modifyCatMiddle(info);
+        };
+        function iterateOver() {
+            collectInfo();
+            loopSelect(sideElementId);
+            if(sideElementId < sideElements.length - 1)
+                sideElementId++;
             else
+                sideElementId = 0;
+            loopThrough = setTimeout(() => iterateOver(), timerLoop);
+        };
+        iterateOver();
+
+        sideElements.forEach(function(sideElement) {
+            sideElement.addEventListener('click', (e) => {
+                sideElementId = sideElement.getAttribute('data-id');
+                collectInfo();
+                userSelect();
+                clearTimeout(loopThrough);
+                loopThrough = setTimeout(() => {
+                    if(sideElementId < sideElements.length - 1)
+                        sideElementId++;
+                    else
+                        sideElementId = 0;
+                    iterateOver();
+                }, timerSelect);
+            });
+        });
+        /* Responsiveness */
+        const sides = document.querySelectorAll('.cat-side'), gamesTopWrap = document.querySelector('#games-top-wrap'), gamesTop = document.querySelector('#games-top');
+        const gamesTopWrapWidth = Number(getComputedStyle(gamesTopWrap).width.replace('px', ''));
+        let catTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), isClicked, drag = 0;
+        
+        gamesTop.addEventListener('mousedown', () => {
+            isClicked = 1;
+        });
+        window.addEventListener('mouseup', () => {
+            isClicked = 0;
+        });
+        window.addEventListener('mousemove', (e) => {
+            if(isClicked == 1 && drag >= -(1795 - catTopWidth) && drag <= 0)
             {
-                for(let i = 0; i < 4; i++) {
-                    sides[0].append(sideElements[i]);
-                }
-                for(let i = 4; i < 8; i++) {
-                    sides[1].append(sideElements[i]);
-                }
+                gamesTopWrap.style.transform = `translateX(${drag}px)`;
+                drag = drag + e.movementX;
+                if(drag > 0)
+                    drag = 0;
+                if(drag < -(1795 - catTopWidth))
+                    drag = -(1795 - catTopWidth);
             }
-    });
+        });
+        window.addEventListener('load', (e) => {
+            if(window.innerWidth < 895)
+                sideElements.forEach((sideElement) => {
+                    gamesTopWrap.append(sideElement);
+                })
+        });
+        window.addEventListener('resize', (e) => {
+            if(drag <= -(1795 - catTopWidth))
+                drag = -(1795 - catTopWidth - 1);
+            gamesTopWrap.style.transform = `translateX(${drag}px)`;
+            catTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', ''));
+            if(window.innerWidth <= 894 && getComputedStyle(gamesTop).display == 'block')
+                {
+                    sideElements.forEach((sideElement) => {
+                    gamesTopWrap.append(sideElement);
+                    });
+                }
+                else
+                {
+                    for(let i = 0; i < 4; i++) {
+                        sides[0].append(sideElements[i]);
+                    }
+                    for(let i = 4; i < 8; i++) {
+                        sides[1].append(sideElements[i]);
+                    }
+                }
+        });
     });
     
 }

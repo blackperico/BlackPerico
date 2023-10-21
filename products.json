@@ -2,9 +2,9 @@
     "gamesContainer": [
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "12.99",
-                "data-text": "An incredible open world experience, experience the life from perspective of an drengr! Advanced combat mechanics, immersive environment."
+                "id": "",
+                "price": "12.99",
+                "text": "An incredible open world experience, experience the life from perspective of an drengr! Advanced combat mechanics, immersive environment."
             },
             "title": "Assassin's Creed: Valhalla Wrath of Druids",
             "developers": "Developers: Sony Entertainment, Ubisoft",
@@ -17,9 +17,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "9.99",
-                "data-text": "Tom Clancy's Ghost Recon Wildlands is a third-person tactical shooter video game developed by Ubisoft Paris in collaboration with Ubisoft Bucharest, Ubisoft Reflections, Ubisoft Montpellier, Ubisoft Annecy, Ubisoft Milan and Ubisoft Belgrade, and published by Ubisoft."
+                "id": "",
+                "price": "9.99",
+                "text": "Tom Clancy's Ghost Recon Wildlands is a third-person tactical shooter video game developed by Ubisoft Paris in collaboration with Ubisoft Bucharest, Ubisoft Reflections, Ubisoft Montpellier, Ubisoft Annecy, Ubisoft Milan and Ubisoft Belgrade, and published by Ubisoft."
             },
             "title": "Ghost Recon's Wildlands",
             "developers": "Developers: Sony Entertainment, Ubisoft",
@@ -32,9 +32,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "24.99",
-                "data-text": "WarCraft III: Reforged is a remastered edition of the 2002 real-time strategy video game Warcraft III: Reign of Chaos and its expansion The Frozen Throne. Released on January 28, 2020, it adds revamped graphics, new campaign gameplay settings as well as modern online Battle.net features."
+                "id": "",
+                "price": "24.99",
+                "text": "WarCraft III: Reforged is a remastered edition of the 2002 real-time strategy video game Warcraft III: Reign of Chaos and its expansion The Frozen Throne. Released on January 28, 2020, it adds revamped graphics, new campaign gameplay settings as well as modern online Battle.net features."
             },
             "title": "Warcraft 3: Reforged",
             "developers": "Developers: Blizzard Entertainment",
@@ -47,9 +47,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "39.99",
-                "data-text": "Dying Light 2 Stay Human is a 2022 action role-playing game developed and published by Techland. The sequel to Dying Light, the game was released on February 4, 2022 for PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S. A Nintendo Switch version for the cloud is in development."
+                "id": "",
+                "price": "39.99",
+                "text": "Dying Light 2 Stay Human is a 2022 action role-playing game developed and published by Techland. The sequel to Dying Light, the game was released on February 4, 2022 for PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S. A Nintendo Switch version for the cloud is in development."
             },
             "title": "Dying Light: 2 Stay Human Super",
             "developers": "Developers: Techland",
@@ -62,9 +62,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "9.99",
-                "data-text": "Soviet soul, post-nuclear apocalypse. Venture through undergrounds and radiated areas of mother Russia full of monsters and challenges."
+                "id": "",
+                "price": "9.99",
+                "text": "Soviet soul, post-nuclear apocalypse. Venture through undergrounds and radiated areas of mother Russia full of monsters and challenges."
             },
             "title": "Metro: Exodus",
             "developers": "Developers: 4A Games",
@@ -77,9 +77,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "7.99",
-                "data-text": "Metro: Last Light is a first-person shooter video game developed by 4A Games and published by Deep Silver for Microsoft Windows, PlayStation 3 and Xbox 360 in May 2013. A sequel to the video game Metro 2033, its story follows Artyom, a young soldier living in the Moscow Metro after a devastating nuclear war."
+                "id": "",
+                "price": "7.99",
+                "text": "Metro: Last Light is a first-person shooter video game developed by 4A Games and published by Deep Silver for Microsoft Windows, PlayStation 3 and Xbox 360 in May 2013. A sequel to the video game Metro 2033, its story follows Artyom, a young soldier living in the Moscow Metro after a devastating nuclear war."
             },
             "title": "Metro: Last Light",
             "developers": "Developers: 4A Games",
@@ -92,9 +92,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "4.99",
-                "data-text": "Metro 2033 is a Post-Apocalyptic Survival Horror and First Person Shooter video game based on the novel of the same name, Metro 2033, by Russian author Dmitry Glukhovsky."
+                "id": "",
+                "price": "4.99",
+                "text": "Metro 2033 is a Post-Apocalyptic Survival Horror and First Person Shooter video game based on the novel of the same name, Metro 2033, by Russian author Dmitry Glukhovsky."
             },
             "title": "Metro: 2033",
             "developers": "Developers: 4A Games",
@@ -107,9 +107,9 @@
         },
         {
             "attributes": {
-                "data-id": "",
-                "data-price": "11.99",
-                "data-text": "Assassin's Creed Origins is a 2017 action role-playing video game developed by Ubisoft Montreal and published by Ubisoft. It is the tenth major installment in the Assassin's Creed series, following 2015's Assassin's Creed Syndicate."
+                "id": "",
+                "price": "11.99",
+                "text": "Assassin's Creed Origins is a 2017 action role-playing video game developed by Ubisoft Montreal and published by Ubisoft. It is the tenth major installment in the Assassin's Creed series, following 2015's Assassin's Creed Syndicate."
             },
             "title": "Assassin's Creed Origins",
             "developers": "Developers: Ubisoft Montreal",
