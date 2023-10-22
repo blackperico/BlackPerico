@@ -1,4 +1,30 @@
 {
+    "adsContainer": [
+        {
+            "attributes" : {
+                "src": "./images/ads/ad0.jpg",
+                "alt": "God of War Ragnarok"
+            }
+        },
+        {
+            "attributes" : {
+                "src": "./images/ads/ad1.jpg",
+                "alt": "Speakers Beoplay Portal"
+            }
+        },
+        {
+            "attributes" : {
+                "src": "./images/ads/ad2.jpg",
+                "alt": "TV gifts"
+            }
+        },
+        {
+            "attributes" : {
+                "src": "./images/ads/gpu.jpg",
+                "alt": "GPU"
+            }
+        }
+    ],
     "gamesContainer": [
         {
             "attributes": {
@@ -120,6 +146,5 @@
                 "alt": "Assassin's Creed Origins"
             }
         }
-    ],
-    "SomeOtherStuff": {}
+    ]
 }

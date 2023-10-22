@@ -20,11 +20,41 @@
 }
 /* Ads */
 {
-    const images = ['images/ads/ad0.jpg', 'images/ads/ad1.jpg', 'images/ads/ad2.jpg'];
-    const image = document.querySelector('#ad-image'), previousImage = document.querySelector('#previous-image'), dots = document.querySelectorAll('.dots');
-    let loopThrough, selectedDot = document.querySelector('.dots').getAttribute('data-id');
+    const ad = document.querySelector('#ad'), currentImage = document.querySelector('#current-image'), previousImage = document.querySelector('#previous-image');
+    let images = [], loopThrough;
+
+    function createDots(index) {
+        const newDot = document.createElement('div');
+        newDot.className = 'dots';
+        newDot.setAttribute('data-id', `${index}`);
+        if(index == 0)
+            newDot.setAttribute('style', 'background-color: #000;');
+
+        ad.appendChild(newDot);
+    };
+
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+        const imagesObject = JSON.parse(this.response).adsContainer;
+        imagesObject.forEach((image, index) => {
+            createDots(index);
+            images.push(image.attributes);
+        });
+    };
+    xmlhttp.open('GET', '../products.json', false);
+    xmlhttp.send();
+
+    currentImage.setAttribute('src', images[0].src);
+    currentImage.setAttribute('alt', images[0].alt);
+    previousImage.setAttribute('src', images[0].src);
+    previousImage.setAttribute('alt', images[0].alt);
+
+    const dots = document.querySelectorAll('.dots');
+    let selectedDot = document.querySelector('.dots').getAttribute('data-id');
+
     function fadeOutPrevious() {
-        previousImage.setAttribute('src', document.querySelector('#ad-image').getAttribute('src'));
+        previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
+        previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
         previousImage.className = '';
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -33,16 +63,18 @@
         });
     };
     function slideInPrevious(id) {
-        image.setAttribute('src', images[`${id}`]);
-        image.className = '';
+        currentImage.setAttribute('src', images[`${id}`].src);
+        currentImage.setAttribute('alt', images[`${id}`].alt);
+        currentImage.className = '';
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                image.classList.add('image-slide-in-right');
+                currentImage.classList.add('image-slide-in-right');
             });
         });
     };
     function fadeOutNext() {
-        previousImage.setAttribute('src', document.querySelector('#ad-image').getAttribute('src'));
+        previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
+        previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
         previousImage.className = '';
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -51,11 +83,12 @@
         });
     };
     function slideInNext(id) {
-        image.setAttribute('src', images[`${id}`]);
-        image.className = '';
+        currentImage.setAttribute('src', images[`${id}`].src);
+        currentImage.setAttribute('alt', images[`${id}`].alt);
+        currentImage.className = '';
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                image.classList.add('image-slide-in-left');
+                currentImage.classList.add('image-slide-in-left');
             });
         });
     };
@@ -66,6 +99,7 @@
             else
                 dots[i].style.backgroundColor = '#000';
     };
+
     for(let dot of dots) {
         dot.addEventListener('click', (e) => {
             if(e.target.style.backgroundColor != 'rgb(0, 0, 0)') 
@@ -88,6 +122,7 @@
             }
         });
     };
+
     function dotsIteration() {
         if(selectedDot < dots.length - 1)
             selectedDot++;
@@ -131,9 +166,9 @@
 }
 /* Side elements JSON insertion */
 {
-    const gamesTop = document.querySelector('#games-top-wrap');
     const catLeft = document.querySelector('#cat-left');
     const catRight = document.querySelector('#cat-right');
+
     function createSideElementGames(index, game) {
         const newSideElement = document.createElement('div');
         newSideElement.className = 'side-element';
@@ -180,14 +215,13 @@
             for(let index in gamesInsert)
                 createSideElementGames(index, gamesInsert[index]);
         };
-        xmlhttp.open("GET", "http://127.0.0.1:5500/products.json");
+        xmlhttp.open("GET", "http://127.0.0.1:5500/products.json", false);
         xmlhttp.send();
     };
     insertJSONGames();
 }
 /* Side elements and middle element */
 {
-    window.addEventListener("DOMContentLoaded", () => {
         const sideElements = document.querySelectorAll('.side-element');
         /* Title scroll */
         sideElements.forEach(function(sideElement) {
@@ -367,8 +401,6 @@
                     }
                 }
         });
-    });
-    
 }
 /* Category elements */
 {
