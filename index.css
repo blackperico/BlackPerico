@@ -1,3 +1,8 @@
+:root {
+    --sideElementLoopTimer: 5000ms;
+    --sideElementSelectTimer: 10000ms;
+}
+
 * {font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;}
@@ -153,12 +158,11 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     z-index: 2;
     margin-left: 5px;
     margin-bottom: 5px;
-    border: 1px solid #000;
+    border: 1px solid #000000;
     border-radius: 50%;
     background-color: transparent;
     cursor: pointer;
-    transition: background-color 300ms;
-    box-shadow: 0 0 1px #fff;}
+    transition: background-color 300ms;}
 .dots:hover {box-shadow: 0 0 5px #000;}
 
 
@@ -209,11 +213,23 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     float: left;
     object-fit: cover;}
 #main-menu-peripherals h2 a {text-decoration: none;
-    color: rgb(215, 200, 26);}
-#main-menu-peripherals h2 a:hover {text-decoration: underline rgb(215, 200, 26);}
+    color: rgb(215, 200, 26);
+    background-image: linear-gradient(rgb(215, 200, 26), rgb(215, 200, 26));
+    background-size: 0% 3px;
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    transition-property: background-size;
+    transition-duration: 300ms;}
+#main-menu-peripherals h2 a:hover {background-size: 100% 3px;}
 #main-menu-components h2 a {text-decoration: none;
-    color: rgb(191, 26, 215);}
-#main-menu-components h2 a:hover {text-decoration: underline rgb(191, 26, 215);}
+    color: rgb(191, 26, 215);
+    background-image: linear-gradient(rgb(191, 26, 215), rgb(191, 26, 215));
+    background-size: 0% 3px;
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    transition-property: background-size;
+    transition-duration: 300ms;}
+#main-menu-components h2 a:hover {background-size: 100% 3px;}
 #main-menu-peripherals ul {position: absolute;
     right: 30px;}
 #main-menu-components ul {position: absolute;
@@ -342,16 +358,14 @@ to {transform: rotate(20deg)}}
     background-color: rgb(255, 0, 0)}
 
 
-#games-top {display: none; 
-    position: relative;
+#games-top {display: none;
     height: 150px;
     width: 100%;
     margin: 50px auto 5px;
     border-radius: 20px;
     overflow-y: hidden;
     overflow-x: scroll;}
-#games-top-wrap {position: absolute;
-    height: 100%;
+#games-top-wrap {height: 100%;
     width: fit-content;
     display: flex;}
 #games-container {height: fit-content;
@@ -517,10 +531,10 @@ to {transform: rotate(20deg)}}
     from {background-size: 0% 100%;}
     to {background-size: 100% 100%;}}
 .side-element-loading {animation-name: side-element-loading;
-    animation-duration: 5000ms;
+    animation-duration: var(--sideElementLoopTimer);
     animation-timing-function: linear;}
 .side-element-selected-loading {animation-name: side-element-loading;
-    animation-duration: 6000ms;
+    animation-duration: var(--sideElementSelectTimer);
     animation-timing-function: linear;}
 
 .side-element {height: 25%;

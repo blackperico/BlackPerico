@@ -146,5 +146,127 @@
                 "alt": "Assassin's Creed Origins"
             }
         }
+    ],
+    "category": [
+        {
+            "price": "249.99",
+            "title": "RTX 2060 Asus TUF",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 14000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/2060.jpg",
+                "alt": "RTX 2060"
+            }
+        },
+        {
+            "price": "349.99",
+            "title": "RTX 2070 OC Gigabyte Nvision",
+            "desc": [
+                "Video Memory: 8GB GDDR6",
+                "GPU Boost Clock: 1885 MHz, GPU Base Clock: 1495",
+                "CUDA Core: 1920",
+                "Memory Speed: 15000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/2070.jpg",
+                "alt": "RTX 2070"
+            }
+        },
+        {
+            "price": "449.99",
+            "title": "RTX 2070-Ti Asus Republic of Gamers",
+            "desc": [
+                "Video Memory: 12GB GDDR6",
+                "GPU Boost Clock: 1985 MHz, GPU Base Clock: 1695",
+                "CUDA Core: 1920",
+                "Memory Speed: 18000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/2070ti.jpg",
+                "alt": "RTX 2070Ti"
+            }
+        },
+        {
+            "price": "549.99",
+            "title": "RTX 2080 MSI Gaming Z Trio",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 14000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/2080.jpg",
+                "alt": "RTX 2080"
+            }
+        },
+        {
+            "price": "269.99",
+            "title": "Radeon RX 550X",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 14000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/550.jpg",
+                "alt": "RX 550"
+            }
+        },
+        {
+            "price": "369.99",
+            "title": "Radeon RX 560X",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 16000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/560.jpg",
+                "alt": "RX 560"
+            }
+        },
+        {
+            "price": "469.99",
+            "title": "Radeon RX 570X",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 17000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/570.jpg",
+                "alt": "RX 570"
+            }
+        },
+        {
+            "price": "569.99",
+            "title": "Radeon RX 580X",
+            "desc": [
+                "Video Memory: 6GB GDDR6",
+                "GPU Boost Clock: 1785 MHz, GPU Base Clock: 1395",
+                "CUDA Core: 1920",
+                "Memory Speed: 19000 MHz",
+                "Memory Interface: 192-bit"
+            ],
+            "image": {
+                "src": "./images/categoryItem/580.jpg",
+                "alt": "RX 580"
+            }
+        }
     ]
 }
