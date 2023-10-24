@@ -425,6 +425,9 @@
         newTitle.innerHTML = `${item.title}`;
         const newSpecsDesc = document.createElement('ul');
         newSpecsDesc.className = 'specs-desc';
+        const newButton = document.createElement('button');
+        newButton.className = 'buy-button';
+        newButton.innerHTML = 'Buy';
         
         if(index < 4)
             upper.append(newItem);
@@ -435,6 +438,7 @@
         newItem.append(newSpecs);
         newSpecs.append(newTitle);
         newSpecs.append(newSpecsDesc);
+        newSpecs.append(newButton);
         for(let desc of item.desc) {
             const descLi = document.createElement('li');
             descLi.innerHTML = desc;
@@ -471,6 +475,7 @@
         
         for(let i = 0; i < specsTitles.length; i++) {
             let enterRecall, leaveRecall, stopSlide = 0, leaveRecallDelay, n = 0;
+            specsTitleWidth[i] = (+getComputedStyle(specsTitles[i]).width.replace('px', ''));
 
             function mouseEnter(widthDiff, div) {
                 mouseEnterSlide(widthDiff, div);
@@ -494,8 +499,6 @@
                 if(n >= 0 || stopSlide == 0)
                     clearTimeout(leaveRecall);
             };
-
-            specsTitleWidth[i] = (+getComputedStyle(specsTitles[i]).width.replace('px', ''));
 
             if(specsTitleWidth[i] > specsWidth) {
                 specsTitles[i].addEventListener('mouseenter', function(e) {
@@ -547,7 +550,7 @@
             isClicked = 0;
         });
         window.addEventListener('mousemove', (e) => {
-            if(isClicked == 1 && categoryWidth < categoryUpperWidth && drag >= (categoryWidth - categoryUpperWidth) && drag <= 0)
+            if(isClicked == 1)
             {
                 categoryUpper.style.transform = `translateX(${drag}px)`;
                 categoryLower.style.transform = `translateX(${drag}px)`;
@@ -561,7 +564,7 @@
         window.addEventListener('resize', (e) => {
             if(drag <= (categoryWidth - categoryUpperWidth))
             {
-                drag = categoryWidth - categoryUpperWidth + 1;
+                drag = categoryWidth - categoryUpperWidth;
                 categoryUpper.style.transform = `translateX(${drag}px)`;
                 categoryLower.style.transform = `translateX(${drag}px)`;
             }
