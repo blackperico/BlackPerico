@@ -1,23 +1,4 @@
 'use strict'
-/* Search box */
-{
-    const searchBox = document.querySelector('#search');
-    let searchValue;
-    searchBox.addEventListener('focus', (e) => {
-        if(e.target.value == 'Search...')
-            e.target.value = '';
-    });
-    searchBox.addEventListener('keydown', function(e) {
-        if(e.key == 'Enter'){
-            searchValue = e.target.value;
-            console.log(searchValue);
-        }
-    });
-    searchBox.addEventListener('blur', (e) => {
-        if(e.target.value == '')
-            e.target.value = 'Search...';
-    });
-}
 /* Ads */
 {
     const ad = document.querySelector('#ad'), currentImage = document.querySelector('#current-image'), previousImage = document.querySelector('#previous-image');
@@ -36,139 +17,217 @@
 
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-        const imagesObject = JSON.parse(this.response).adsContainer;
-        imagesObject.forEach((image, index) => {
-            createDots(index);
-            images.push(image.attributes);
-        });
+        if(xmlhttp.status == 200) {
+            const imagesObject = JSON.parse(this.response).adsContainer;
+            imagesObject.forEach((image, index) => {
+                createDots(index);
+                images.push(image.attributes);
+            });
+            main();
+        }
+        else
+        alert('Error: ' + xmlhttp.status);
     };
-    xmlhttp.open('GET', '../products.json', false);
+    xmlhttp.open('GET', '../products.json', true);
     xmlhttp.send();
 
-    currentImage.setAttribute('src', images[0].src);
-    currentImage.setAttribute('alt', images[0].alt);
-    previousImage.setAttribute('src', images[0].src);
-    previousImage.setAttribute('alt', images[0].alt);
+    function main() {
+        currentImage.setAttribute('src', images[0].src);
+        currentImage.setAttribute('alt', images[0].alt);
+        previousImage.setAttribute('src', images[0].src);
+        previousImage.setAttribute('alt', images[0].alt);
 
-    const dots = document.querySelectorAll('.dots');
-    let selectedDot = document.querySelector('.dots').getAttribute('data-id');
+        const dots = document.querySelectorAll('.dots');
+        let selectedDot = document.querySelector('.dots').getAttribute('data-id');
 
-    function fadeOutPrevious() {
-        previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
-        previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
-        previousImage.className = '';
-        requestAnimationFrame(() => {
+        function fadeOutPrevious() {
+            previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
+            previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
+            previousImage.className = '';
             requestAnimationFrame(() => {
-                previousImage.classList.add('image-fade-out-right');
+                requestAnimationFrame(() => {
+                    previousImage.classList.add('image-fade-out-right');
+                });
             });
-        });
-    };
-    function slideInPrevious(id) {
-        currentImage.setAttribute('src', images[`${id}`].src);
-        currentImage.setAttribute('alt', images[`${id}`].alt);
-        currentImage.className = '';
-        requestAnimationFrame(() => {
+        };
+        function slideInPrevious(id) {
+            currentImage.setAttribute('src', images[`${id}`].src);
+            currentImage.setAttribute('alt', images[`${id}`].alt);
+            currentImage.className = '';
             requestAnimationFrame(() => {
-                currentImage.classList.add('image-slide-in-right');
+                requestAnimationFrame(() => {
+                    currentImage.classList.add('image-slide-in-right');
+                });
             });
-        });
-    };
-    function fadeOutNext() {
-        previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
-        previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
-        previousImage.className = '';
-        requestAnimationFrame(() => {
+        };
+        function fadeOutNext() {
+            previousImage.setAttribute('src', document.querySelector('#current-image').getAttribute('src'));
+            previousImage.setAttribute('alt', document.querySelector('#current-image').getAttribute('alt'));
+            previousImage.className = '';
             requestAnimationFrame(() => {
-                previousImage.classList.add('image-fade-out-left');
+                requestAnimationFrame(() => {
+                    previousImage.classList.add('image-fade-out-left');
+                });
             });
-        });
-    };
-    function slideInNext(id) {
-        currentImage.setAttribute('src', images[`${id}`].src);
-        currentImage.setAttribute('alt', images[`${id}`].alt);
-        currentImage.className = '';
-        requestAnimationFrame(() => {
+        };
+        function slideInNext(id) {
+            currentImage.setAttribute('src', images[`${id}`].src);
+            currentImage.setAttribute('alt', images[`${id}`].alt);
+            currentImage.className = '';
             requestAnimationFrame(() => {
-                currentImage.classList.add('image-slide-in-left');
+                requestAnimationFrame(() => {
+                    currentImage.classList.add('image-slide-in-left');
+                });
             });
-        });
-    };
-    function dotRecolor(id) {
-        for(let i = 0; i < dots.length; i++)
-            if(id != i)
-                dots[i].style.backgroundColor = 'transparent';
+        };
+        function dotRecolor(id) {
+            for(let i = 0; i < dots.length; i++)
+                if(id != i)
+                    dots[i].style.backgroundColor = 'transparent';
+                else
+                    dots[i].style.backgroundColor = '#000';
+        };
+        function dotsIteration() {
+            if(selectedDot < dots.length - 1)
+                selectedDot++;
             else
-                dots[i].style.backgroundColor = '#000';
-    };
+                selectedDot = '0';
+            fadeOutNext();
+            slideInNext(selectedDot);
+            dotRecolor(selectedDot);
+            loopThrough = setTimeout(dotsIteration, loopTimer);
+        };
+        loopThrough = setTimeout(dotsIteration, loopTimer);
 
-    for(let dot of dots) {
-        dot.addEventListener('click', (e) => {
-            if(e.target.style.backgroundColor != 'rgb(0, 0, 0)') 
-            {
-                clearTimeout(loopThrough);
-                loopThrough = setTimeout(dotsIteration, selectTimer);
-                if(e.target.getAttribute('data-id') < selectedDot) 
+        for(let dot of dots) {
+            dot.addEventListener('click', (e) => {
+                if(e.target.style.backgroundColor != 'rgb(0, 0, 0)') 
                 {
-                    fadeOutPrevious();
-                    slideInPrevious(e.target.getAttribute('data-id'));
-                    dotRecolor(e.target.getAttribute('data-id'));
+                    clearTimeout(loopThrough);
+                    loopThrough = setTimeout(dotsIteration, selectTimer);
+                    if(e.target.getAttribute('data-id') < selectedDot) 
+                    {
+                        fadeOutPrevious();
+                        slideInPrevious(e.target.getAttribute('data-id'));
+                        dotRecolor(e.target.getAttribute('data-id'));
+                    }
+                    else 
+                    {
+                        fadeOutNext();
+                        slideInNext(e.target.getAttribute('data-id'));
+                        dotRecolor(e.target.getAttribute('data-id'));
+                    }
+                    selectedDot = e.target.getAttribute('data-id');
                 }
-                else 
-                {
-                    fadeOutNext();
-                    slideInNext(e.target.getAttribute('data-id'));
-                    dotRecolor(e.target.getAttribute('data-id'));
-                }
-                selectedDot = e.target.getAttribute('data-id');
-            }
+            });
+        };
+    };
+}
+/* Ads */
+{
+/* Buy buttons and cart */
+    const cart = document.querySelector('#cart'), cartBlock = document.querySelector('#cart-block'), cartCount = document.querySelector('#cart-count'), cartIcon = document.querySelector('.fa-cart-shopping');
+    let cartItem = {name: undefined,
+        price: undefined};
+    let key = localStorage.length;
+    cartCount.innerHTML = key;
+    
+    function wiggleAnimation() {
+        cartIcon.className = 'fa fa-cart-shopping';
+            requestAnimationFrame(() => {
+                cartIcon.classList.add('cart-wiggle');
+            });
+    };
+    function cartDropAnimation() {
+        cartIcon.className = 'fa fa-cart-shopping';
+        requestAnimationFrame(() => {
+            cartIcon.classList.add('cart-drop');
         });
     };
-
-    function dotsIteration() {
-        if(selectedDot < dots.length - 1)
-            selectedDot++;
+    function isCartCountOne() {
+        if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
+            cartBlock.style.borderBottomRightRadius = '0px';
         else
-            selectedDot = '0';
-        fadeOutNext();
-        slideInNext(selectedDot);
-        dotRecolor(selectedDot);
-        loopThrough = setTimeout(dotsIteration, loopTimer);
+            cartBlock.style.borderRadius = '10px 0 10px 10px';
+        if(cartCount.innerHTML == 0) {
+            cartBlock.style.display = 'none';
+            cart.style.borderTopLeftRadius = '23px';
+            cart.style.borderBottomLeftRadius = '23px';}
     };
-    loopThrough = setTimeout(dotsIteration, loopTimer);
-}
-/*  Menu  */ 
-{ 
-    localStorage.removeItem('menuFilter');
-    const navMenu = document.querySelector("nav ul li:first-of-type"), menu = document.querySelector('#menu');
-    let check;
-    navMenu.addEventListener('click', function(e) {
-        check = Number(getComputedStyle(menu).left.replace('-', '').replace('px', ''));
-        if(check > 0)
-        {
-            menu.style.left = '0px';
+    function addCart(type, item) {
+        switch(type){
+            case 1: { 
+                cartItem.name = document.querySelector('#games-middle').querySelector('.cat-title').innerHTML;
+                cartItem.price = document.querySelector('#games-middle').querySelector('.cat-price').innerHTML;
+                window.localStorage.setItem(key, JSON.stringify(cartItem));
+                cartModify(key, cartItem.name, cartItem.price);
+                key++;
+                cartCount.innerHTML = key;
+                wiggleAnimation();
+                isCartCountOne();
+                break;
+            }
+            case 2: {
+                cartItem.name = item.querySelector('.specs-title').innerHTML;
+                cartItem.price = item.getAttribute('data-price');
+                window.localStorage.setItem(key, JSON.stringify(cartItem));
+                cartModify(key, cartItem.name, cartItem.price);
+                key++;
+                cartCount.innerHTML = key;
+                wiggleAnimation();
+                isCartCountOne();
+                break;
+            }
+            default:
+                return;
         }
-        else
-        {
-            menu.style.left = '-300px';
+    };
+    const storageModify = function(e) {
+        let selectDelete = +(e.target.parentElement.querySelector('.cart-number').innerHTML);
+        if(e.target.parentElement.nextSibling != null) {
+            e.target.parentElement.replaceWith(e.target.parentElement.nextSibling);
+            localStorage.removeItem(selectDelete);
+            for(let i = selectDelete; i < cartBlock.children.length; i++) {
+                if(cartBlock.children[i].querySelector('.cart-number').innerHTML != i) 
+                {
+                    cartBlock.children[i].querySelector('.cart-number').innerHTML = i;
+                    localStorage.setItem(i, localStorage.getItem(i + 1));
+                    localStorage.removeItem(i + 1);
+                }
+            }
+            }
+            else 
+            {
+                e.target.parentElement.remove();
+                localStorage.removeItem(selectDelete);
+            }
+            key = localStorage.length;
+            cartCount.innerHTML = localStorage.length;
+            isCartCountOne();
+    };
+    const cartModify = function(cartNumber, cartDesc, cartPrice) {
+        const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
+        createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
+        createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
+        cartBlock.append(createCartContainer);
+        createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
+        createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
+    };
+
+    window.addEventListener('DOMContentLoaded', function(e) {
+        if(localStorage.length) {
+            for(let i = 0; i < localStorage.length; i++) {
+                cartItem.name = JSON.parse(localStorage.getItem(i)).name;
+                cartItem.price = JSON.parse(localStorage.getItem(i)).price;
+                cartModify(i, cartItem.name, cartItem.price);
+            }
         }
     });
-    const headerHeight = Number(getComputedStyle(document.querySelector('header')).height.replace('px', '')), navHeight = Number(getComputedStyle(document.querySelector('nav')).height.replace('px', ''));
-    let scrollValue;
-    window.addEventListener('scroll', function(e) {
-        scrollValue = window.scrollY;
-        if (scrollValue < headerHeight) {
-            menu.style.top = (headerHeight + navHeight) - scrollValue + 'px';
-        } 
-        else 
-        {
-            menu.style.top = navHeight + 'px';
-        }
-    });
-}
+/* Buy buttons and cart */
+
 /* Side elements JSON insertion */
-{
-    const catLeft = document.querySelector('#cat-left');
-    const catRight = document.querySelector('#cat-right');
+    const gamesLeft = document.querySelector('#games-left');
+    const gamesRight = document.querySelector('#games-right');
 
     function createSideElementGames(index, game) {
         const newSideElement = document.createElement('div');
@@ -203,9 +262,9 @@
             gamesTopWrap.append(newSideElement);
         else
         if(getComputedStyle(gamesTop).display == 'none' && index < 4)
-            catLeft.append(newSideElement);
+            gamesLeft.append(newSideElement);
             else
-            catRight.append(newSideElement);
+            gamesRight.append(newSideElement);
 
         newSideElement.append(newTitle);
         newSideElement.append(newWrap);
@@ -214,206 +273,210 @@
         newWrap.append(newDate);
         newSideElement.append(newImg);
     };
-    function insertJSONGames() {
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            const gamesInsert = JSON.parse(this.response).gamesContainer;
-            for(let index in gamesInsert)
-                createSideElementGames(index, gamesInsert[index]);
-        };
-        xmlhttp.open("GET", "../products.json", false);
-        xmlhttp.send();
+    
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+        const gamesInsert = JSON.parse(this.response).gamesContainer;
+        for(const index in gamesInsert)
+            createSideElementGames(index, gamesInsert[index]);
+        mainSideElements();
     };
+    xmlhttp.open("GET", "../products.json", true);
+    xmlhttp.send();
+/* Side elements JSON insertion */
 
-    insertJSONGames();
-}
-/* Responsiveness gamesContainer */
-{
-    const sides = document.querySelectorAll('.cat-side'), gamesTop = document.querySelector('#games-top'), gamesTopWrap = document.querySelector('#games-top-wrap'), sideElements = document.querySelectorAll('.side-element');
-    let gamesTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), gamesTopWrapWidth = gamesTopWrap.clientWidth, isClicked, drag = 0;
-   
-    gamesTop.addEventListener('mousedown', () => {
-        isClicked = 1;
-    });
-    window.addEventListener('mouseup', () => {
-        isClicked = 0;
-    });
-    window.addEventListener('mousemove', (e) => {
-        if(isClicked == 1)
-        {
-            gamesTopWrap.style.transform = `translateX(${drag}px)`;
-            drag = drag + e.movementX;
-            if(drag > 0)
-                drag = 0;
-            if(drag < -(gamesTopWrapWidth - gamesTopWidth))
-                drag = -(gamesTopWrapWidth - gamesTopWidth);
-        }
-    });
-
-    window.addEventListener('resize', (e) => {
-        drag = 0;
-        gamesTopWidth = gamesTop.clientWidth;
-        gamesTopWrapWidth = gamesTopWrap.clientWidth;
-        gamesTopWrap.style.transform = `translateX(${drag}px)`;
-
-        if(getComputedStyle(gamesTop).display == 'block')
-            {
-                if(gamesTopWrap.children.length < 8)
-                    sideElements.forEach((sideElement) => {
-                        gamesTopWrap.append(sideElement);
-                    });
-            }
-            else
-            {
-                if(sides[0].children.length < 4)
-                for(let i = 0; i < 4; i++) {
-                    sides[0].append(sideElements[i]);
-                }
-                if(sides[1].children.length < 4)
-                for(let i = 4; i < 8; i++) {
-                    sides[1].append(sideElements[i]);
-                }
-            }
-    });
-}
-/* Side elements and middle element */
-{
-    const sideElements = document.querySelectorAll('.side-element');
-    /* Title scroll */
-    sideElements.forEach(function(sideElement) {
-        let increment = 0, titleTimeOut;
-        let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-        let sideElementTitle = sideElement.querySelector('.side-element-title');
-        let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-        let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-        
-        let mouseOverSideElement = function(e) {
-            clearTimeout(titleTimeOut);
-            sideElementTitle.style.transform = `translateX(${increment}px)`;
-            increment--;
-            titleTimeOut = setTimeout(mouseOverSideElement, 15);
-            if(increment <= (sideElementTitleOffset))
+/* Side elements title scroll on hover, looping and middle element animations */
+    function mainSideElements() {
+        const sideElements = document.querySelectorAll('.side-element');
+        /* Title scroll */
+        sideElements.forEach(function(sideElement) {
+            let increment = 0, titleTimeOut;
+            let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+            let sideElementTitle = sideElement.querySelector('.side-element-title');
+            let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+            let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
+            
+            let mouseOverSideElement = function(e) {
                 clearTimeout(titleTimeOut);
-            };
-        let mouseLeaveSideElement = function() {
-            clearTimeout(titleTimeOut);
-            sideElementTitle.style.transform = `translateX(${increment}px)`;
-            increment++;
-            titleTimeOut = setTimeout(mouseLeaveSideElement, 15);
-                if(increment >= 0)
+                sideElementTitle.style.transform = `translateX(${increment}px)`;
+                increment--;
+                titleTimeOut = setTimeout(mouseOverSideElement, 15);
+                if(increment <= (sideElementTitleOffset))
                     clearTimeout(titleTimeOut);
-        };
-        if(sideElementTitleOffset < 0) 
-        {
-            sideElement.addEventListener('mouseenter', mouseOverSideElement)
-            sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
-        }
-
-        window.addEventListener('resize', function(e) {
-            sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-            sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-            sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-            if(sideElementTitleOffset < 0) {
+                };
+            let mouseLeaveSideElement = function() {
+                clearTimeout(titleTimeOut);
+                sideElementTitle.style.transform = `translateX(${increment}px)`;
+                increment++;
+                titleTimeOut = setTimeout(mouseLeaveSideElement, 15);
+                    if(increment >= 0)
+                        clearTimeout(titleTimeOut);
+            };
+            if(sideElementTitleOffset < 0) 
+            {
                 sideElement.addEventListener('mouseenter', mouseOverSideElement)
                 sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
             }
-            else 
-            {
-                sideElement.removeEventListener('mouseenter', mouseOverSideElement)
-                sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
-            }
-        });
-    });
 
-    const timerLoop = getComputedStyle(document.documentElement).getPropertyValue('--sideElementLoopTimer').replace('ms', '');
-    const timerSelect = getComputedStyle(document.documentElement).getPropertyValue('--sideElementSelectTimer').replace('ms', '');
-    const catMiddle = document.querySelector('#cat-middle'), catMiddleImg = catMiddle.querySelector('img'), catMiddleTitle = catMiddle.querySelector('.cat-title'), catMiddlePrice = catMiddle.querySelector('.cat-price'), catMiddleText = catMiddle.querySelector('.cat-text');
-    const animationContainer = document.querySelector('#animation-container');
-    let loopThrough, sideElementId = 0;
-    let info = {
-        src: undefined,
-        title: undefined,
-        price: undefined,
-        text: undefined,
-    };
-
-    function catMiddleAnimation() {
-        catMiddleText.className = 'cat-text';
-        catMiddlePrice.className = 'cat-price';
-        animationContainer.className = '';
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                animationContainer.classList.add('cat-middle-animation');
-                catMiddleText.classList.add('cat-middle-children-animation');
-                catMiddlePrice.classList.add('cat-middle-children-animation');
+            window.addEventListener('resize', function(e) {
+                sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+                sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+                sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
+                if(sideElementTitleOffset < 0) {
+                    sideElement.addEventListener('mouseenter', mouseOverSideElement)
+                    sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
+                }
+                else 
+                {
+                    sideElement.removeEventListener('mouseenter', mouseOverSideElement)
+                    sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
+                }
             });
         });
-    };
-    function loopSelect(sideElementId) {
-        sideElements.forEach(sideElement => sideElement.className = 'side-element');
-        requestAnimationFrame(() => {
-            sideElements[sideElementId].classList.add('side-element-loading');
-        });
-    };
-    function userSelect() {
-        sideElements.forEach((sideElement) => sideElement.className = 'side-element')
-        requestAnimationFrame(() => {
-            sideElements[sideElementId].classList.add('side-element-selected-loading');
-        });
-    };
-    function modifyCatMiddle (info) {
-        catMiddleAnimation()
-        catMiddleImg.src = info.src;
-        catMiddleTitle.innerHTML = info.title;
-        catMiddlePrice.innerHTML = info.price;
-        catMiddleText.innerHTML = info.text;
-    };
-    function collectInfo() {
-        info = {
-            src: sideElements[sideElementId].querySelector('img').src,
-            title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
-            price: sideElements[sideElementId].getAttribute('data-price').replace('', '&euro;'),
-            text: sideElements[sideElementId].getAttribute('data-text'),
+        /* Title scroll */
+        /* Side elements looping */
+        const timerLoop = getComputedStyle(document.documentElement).getPropertyValue('--sideElementLoopTimer').replace('ms', '');
+        const timerSelect = getComputedStyle(document.documentElement).getPropertyValue('--sideElementSelectTimer').replace('ms', '');
+        const gamesMiddle = document.querySelector('#games-middle'), gamesMiddleImg = gamesMiddle.querySelector('img'), gamesMiddleTitle = gamesMiddle.querySelector('.cat-title'), gamesMiddlePrice = gamesMiddle.querySelector('.cat-price'), gamesMiddleText = gamesMiddle.querySelector('.cat-text');
+        const animationContainer = document.querySelector('#animation-container');
+        const gamesMiddleBuy = gamesMiddle.querySelector('.buy-button');
+        gamesMiddleBuy.addEventListener('click', () => addCart(1));
+        let loopThrough, sideElementId = 0;
+        let info = {
+            src: undefined,
+            title: undefined,
+            price: undefined,
+            text: undefined,
         };
-        modifyCatMiddle(info);
-    };
-    function iterateOver() {
-        collectInfo();
-        loopSelect(sideElementId);
-        if(sideElementId < sideElements.length - 1)
-            sideElementId++;
-        else
-            sideElementId = 0;
-        loopThrough = setTimeout(() => iterateOver(), timerLoop);
-    };
 
-    iterateOver();
-
-    sideElements.forEach(function(sideElement) {
-        sideElement.addEventListener('click', (e) => {
-            sideElementId = sideElement.getAttribute('data-id');
+        function gamesMiddleAnimation() {
+            gamesMiddleText.className = 'cat-text';
+            gamesMiddlePrice.className = 'cat-price';
+            animationContainer.className = '';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    animationContainer.classList.add('games-middle-animation');
+                    gamesMiddleText.classList.add('games-middle-children-animation');
+                    gamesMiddlePrice.classList.add('games-middle-children-animation');
+                });
+            });
+        };
+        function loopSelect(sideElementId) {
+            sideElements.forEach(sideElement => sideElement.className = 'side-element');
+            requestAnimationFrame(() => {
+                sideElements[sideElementId].classList.add('side-element-loading');
+            });
+        };
+        function userSelect() {
+            sideElements.forEach((sideElement) => sideElement.className = 'side-element')
+            requestAnimationFrame(() => {
+                sideElements[sideElementId].classList.add('side-element-selected-loading');
+            });
+        };
+        function modifyGamesMiddle (info) {
+            gamesMiddleAnimation()
+            gamesMiddleImg.src = info.src;
+            gamesMiddleTitle.innerHTML = info.title;
+            gamesMiddlePrice.innerHTML = info.price;
+            gamesMiddleText.innerHTML = info.text;
+        };
+        function collectInfo() {
+            info = {
+                src: sideElements[sideElementId].querySelector('img').src,
+                title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
+                price: sideElements[sideElementId].getAttribute('data-price').replace('', '&euro;'),
+                text: sideElements[sideElementId].getAttribute('data-text'),
+            };
+            modifyGamesMiddle(info);
+        };
+        function iterateOver() {
             collectInfo();
-            userSelect();
-            clearTimeout(loopThrough);
-            loopThrough = setTimeout(() => {
-                if(sideElementId < sideElements.length - 1)
-                    sideElementId++;
-                else
-                    sideElementId = 0;
-                iterateOver();
-            }, timerSelect);
+            loopSelect(sideElementId);
+            if(sideElementId < sideElements.length - 1)
+                sideElementId++;
+            else
+                sideElementId = 0;
+            loopThrough = setTimeout(() => iterateOver(), timerLoop);
+        };
+
+        iterateOver();
+        
+        sideElements.forEach(function(sideElement) {
+            sideElement.addEventListener('click', (e) => {
+                sideElementId = sideElement.getAttribute('data-id');
+                collectInfo();
+                userSelect();
+                clearTimeout(loopThrough);
+                loopThrough = setTimeout(() => {
+                    if(sideElementId < sideElements.length - 1)
+                        sideElementId++;
+                    else
+                        sideElementId = 0;
+                    iterateOver();
+                }, timerSelect);
+            });
         });
-    });
-}
+        /* Side elements looping */
+/* Side elements title scroll on hover, looping and middle element animations */
+
+/* Responsiveness gamesContainer */
+        const sides = document.querySelectorAll('.games-side'), gamesTop = document.querySelector('#games-top'), gamesTopWrap = document.querySelector('#games-top-wrap');
+        let gamesTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), gamesTopWrapWidth = gamesTopWrap.clientWidth, isClicked, drag = 0;
+    
+        gamesTop.addEventListener('mousedown', () => {
+            isClicked = 1;
+        });
+        window.addEventListener('mouseup', () => {
+            isClicked = 0;
+        });
+        window.addEventListener('mousemove', (e) => {
+            if(isClicked == 1)
+            {
+                gamesTopWrap.style.transform = `translateX(${drag}px)`;
+                drag = drag + e.movementX;
+                if(drag > 0)
+                    drag = 0;
+                if(drag < -(gamesTopWrapWidth - gamesTopWidth))
+                    drag = -(gamesTopWrapWidth - gamesTopWidth);
+            }
+        });
+
+        window.addEventListener('resize', (e) => {
+            drag = 0;
+            gamesTopWidth = gamesTop.clientWidth;
+            gamesTopWrapWidth = gamesTopWrap.clientWidth;
+            gamesTopWrap.style.transform = `translateX(${drag}px)`;
+
+            if(getComputedStyle(gamesTop).display == 'block')
+                {
+                    if(gamesTopWrap.children.length < 8)
+                        sideElements.forEach((sideElement) => {
+                            gamesTopWrap.append(sideElement);
+                        });
+                }
+                else
+                {
+                    if(sides[0].children.length < 4)
+                    for(let i = 0; i < 4; i++) {
+                        sides[0].append(sideElements[i]);
+                    }
+                    if(sides[1].children.length < 4)
+                    for(let i = 4; i < 8; i++) {
+                        sides[1].append(sideElements[i]);
+                    }
+                }
+        });
+    }
+/* Responsiveness gamesContainer */
+
 /* Category elements */
-{
     function createCategoryItem(item, index) {
         const upper = document.querySelector('#category-upper');
         const lower = document.querySelector('#category-lower');
 
         const newItem = document.createElement('div');
         newItem.className = 'category-item';
-        newItem.setAttribute('price', `${item.price}`);
+        newItem.setAttribute('data-price', `${item.price}`);
         const newImg = document.createElement('img');
         newImg.setAttribute('src', `${item.image.src}`);
         newImg.setAttribute('alt', `${item.image.alt}`);
@@ -444,10 +507,9 @@
             descLi.innerHTML = desc;
             newSpecsDesc.append(descLi);
         }
-            
     };
 
-    const myPromise = new Promise((resolve, reject) => {
+    const getCategory = new Promise((resolve, reject) => {
         fetch('../products.json')
             .then(response => {
                 if(!response.ok) {
@@ -462,12 +524,14 @@
                 reject(error);
             })
     });
-    myPromise
-    .then(result => {
-        result.category.forEach((item, index) => {
+
+    getCategory
+    .then(({category}) => {
+        category.forEach((item, index) => {
             createCategoryItem(item, index)
         });
-
+    })
+    .then(() => {
         const upper = Array.from(document.querySelector('#category-upper').children), lower = Array.from(document.querySelector('#category-lower').children), categoryArray = upper.concat(lower);
         const category = document.querySelector('#category');
         const specs = category.querySelector('.specs'), specsWidth = (+getComputedStyle(specs).width.replace('px', '')), specsTitles = category.querySelectorAll('.specs-title');
@@ -574,118 +638,19 @@
             categoryUpperWidth = Number(getComputedStyle(categoryUpper).width.replace('px', ''));
         });
     })
+    .then(() => {
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(function(item) {
+            const button = item.querySelector('.buy-button');
+            button.addEventListener('click', () => addCart(2, item));
+        });
+    })
     .catch(error => {
         console.error('Error', error);
     });
-}
-/* Buy buttons and cart */
-{   
-    const cart = document.querySelector('#cart'), cartBlock = document.querySelector('#cart-block'), cartCount = document.querySelector('#cart-count'), cartIcon = document.querySelector('.fa-cart-shopping');
-    let cartItem = {name: undefined,
-        price: undefined};
-    let key = localStorage.length;
-    cartCount.innerHTML = key;
-     
-    function wiggleAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-            requestAnimationFrame(() => {
-                cartIcon.classList.add('cart-wiggle');
-            });
-    };
-    function cartDropAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-        requestAnimationFrame(() => {
-            cartIcon.classList.add('cart-drop');
-        });
-    };
-    function isCartCountOne() {
-        if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
-            cartBlock.style.borderBottomRightRadius = '0px';
-        else
-            cartBlock.style.borderRadius = '10px 0 10px 10px';
-        if(cartCount.innerHTML == 0) {
-            cartBlock.style.display = 'none';
-            cart.style.borderTopLeftRadius = '23px';
-            cart.style.borderBottomLeftRadius = '23px';}
-    };
-    function addCart(type, item) {
-        switch(type){
-            case 1: { 
-                cartItem.name = catMiddle.querySelector('.cat-title').innerHTML;
-                cartItem.price = catMiddle.querySelector('.cat-price').innerHTML;
-                window.localStorage.setItem(key, JSON.stringify(cartItem));
-                cartModify(key, cartItem.name, cartItem.price);
-                key++;
-                cartCount.innerHTML = key;
-                wiggleAnimation();
-                isCartCountOne();
-                break;}
-            case 2: {
-                cartItem.name = item.querySelector('.specs-title').innerHTML;
-                cartItem.price = item.getAttribute('data-price');
-                window.localStorage.setItem(key, JSON.stringify(cartItem));
-                cartModify(key, cartItem.name, cartItem.price);
-                key++;
-                cartCount.innerHTML = key;
-                wiggleAnimation();
-                isCartCountOne();
-                break;}
-            default:
-                return;
-        }
-    };
-    const storageModify = function(e) {
-        let selectDelete = +(e.target.parentElement.querySelector('.cart-number').innerHTML);
-        if(e.target.parentElement.nextSibling != null) {
-            e.target.parentElement.replaceWith(e.target.parentElement.nextSibling);
-            localStorage.removeItem(selectDelete);
-            for(let i = selectDelete; i < cartBlock.children.length; i++) {
-                if(cartBlock.children[i].querySelector('.cart-number').innerHTML != i) 
-                {
-                    cartBlock.children[i].querySelector('.cart-number').innerHTML = i;
-                    localStorage.setItem(i, localStorage.getItem(i + 1));
-                    localStorage.removeItem(i + 1);
-                }
-            }
-            }
-            else 
-            {
-                e.target.parentElement.remove();
-                localStorage.removeItem(selectDelete);
-            }
-            key = localStorage.length;
-            cartCount.innerHTML = localStorage.length;
-            isCartCountOne();
-    };
-    const cartModify = function(cartNumber, cartDesc, cartPrice) {
-        const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
-        createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
-        createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
-        cartBlock.append(createCartContainer);
-        createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
-        createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
-    };
     
-    const catMiddle = document.querySelector('#cat-middle'), catMiddleBuy = catMiddle.querySelector('.buy-button');
-    catMiddleBuy.addEventListener('click', () => addCart(1));
-    
-    const categoryItems = document.querySelectorAll('.category-item');
-    categoryItems.forEach(function(item) {
-        const button = item.querySelector('.buy-button');
-        button.addEventListener('click', () => addCart(2, item));
-    });
-
-    window.addEventListener('DOMContentLoaded', function(e) {
-        if(localStorage.length) {
-            for(let i = 0; i < localStorage.length; i++) {
-                cartItem.name = JSON.parse(localStorage.getItem(i)).name;
-                cartItem.price = JSON.parse(localStorage.getItem(i)).price;
-                cartModify(i, cartItem.name, cartItem.price);
-            }
-        }
-    });
+/* Category elements */
 }
-
 /* Cart design */
 {
     const cart = document.querySelector('#cart');

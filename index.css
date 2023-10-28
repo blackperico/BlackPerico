@@ -374,7 +374,7 @@ to {transform: rotate(20deg)}}
     flex-flow: row;
     justify-content: center;
     margin-top: 20px;}
-#cat-middle {height: 460px;
+#games-middle {height: 460px;
     width: 700px;
     min-width: 475px;
     position: relative;
@@ -383,12 +383,12 @@ to {transform: rotate(20deg)}}
     user-select: none;
     overflow: hidden;}
 @media screen and (max-width: 894px) {
-    #cat-middle {width: calc(100% - 2px);
+    #games-middle {width: calc(100% - 2px);
         min-width: 0px;}
     #games-container {flex-direction: column;
         margin-top: 0px;}
     #games-top {display: block;}
-    #games-container .cat-side {display: none;}
+    #games-container .games-side {display: none;}
     #games-top-wrap .side-element:first-child {margin-left: 0px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;}
@@ -443,18 +443,18 @@ to {transform: rotate(20deg)}}
     height: 100%;
     width: 100%;}
     
-@keyframes cat-middle-animation {
+@keyframes games-middle-animation {
     from {margin-left: 15%;}
     to {margin-left: 0%;}
 }
-.cat-middle-animation {animation-name: cat-middle-animation;
+.games-middle-animation {animation-name: games-middle-animation;
     animation-duration: 400ms;
     animation-timing-function: (0.1, 0.9);}
-@keyframes cat-middle-children-animation {
+@keyframes games-middle-children-animation {
     from {margin-left: 80%;}
     to {margin-left: 0%;}
 }
-.cat-middle-children-animation {animation-name: cat-middle-children-animation;
+.games-middle-children-animation {animation-name: games-middle-children-animation;
     animation-duration: 700ms;
     animation-timing-function: cubic-bezier(0.9, 0.1);}
 
@@ -472,7 +472,7 @@ to {transform: rotate(20deg)}}
     text-shadow: 0px 0px 12px #fff;}
 .cat-title {padding-top: 10px;
     padding-bottom: 10px;}
-#cat-middle img {height: 100%;
+#games-middle img {height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 20px;
@@ -492,7 +492,7 @@ to {transform: rotate(20deg)}}
     font-size: 15px;
     color: #fff;
     cursor: default;}
-#cat-middle .buy-button {position: absolute;
+#games-middle .buy-button {position: absolute;
     bottom: 35px;
     right: 30px;
     height: fit-content;
@@ -507,7 +507,7 @@ to {transform: rotate(20deg)}}
     transition-duration: 300ms;
     transition-timing-function: cubic-bezier(0.1, 0.2, 0.7);
     cursor: pointer;}
-#cat-middle .buy-button:hover {background-color: rgba(131, 133, 47, 0.9);}
+#games-middle .buy-button:hover {background-color: rgba(131, 133, 47, 0.9);}
 .cat-text {position: absolute;
     top: 120px;
     left: 20px;
@@ -517,15 +517,15 @@ to {transform: rotate(20deg)}}
     color: #fff;
     text-shadow: 0px 0px 5px #000;
     font-size: 18px;}
-.cat-side {display: block;
+.games-side {display: block;
     height: 460px;
     width: fit-content;
     max-width: 300px;
     min-width: 190px;
     display: flex;
     flex-direction: column;}
-#cat-left {margin-right: 10px;}
-#cat-right {margin-left: 10px;}
+#games-left {margin-right: 10px;}
+#games-right {margin-left: 10px;}
 
 @keyframes side-element-loading {
     from {background-size: 0% 100%;}
@@ -563,10 +563,10 @@ to {transform: rotate(20deg)}}
     word-break: keep-all; 
     font-size: 14px;
     margin-top: 22px;}
-#cat-left .side-element-wrap{float: left;
+#games-left .side-element-wrap{float: left;
     padding-left: 3px;
     padding-right: 0px;}
-#cat-right .side-element-wrap{float: right;
+#games-right .side-element-wrap{float: right;
     padding-left: 0px;
     padding-right: 3px;}
 .side-element-developer {height: 35px;
@@ -579,10 +579,10 @@ to {transform: rotate(20deg)}}
     width: 55px;
     border-radius: 5px;
     object-fit: cover;}
-#cat-right .side-element img {position: absolute;
+#games-right .side-element img {position: absolute;
     left: 2px; 
     bottom: 2px;}
-#cat-left .side-element img {position: absolute;
+#games-left .side-element img {position: absolute;
     right: 2px;
     bottom: 2px;}
 
