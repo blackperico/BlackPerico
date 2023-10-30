@@ -1,22 +1,91 @@
 'use strict'
-/* Search box */
 {
-    const searchBox = document.querySelector('#search');
-    let searchValue;
-    searchBox.addEventListener('focus', (e) => {
-        if(e.target.value == 'Search...')
-            e.target.value = '';
+    /* Products creation and JSON insertion */
+    function createElements(item) {
+        /* Declare const for elements creation */
+        const shopContainer = document.querySelector('#shop-container');
+        const newProduct = document.createElement('div');
+        newProduct.className = 'product';
+        const newImg = document.createElement('img');
+        newImg.setAttribute('src', `${item.image.src}`);
+        newImg.setAttribute('alt', `${item.image.alt}`);
+        const newProductInfo = document.createElement('div');
+        newProductInfo.className = 'product-info';
+        const newProductName = document.createElement('p');
+        newProductName.className = 'product-name';
+        const newProductPrice = document.createElement('p');
+        newProductPrice.className = 'product-price';
+        const newDescContainer = document.createElement('div');
+        newDescContainer.className = 'desc-container';
+/*
+        const newScrollPath = document.createElement('div');
+        newScrollPath.className = 'scroll-path';
+        const newScroll = document.createElement('div');
+        newScroll.className = 'scroll';
+*/
+        const newProductDesc = document.createElement('p');
+        newProductDesc.className = 'product-desc';
+        const newButtonContainer = document.createElement('div');
+        newButtonContainer.className = 'button-container';
+        const newButton = document.createElement('button');
+        newButton.innerHTML = 'Order';
+
+        /* Insert attributes and HTML text into elements */
+        for(const [attribute, value] of Object.entries(item.attributes)) {
+            newProduct.setAttribute(`${attribute}`, `${value}`);
+        };
+        newProductName.innerHTML = item.name;
+        newProductPrice.innerHTML = item.price;
+        newProductDesc.innerHTML = item.desc;
+
+        /* Creation */
+        newProduct.append(newImg);
+        newProductInfo.append(newProductName);
+        newProductInfo.append(newProductPrice);
+        newProduct.append(newProductInfo);
+        newDescContainer.append(newProductDesc);
+        newProduct.append(newDescContainer);
+        newButtonContainer.append(newButton);
+        newProduct.append(newButtonContainer);
+        shopContainer.append(newProduct);
+
+        return newProduct;
+    };
+
+    const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
+    const loadAndCreate = new Promise((resolve, reject) => {
+        fetch('../../products.json')
+        .then(response => {
+            if(!response.ok)
+                reject('Network problem.');
+            return response.json();
+        })
+        .then(data => resolve(data[searchFor]))
+        .catch(error => console.log('Error: ' + error));
     });
-    searchBox.addEventListener('keydown', function(e) {
-        if(e.key == 'Enter'){
-            searchValue = e.target.value;
-            console.log(searchValue);
-        }
-    });
-    searchBox.addEventListener('blur', (e) => {
-        if(e.target.value == '')
-            e.target.value = 'Search...';
-    });
+    loadAndCreate
+    .then(data => {
+        const elementsCreated = [];
+        data.forEach((value, index, array) => {
+            const element = createElements(value);
+            elementsCreated.push(element);
+        });
+        return elementsCreated;
+    })
+    .then(elements => {
+        console.log(elements[0].querySelector('.product-desc').clientHeight);
+        console.log(elements[0].querySelector('.desc-container').clientHeight);
+        return elements;
+    })
+    .then(o => {
+        window.addEventListener('resize', (e) => {
+            console.log(1);
+        })
+    })
+    /* !!!FOR TOMORROW!!!: 
+        MAKE CSS VARIABLE FOR DESC-CONTAINER > IN NEXT .THEN ADD SCROLLS*/
+    
+    /* Products creation and JSON insertion */
 }
 /*  Array of shop items  */   
 {
@@ -261,34 +330,6 @@
             item.checked = false;
         });
         sortObject = {};
-    });
-}
-/*  Menu  */
-{
-    const navMenu = document.querySelector("nav ul li:first-of-type"), menu = document.querySelector('#menu');
-    let check;
-    navMenu.addEventListener('click', function(e) {
-        check = Number(getComputedStyle(menu).left.replace('-', '').replace('px', ''));
-        if(check > 0)
-        {
-            menu.style.left = '0px';
-        }
-        else
-        {
-            menu.style.left = '-300px';
-        }
-    });
-    const headerHeight = Number(getComputedStyle(document.querySelector('header')).height.replace('px', '')), navHeight = Number(getComputedStyle(document.querySelector('nav')).height.replace('px', ''));
-    let scrollValue;
-    window.addEventListener('scroll', function(e) {
-        scrollValue = window.scrollY;
-        if (scrollValue < headerHeight) {
-            menu.style.top = (headerHeight + navHeight) - scrollValue + 'px';
-        } 
-        else 
-        {
-            menu.style.top = navHeight + 'px';
-        }
     });
 }
 /* Buy buttons and cart */

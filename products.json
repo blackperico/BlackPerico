@@ -1042,7 +1042,7 @@
             }
         }
     ],
-    "motherboard": [
+    "motherboards": [
         {
             "attributes": {
                 "data-manufacturer": "asus",
@@ -1758,7 +1758,7 @@
             }
         }
     ],
-    "keyboard": [
+    "keyboards": [
         {
             "attributes": {
                 "data-manufacturer": "logitech",
@@ -2049,7 +2049,7 @@
             }
         }
     ],
-    "mouse": [
+    "mouses": [
         {
             "attributes": {
                 "data-manufacturer": "logitech",
