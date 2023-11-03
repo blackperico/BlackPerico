@@ -1,6 +1,8 @@
 :root {
     --sideElementLoopTimer: 5000ms;
     --sideElementSelectTimer: 10000ms;
+    --descContainerHeight: 110px;
+    --scrollHeight: 30px;
 }
 
 * {font-family: Arial, Helvetica, sans-serif;
@@ -854,7 +856,7 @@ to {transform: rotate(20deg)}}
     user-select: none;}
 .product-name {overflow: hidden;
     text-overflow: ellipsis;}
-.desc-container {height: 110px;
+.desc-container {height: var(--descContainerHeight);
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -881,11 +883,11 @@ to {transform: rotate(20deg)}}
     top: 0px;
     right: 2px;
     width: 3px;
-    height: 80px;
+    height: 100%;
     border-radius: 10px;}
 .scroll {position: absolute; 
     top: 0px;
-    height: 30px;
+    height: var(--scrollHeight);
     width: inherit;
     border-radius: 10px;
     transition: 300ms;

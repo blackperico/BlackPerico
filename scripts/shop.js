@@ -1,7 +1,7 @@
 'use strict'
 {
     /* Products creation and JSON insertion */
-    function createElements(item) {
+    function createProducts(item) {
         /* Declare const for elements creation */
         const shopContainer = document.querySelector('#shop-container');
         const newProduct = document.createElement('div');
@@ -9,6 +9,7 @@
         const newImg = document.createElement('img');
         newImg.setAttribute('src', `${item.image.src}`);
         newImg.setAttribute('alt', `${item.image.alt}`);
+        newImg.setAttribute('draggable', 'false');
         const newProductInfo = document.createElement('div');
         newProductInfo.className = 'product-info';
         const newProductName = document.createElement('p');
@@ -17,12 +18,6 @@
         newProductPrice.className = 'product-price';
         const newDescContainer = document.createElement('div');
         newDescContainer.className = 'desc-container';
-/*
-        const newScrollPath = document.createElement('div');
-        newScrollPath.className = 'scroll-path';
-        const newScroll = document.createElement('div');
-        newScroll.className = 'scroll';
-*/
         const newProductDesc = document.createElement('p');
         newProductDesc.className = 'product-desc';
         const newButtonContainer = document.createElement('div');
@@ -51,7 +46,7 @@
 
         return newProduct;
     };
-
+    
     const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
     const loadAndCreate = new Promise((resolve, reject) => {
         fetch('../../products.json')
@@ -64,31 +59,130 @@
         .catch(error => console.log('Error: ' + error));
     });
     loadAndCreate
+    /* Create products on page and return array of elements*/
     .then(data => {
         const elementsCreated = [];
         data.forEach((value, index, array) => {
-            const element = createElements(value);
+            const element = createProducts(value);
             elementsCreated.push(element);
         });
         return elementsCreated;
     })
-    .then(elements => {
-        console.log(elements[0].querySelector('.product-desc').clientHeight);
-        console.log(elements[0].querySelector('.desc-container').clientHeight);
-        return elements;
+    /* Add scroll on products if necessary */
+    .then(products => {
+        scrollCheck(products);
+        window.addEventListener('resize', () => {
+            scrollCheck(products);
+        });
+        products.forEach((product) => {
+            const text = product.querySelector('.product-desc');
+            let textHeight = Number(getComputedStyle(text).height.replace('px', ''));
+            let heightDiff = containerHeight - textHeight;
+            let scroll = product.querySelector('.scroll');
+            const scrollHeight = getComputedStyle(document.documentElement).getPropertyValue('--scrollHeight').replace('px', '');
+            const scrollPercent = 100 - (scrollHeight / containerHeight) * 100;
+            let mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
+
+            /* Event functions for scrolling */
+            function moveScroll() {
+                scrollDrag = (drag / heightDiff) * scrollPercent;
+                if(scrollDrag <= 72.72)
+                scroll.style.top = `${scrollDrag}%`;
+            };
+            function moveText() {console.log(heightDiff);
+                if(drag <= 0 && drag >= heightDiff && scroll !== null)
+                    text.style.transform = `translateY(${drag}px)`;
+                if(drag > 0)
+                    drag = 0;
+                if(drag < heightDiff)
+                    drag = heightDiff;
+                moveScroll();
+            };
+            function eventStartHandler(e) {
+                if(e.button == 0) {console.log(mouseDown)
+                    mouseDown = 1;
+                    mouseUp = 0;
+                }
+            };
+            function eventMoveHandler(e) {
+                if(mouseDown == 1) {console.log(mouseDown);
+                    drag = drag + e.movementY;
+                    moveText();
+                }
+            };
+            function eventEndHandler() {
+                mouseDown = 0;
+                mouseUp = 1;
+            };
+
+            product.addEventListener(eventStart, eventStartHandler);
+            window.addEventListener(eventMove, eventMoveHandler);
+            window.addEventListener(eventEnd, eventEndHandler);
+
+            window.addEventListener('resize', (e) => {
+                product.removeEventListener(eventStart, eventStartHandler);
+                window.removeEventListener(eventMove, eventMoveHandler);
+                window.removeEventListener(eventEnd, eventEndHandler);
+
+                scroll = product.querySelector('.scroll');
+                textHeight = Number(getComputedStyle(text).height.replace('px', ''));
+                heightDiff = containerHeight - textHeight;
+                mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
+
+                product.addEventListener(eventStart, eventStartHandler);
+                window.addEventListener(eventMove, eventMoveHandler);
+                window.addEventListener(eventEnd, eventEndHandler);
+            });
+            });
+        return products;
     })
-    .then(o => {
-        window.addEventListener('resize', (e) => {
-            console.log(1);
-        })
-    })
+
+    const containerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--descContainerHeight').replace('px', ''));
+    /* Check on load and window resize if products need scrolls to be added or removed */
+    function scrollCheck(products) {
+        products.forEach((product) => {
+            const newScrollPath = document.createElement('div');
+            newScrollPath.className = 'scroll-path';
+            const newScroll = document.createElement('div');
+            newScroll.className = 'scroll';
+            const productText = product.querySelector('.product-desc');
+            const textHeight = Number(getComputedStyle(productText).height.replace('px', ''));
+            const scroll = product.querySelector('.scroll');
+            
+            if(textHeight > containerHeight && scroll == null) {
+                const productContainer = product.querySelector('.desc-container');
+                productContainer.append(newScrollPath);
+                newScrollPath.append(newScroll);
+            } else
+            if(textHeight < containerHeight && scroll) {
+                scroll.remove();
+            }
+        });
+    };
+
+    /* Checks wether user is using phone or pc, use touchstart/mousedown */
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const eventStart = isMobile ? 'touchstart' : 'mousedown';
+    const eventMove = isMobile ? 'touchmove' : 'mousemove';
+    const eventEnd = isMobile ? 'touchend' : 'mouseup';
+
+    /* Adds event functions for scrolling */
+    function scrollFunctionality(product, action, eventStartHandler, eventMoveHandler, eventEndHandler) {
+        
+    };
+    function productVariables(product) {
+        
+        return [text, textHeight, heightDiff, scroll, scrollHeight, scrollPercent, mouseDown, mouseUp, drag, scrollDrag];
+    };
+    function eventFs(product, action, text, textHeight, heightDiff, scroll, scrollHeight, scrollPercent, mouseDown, mouseUp, drag, scrollDrag) {
+        
+    }
     /* !!!FOR TOMORROW!!!: 
-        MAKE CSS VARIABLE FOR DESC-CONTAINER > IN NEXT .THEN ADD SCROLLS*/
-    
-    /* Products creation and JSON insertion */
+        MAKE CSS VARIABLE FOR DESC-CONTAINER > IN NEXT .THEN ADD SCROLLS
+        MAKE MULTIPLE PAGES OF PRODUCTS */
 }
 /*  Array of shop items  */   
-{
+{/*
     const products = document.querySelectorAll('.product'), isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     products.forEach(function (product) {
@@ -189,7 +283,7 @@
                 mouseDownCheck = 0;
             });
         }
-    })
+    })*/
 }
 /* Filters */
 {
