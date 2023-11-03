@@ -1,6 +1,6 @@
 'use strict'
 {
-    /* Products creation and JSON insertion */
+    /* Products creation and JSON insertion from fetch */
     function createProducts(item) {
         /* Declare const for elements creation */
         const shopContainer = document.querySelector('#shop-container');
@@ -46,99 +46,14 @@
 
         return newProduct;
     };
-    
-    const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
-    const loadAndCreate = new Promise((resolve, reject) => {
-        fetch('../../products.json')
-        .then(response => {
-            if(!response.ok)
-                reject('Network problem.');
-            return response.json();
-        })
-        .then(data => resolve(data[searchFor]))
-        .catch(error => console.log('Error: ' + error));
-    });
-    loadAndCreate
-    /* Create products on page and return array of elements*/
-    .then(data => {
-        const elementsCreated = [];
-        data.forEach((value, index, array) => {
-            const element = createProducts(value);
-            elementsCreated.push(element);
-        });
-        return elementsCreated;
-    })
-    /* Add scroll on products if necessary */
-    .then(products => {
-        scrollCheck(products);
-        window.addEventListener('resize', () => {
-            scrollCheck(products);
-        });
-        products.forEach((product) => {
-            const text = product.querySelector('.product-desc');
-            let textHeight = Number(getComputedStyle(text).height.replace('px', ''));
-            let heightDiff = containerHeight - textHeight;
-            let scroll = product.querySelector('.scroll');
-            const scrollHeight = getComputedStyle(document.documentElement).getPropertyValue('--scrollHeight').replace('px', '');
-            const scrollPercent = 100 - (scrollHeight / containerHeight) * 100;
-            let mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
-
-            /* Event functions for scrolling */
-            function moveScroll() {
-                scrollDrag = (drag / heightDiff) * scrollPercent;
-                if(scrollDrag <= 72.72)
-                scroll.style.top = `${scrollDrag}%`;
-            };
-            function moveText() {console.log(heightDiff);
-                if(drag <= 0 && drag >= heightDiff && scroll !== null)
-                    text.style.transform = `translateY(${drag}px)`;
-                if(drag > 0)
-                    drag = 0;
-                if(drag < heightDiff)
-                    drag = heightDiff;
-                moveScroll();
-            };
-            function eventStartHandler(e) {
-                if(e.button == 0) {console.log(mouseDown)
-                    mouseDown = 1;
-                    mouseUp = 0;
-                }
-            };
-            function eventMoveHandler(e) {
-                if(mouseDown == 1) {console.log(mouseDown);
-                    drag = drag + e.movementY;
-                    moveText();
-                }
-            };
-            function eventEndHandler() {
-                mouseDown = 0;
-                mouseUp = 1;
-            };
-
-            product.addEventListener(eventStart, eventStartHandler);
-            window.addEventListener(eventMove, eventMoveHandler);
-            window.addEventListener(eventEnd, eventEndHandler);
-
-            window.addEventListener('resize', (e) => {
-                product.removeEventListener(eventStart, eventStartHandler);
-                window.removeEventListener(eventMove, eventMoveHandler);
-                window.removeEventListener(eventEnd, eventEndHandler);
-
-                scroll = product.querySelector('.scroll');
-                textHeight = Number(getComputedStyle(text).height.replace('px', ''));
-                heightDiff = containerHeight - textHeight;
-                mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
-
-                product.addEventListener(eventStart, eventStartHandler);
-                window.addEventListener(eventMove, eventMoveHandler);
-                window.addEventListener(eventEnd, eventEndHandler);
-            });
-            });
-        return products;
-    })
+    /* Checks wether user is using phone or pc, use touchstart/mousedown */
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const eventStart = isMobile ? 'touchstart' : 'mousedown';
+    const eventMove = isMobile ? 'touchmove' : 'mousemove';
+    const eventEnd = isMobile ? 'touchend' : 'mouseup';
 
     const containerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--descContainerHeight').replace('px', ''));
-    /* Check on load and window resize if products need scrolls to be added or removed */
+    /* Checks if products need scrolls to be added or removed */
     function scrollCheck(products) {
         products.forEach((product) => {
             const newScrollPath = document.createElement('div');
@@ -159,131 +74,116 @@
             }
         });
     };
+    /* Fetch request */
+    const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
+    const loadAndCreate = new Promise((resolve, reject) => {
+        fetch('../../products.json')
+        .then(response => {
+            if(!response.ok)
+                reject('Network problem.');
+            return response.json();
+        })
+        .then(data => resolve(data[searchFor]))
+        .catch(error => console.log('Error: ' + error));
+    });
 
-    /* Checks wether user is using phone or pc, use touchstart/mousedown */
-    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const eventStart = isMobile ? 'touchstart' : 'mousedown';
-    const eventMove = isMobile ? 'touchmove' : 'mousemove';
-    const eventEnd = isMobile ? 'touchend' : 'mouseup';
+    loadAndCreate
+    /* Create products on page and return array of elements*/
+    .then(data => {
+        const elementsCreated = [];
+        data.forEach((value, index, array) => {
+            const element = createProducts(value);
+            elementsCreated.push(element);
+        });
+        return elementsCreated;
+    })
+    /* Add scroll on created products if necessary + functionality for scroll */
+    .then(products => {
+        scrollCheck(products);
+        products.forEach((product) => {
+            const text = product.querySelector('.product-desc');
+            let textHeight = Number(getComputedStyle(text).height.replace('px', ''));
+            let heightDiff = containerHeight - textHeight;
+            let scroll = product.querySelector('.scroll');
+            const scrollHeight = getComputedStyle(document.documentElement).getPropertyValue('--scrollHeight').replace('px', '');
+            const scrollPercent = 100 - (scrollHeight / containerHeight) * 100;
+            let mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
+            let recallText, recallTextInner, recallFunction;
 
-    /* Adds event functions for scrolling */
-    function scrollFunctionality(product, action, eventStartHandler, eventMoveHandler, eventEndHandler) {
+            /* Event functions for scrolling */
+            function moveScroll() {
+                scrollDrag = (drag / heightDiff) * scrollPercent;
+                if(scrollDrag <= 72.72)
+                scroll.style.top = `${scrollDrag}%`;
+            };
+            function moveText() {
+                if(drag <= 0 && drag >= heightDiff && scroll !== null)
+                    text.style.transform = `translateY(${drag}px)`;
+                if(drag > 0)
+                    drag = 0;
+                if(drag < heightDiff)
+                    drag = heightDiff;
+                moveScroll();
+            };
+            function eventStartHandler(e) {
+                if(e.button == 0) {
+                    mouseDown = 1;
+                    mouseUp = 0;
+                    clearTimeout(recallText);
+                    clearTimeout(recallTextInner);
+                }
+            };
+            function eventMoveHandler(e) {
+                if(mouseDown == 1) {
+                    drag = drag + e.movementY;
+                    moveText();
+                }
+            };
+            function eventEndHandler() {
+                mouseDown = 0;
+                mouseUp = 1;
+                recallText = setTimeout(function recallFunction() {
+                    recallTextInner = setTimeout(recallFunction, 80);
+                    if(drag < 0) {
+                        drag = drag + 1;
+                        scrollDrag = scrollDrag + scrollPercent;
+                        moveText();
+                    }
+                    else {
+                        clearTimeout(recallTextInner);
+                    }
+                }, 3000);
+            };
+
+            /* Add event functions to product */
+            product.addEventListener(eventStart, eventStartHandler);
+            window.addEventListener(eventMove, eventMoveHandler);
+            window.addEventListener(eventEnd, eventEndHandler);
+            /* Checks for new text height, adds/removes scrolls */
+            window.addEventListener('resize', (e) => {
+                product.removeEventListener(eventStart, eventStartHandler);
+                window.removeEventListener(eventMove, eventMoveHandler);
+                window.removeEventListener(eventEnd, eventEndHandler);
+
+                scrollCheck(products);
+                scroll = product.querySelector('.scroll');
+                textHeight = Number(getComputedStyle(text).height.replace('px', ''));
+                heightDiff = containerHeight - textHeight;
+                mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
+                moveText();
+                
+                product.addEventListener(eventStart, eventStartHandler);
+                window.addEventListener(eventMove, eventMoveHandler);
+                window.addEventListener(eventEnd, eventEndHandler);
+            });
+            });
+        return products;
+    })
+    .then(products => {
         
-    };
-    function productVariables(product) {
-        
-        return [text, textHeight, heightDiff, scroll, scrollHeight, scrollPercent, mouseDown, mouseUp, drag, scrollDrag];
-    };
-    function eventFs(product, action, text, textHeight, heightDiff, scroll, scrollHeight, scrollPercent, mouseDown, mouseUp, drag, scrollDrag) {
-        
-    }
+    })
     /* !!!FOR TOMORROW!!!: 
-        MAKE CSS VARIABLE FOR DESC-CONTAINER > IN NEXT .THEN ADD SCROLLS
-        MAKE MULTIPLE PAGES OF PRODUCTS */
-}
-/*  Array of shop items  */   
-{/*
-    const products = document.querySelectorAll('.product'), isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    products.forEach(function (product) {
-        const descContainer = product.querySelector('.desc-container'), desc = product.querySelector('.product-desc'), containerHeight = Number(getComputedStyle(descContainer).height.replace('px', ''));
-        let descHeight = Number(getComputedStyle(desc).height.replace('px', ''));
-        const createDiv = document.createElement('div'), createScroll = document.createElement('div');
-        createDiv.className = 'scroll-path'; 
-        createScroll.className = 'scroll';
-
-        if(descHeight > containerHeight) 
-        {
-            descContainer.append(createDiv);
-            createDiv.append(createScroll);
-        }
-
-        let drag = 0, mouseDownCheck = 0, textRecall, textRecalls, dragScroll = 0;
-        const scroll = descContainer.querySelector('.scroll'), scrollPercent = 100/(containerHeight - descHeight);
-
-        let dragText = function() {
-            desc.style.transform = `translateY(${drag}px)`;
-            if(scroll)
-                scroll.style.top = `${dragScroll}%`;
-        };
-
-        if(isMobile)
-        {
-            descContainer.addEventListener('touchstart', function(e) {
-                if(descHeight > containerHeight) 
-                {
-                    mouseDownCheck = 1;
-                    clearTimeout(textRecall);
-                    clearTimeout(textRecalls);
-                }
-            });
-            window.addEventListener('touchmove', function(e) {
-                if (mouseDownCheck == 1) 
-                {
-                    if((drag + e.movementY) >= (containerHeight - descHeight) && (drag + e.movementY) <= (0)) 
-                    {
-                        drag = drag + e.movementY;
-                        dragScroll = dragScroll + e.movementY * scrollPercent;
-                    }
-                    dragText();
-                }
-            });
-            window.addEventListener('touchend', function(e) {
-                textRecall = setTimeout(function recallText() {
-                    textRecalls = setTimeout(recallText, 70); 
-                    if(drag < 0) 
-                    {
-                        drag++;
-                        dragScroll = dragScroll + scrollPercent;
-                        dragText();
-                    }
-                    else 
-                    {
-                        clearTimeout(textRecalls);
-                    }
-                }, 3000);
-                mouseDownCheck = 0;
-            });
-        }
-        else
-        {
-            descContainer.addEventListener('mousedown', function(e) {
-                if(e.button == 0 && descHeight > containerHeight) 
-                {
-                    mouseDownCheck = 1;
-                    clearTimeout(textRecall);
-                    clearTimeout(textRecalls);
-                }
-            });
-            window.addEventListener('mousemove', function(e) {
-                if (mouseDownCheck == 1) 
-                {
-                    if((drag + e.movementY) >= (containerHeight - descHeight) && (drag + e.movementY) <= (0)) 
-                    {
-                        drag = drag + e.movementY;
-                        dragScroll = dragScroll + e.movementY * scrollPercent;
-                    }
-                    dragText();
-                }
-            });
-            window.addEventListener('mouseup', function(e) {
-                textRecall = setTimeout(function recallText() {
-                    textRecalls = setTimeout(recallText, 70); 
-                    if(drag < 0) 
-                    {
-                        drag++;
-                        dragScroll = dragScroll + scrollPercent;
-                        dragText();
-                    }
-                    else 
-                    {
-                        clearTimeout(textRecalls);
-                    }
-                }, 3000);
-                mouseDownCheck = 0;
-            });
-        }
-    })*/
+            MAKE MULTIPLE PAGES OF PRODUCTS */
 }
 /* Filters */
 {
