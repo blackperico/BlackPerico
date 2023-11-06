@@ -74,6 +74,91 @@
             }
         });
     };
+    /* Takes 'filters' object containing keys(title what to be sorted by) and values(exact product's attribute to sort by for) and creates sorting table on page */
+    function createFilters(filters) {
+        const filterContainer = document.querySelector('#shop-container-filter');
+        const filtersNoDuplicates = {};
+        /* Making array('filtersNoDuplicates') of possible choices to sort by without duplicates */
+        for(const key in filters)
+            filtersNoDuplicates[key] = noDuplicates(filters[key]);
+        /* Loop for removing 'data-' from sort titles we got from JSON that's inserted in html before, and adds UpperCase for each word */
+        for(const filter in filtersNoDuplicates) {
+            const filterBy = beautyWords(filter);
+            
+            const collapsible = document.createElement('div');
+            collapsible.className = 'collapsible';
+            const collapsibleTrigger = document.createElement('span');
+            collapsibleTrigger.className = 'collapsible-trigger';
+            collapsibleTrigger.innerHTML = `${filterBy}`;
+            const arrow = document.createElement('i');
+            arrow.className = 'fa fa-caret-up';
+            const collapsibleContent = document.createElement('div');
+            collapsibleContent.className = 'collapsible-content';
+            
+
+            filterContainer.append(collapsible);
+            collapsible.append(collapsibleTrigger);
+            collapsibleTrigger.append(arrow);
+            collapsible.append(collapsibleContent);
+
+            filtersNoDuplicates[filter].forEach((item, i) => {
+                const nameUpperCase = item[0].toUpperCase() + item.substring(1);
+
+                const collapsibleItem = document.createElement('div');
+                collapsibleItem.className = 'collapsible-item';
+                const input = document.createElement('input');
+                input.setAttribute('type', 'checkbox');
+                input.setAttribute('id', `${filter + i}`);
+                input.setAttribute('name', `${item}`);
+                const label = document.createElement('label');
+                label.setAttribute('for', `${filter + i}`);
+                label.innerHTML = `${nameUpperCase}`;
+                const availableSorts = document.createElement('div');
+                availableSorts.className = 'available-sorts';
+                /* WARNING: ADD METHOD FOR AVAILABLE-SORTS CHANGES */
+
+                collapsibleContent.append(collapsibleItem);
+                collapsibleItem.append(input);
+                collapsibleItem.append(label);
+                collapsibleItem.append(availableSorts);
+            });
+        }
+    };
+    /* Makes set out of an array so there are no repeated values then returns it as array. Also sort it out for better look. */
+    function noDuplicates(arrayAttributes) {
+        const setAttributes = new Set();
+
+        arrayAttributes.forEach((attribute) => {
+            setAttributes.add(attribute);
+        });
+
+        const arrayNoDuplicates = Array.from(setAttributes);
+
+        arrayNoDuplicates.sort((a, b) => {
+            const stringA = String(a);
+            const stringB = String(b);
+
+            return stringA.localeCompare(stringB, undefined, {
+                numeric: true,
+                sensitivity: 'base',
+            });
+        });
+        return arrayNoDuplicates;
+    };
+    /* remove 'data-' that came from JSON which was inserted into HTML, adds UpperCases for each new word */
+    function beautyWords(filterBy) {
+        if(filterBy.length > 0) {
+            filterBy = filterBy.replace(/data-/g, '');
+            filterBy = filterBy[0].toUpperCase() + filterBy.slice(1);
+            filterBy = filterBy.replace(/-/g, ' ');
+            
+            for(let n = 1; n < filterBy.length; n++) {
+                if(filterBy[n] === ' ')
+                    filterBy = filterBy.substring(0, n + 1) + filterBy[n + 1].toUpperCase() + filterBy.substring(n + 2);
+            };
+        }
+        return filterBy;
+    };
     /* Fetch request */
     const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
     const loadAndCreate = new Promise((resolve, reject) => {
@@ -95,10 +180,10 @@
             const element = createProducts(value);
             elementsCreated.push(element);
         });
-        return elementsCreated;
+        return [elementsCreated, data];
     })
     /* Add scroll on created products if necessary + functionality for scroll */
-    .then(products => {
+    .then(([products, data]) => {
         scrollCheck(products);
         products.forEach((product) => {
             const text = product.querySelector('.product-desc');
@@ -177,16 +262,53 @@
                 window.addEventListener(eventEnd, eventEndHandler);
             });
             });
-        return products;
+        return [products, data];
     })
-    .then(products => {
+    /* Add and create filters for products' attributes */
+    .then(([products, data]) => {
+        const filters = {};
+        let collapsibles = [];
         
+        function addFilters(key, value) {
+            if(filters.hasOwnProperty(key)) {
+                if(!Array.isArray(filters[key])) {
+                    filters[key] = [filters[key]];
+                }
+                filters[key].push(value);
+            } else {
+                filters[key] = [value];
+            }
+        };
+        
+        data.forEach((product) => {
+            const attributes = product.attributes;
+            const attributeEntries = Object.entries(attributes);
+
+            attributeEntries.forEach((itemAttributes) => {
+                const key = itemAttributes[0];
+                const value = itemAttributes[1];
+                addFilters(key, value);
+            });
+        });
+
+        createFilters(filters);
+        return [products, data];
     })
+    /*  */
+    .then(([products, data]) => {
+        const collapsibles = document.querySelectorAll('.collapsible');
+        console.log(collapsibles);
+    })
+
     /* !!!FOR TOMORROW!!!: 
-            MAKE MULTIPLE PAGES OF PRODUCTS */
+            -1. LINE 118
+            0. MAKE MULTIPLE PAGES OF PRODUCTS
+            1. ADD INDICATOR HOW MANY POSSIBLE CHOICES THERE ARE FOR FILTERS > CHANGES ON EACH CHECK
+            2. FIGURE PRODUCTS' BUY BUTTONS AND CART */
 }
 /* Filters */
 {
+
     const shopContainer = document.querySelector('#shop-container'), shopItems = shopContainer.querySelectorAll('.product'), filterContainer = document.querySelector('#filter-container'), shopContainerFilter = document.querySelector('#shop-container-filter'), removeFilters = document.querySelector('.remove-filters'), closeFilter = document.querySelector('#close-filter .fa'), overlay = document.querySelector('#overlay');
     let sortingArray = Array.from(shopItems);
 /* Display/Hide filterBlock */

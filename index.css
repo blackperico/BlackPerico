@@ -781,6 +781,8 @@ to {transform: rotate(20deg)}}
     transition: height 300ms ease-out;}
 .collapsible-item label {cursor: pointer;}
 .collapsible-item input {margin-right: 10px;}
+.available-sorts {float: right;
+    margin-right: 25px;}
 .collapsible .fa {transition: transform 300ms ease-in-out;}
 #shop-container {display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
