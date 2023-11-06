@@ -267,7 +267,6 @@
     /* Add and create filters for products' attributes */
     .then(([products, data]) => {
         const filters = {};
-        let collapsibles = [];
         
         function addFilters(key, value) {
             if(filters.hasOwnProperty(key)) {
@@ -294,6 +293,55 @@
         createFilters(filters);
         return [products, data];
     })
+    /* Sort by price */
+    .then(([products, data]) => {
+        const productsOrder = [];
+        products.forEach((product) => {
+            productsOrder.push(product);
+        });
+        const sortPrice = document.querySelector('#sort');
+        const shopContainer = document.querySelector('#shop-container');
+        const removeFilters = document.querySelector('.remove-filters');
+       
+        const ACTIONS = {
+            1: function descending(sortingArray) {
+                sortingArray.sort((a, b) => {
+                    a = parseFloat(a.querySelector('.product-price').innerHTML);
+                    b = parseFloat(b.querySelector('.product-price').innerHTML);
+                    return a - b;
+                });
+                sortingArray.forEach((product) => {
+                    shopContainer.append(product);
+                });
+            },
+            2: function ascending(sortingArray) {
+                sortingArray.sort((a, b) => {
+                    a = parseFloat(a.querySelector('.product-price').innerHTML);
+                    b = parseFloat(b.querySelector('.product-price').innerHTML);
+                    return b - a;
+                });
+                sortingArray.forEach((product) => {
+                    shopContainer.append(product);
+                });
+            },
+            3: function reset(sortingArray) {
+                sortingArray.forEach((product) => {
+                    shopContainer.append(product);
+                });
+                products = productsOrder;
+            }
+        };
+    
+        sortPrice.addEventListener('change', (e) => {
+            const selectedIndex = e.target.selectedIndex;
+            ACTIONS[selectedIndex](products);
+        });
+        removeFilters.addEventListener('click', () => {
+            ACTIONS[3](productsOrder);
+        });
+        
+        return [products, data];
+    })
     /*  */
     .then(([products, data]) => {
         const collapsibles = document.querySelectorAll('.collapsible');
@@ -302,6 +350,7 @@
 
     /* !!!FOR TOMORROW!!!: 
             -1. LINE 118
+            -0. PASS CHECKBOXES TO NEXT '.THEN' AND MAKE <RESET> FUNCTION UNCHECK THEM ALL
             0. MAKE MULTIPLE PAGES OF PRODUCTS
             1. ADD INDICATOR HOW MANY POSSIBLE CHOICES THERE ARE FOR FILTERS > CHANGES ON EACH CHECK
             2. FIGURE PRODUCTS' BUY BUTTONS AND CART */
