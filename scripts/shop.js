@@ -94,7 +94,6 @@
             arrow.className = 'fa fa-caret-up';
             const collapsibleContent = document.createElement('div');
             collapsibleContent.className = 'collapsible-content';
-            
 
             filterContainer.append(collapsible);
             collapsible.append(collapsibleTrigger);
@@ -115,7 +114,6 @@
                 label.innerHTML = `${nameUpperCase}`;
                 const availableSorts = document.createElement('div');
                 availableSorts.className = 'available-sorts';
-                /* WARNING: ADD METHOD FOR AVAILABLE-SORTS CHANGES */
 
                 collapsibleContent.append(collapsibleItem);
                 collapsibleItem.append(input);
@@ -159,6 +157,8 @@
         }
         return filterBy;
     };
+    /* HTML Element for removing filters, used later in both Price filter and Attributes filters */
+    const removeFilters = document.querySelector('.remove-filters');
     /* Fetch request */
     const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
     const loadAndCreate = new Promise((resolve, reject) => {
@@ -176,7 +176,7 @@
     /* Create products on page and return array of elements*/
     .then(data => {
         const elementsCreated = [];
-        data.forEach((value, index, array) => {
+        data.forEach((value) => {
             const element = createProducts(value);
             elementsCreated.push(element);
         });
@@ -193,7 +193,7 @@
             const scrollHeight = getComputedStyle(document.documentElement).getPropertyValue('--scrollHeight').replace('px', '');
             const scrollPercent = 100 - (scrollHeight / containerHeight) * 100;
             let mouseDown = 0, mouseUp = 0, drag = 0, scrollDrag = 0;
-            let recallText, recallTextInner, recallFunction;
+            let recallText, recallTextInner;
 
             /* Event functions for scrolling */
             function moveScroll() {
@@ -264,7 +264,9 @@
             });
         return [products, data];
     })
-    /* Add and create filters for products' attributes */
+    /* Checks each product for it's attributes, collects all attributes depending on which creates filters for sorting
+       + Shrinking/Expanding filter's content on click
+       + Checkboxes, only 1 of a group can be selected, onchange it calls sort() */
     .then(([products, data]) => {
         const filters = {};
         
@@ -291,9 +293,75 @@
         });
 
         createFilters(filters);
+        /* Shrinking/Expanding content on clicks */
+        const collapsibleContents = document.querySelectorAll('.collapsible-content');
+        const collapsibleTriggers = document.querySelectorAll('.collapsible-trigger');
+        const arrows = document.querySelectorAll('.fa-caret-up');
+
+        for(let n = 0; n < collapsibleTriggers.length; n++) {
+            const height = getComputedStyle(collapsibleContents[n]).height;
+            collapsibleContents[n].style.height = '0px';
+            collapsibleTriggers[n].addEventListener('click', () => {
+                if(getComputedStyle(collapsibleContents[n]).height == '0px') {
+                    collapsibleContents[n].style.height = height;
+                    arrows[n].style.transform = 'rotate(180deg)';
+                }
+                else {
+                    collapsibleContents[n].style.height = '0px';
+                    arrows[n].style.transform = 'rotate(0deg)';
+                }
+            });
+        };
+        /* Can select only 1 checkbox in group(collapsibleContents)
+           On checkbox change sort() is called and filter is passed */
+        function anyCheck() {
+            const allChecks = document.querySelectorAll('input[type="checkbox"]');
+            const isChecked = Array.from(allChecks).some(checkbox => checkbox.checked);
+            return isChecked;
+        };
+        function removeNumber(word) {
+            return word.replace(/\d+$/, '');
+        };
+        let sendFilter = {};
+        collapsibleContents.forEach((group) => {
+            const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', (e) => {
+                    if(e.target.checked) {
+                        checkboxes.forEach((checkbox) => {
+                            if(checkbox !== e.target && checkbox.checked === true) {
+                                checkbox.checked = false;
+                                delete sendFilter[removeNumber(checkbox.id)];
+                            }
+                        });
+                        sendFilter[removeNumber(e.target.id)] = e.target.name;
+                    }
+                    else {
+                        delete sendFilter[removeNumber(e.target.id)];
+                    }
+                    sort(products, sendFilter);
+                    if(anyCheck() == false && document.querySelector('#sort').selectedIndex == 0)
+                        removeFilters.style.display = 'none';
+                    else if(anyCheck() == true) {
+                        removeFilters.style.display = 'inline';
+                    }
+                });
+            });
+        });
+        /* When removeFilters HTML element is clicked  */
+        removeFilters.addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = false;
+            });
+            sendFilter = {};
+            sort(products, sendFilter);
+        });
         return [products, data];
     })
-    /* Sort by price */
+    /* Sort by price, RESET button for filters */
     .then(([products, data]) => {
         const productsOrder = [];
         products.forEach((product) => {
@@ -301,7 +369,6 @@
         });
         const sortPrice = document.querySelector('#sort');
         const shopContainer = document.querySelector('#shop-container');
-        const removeFilters = document.querySelector('.remove-filters');
        
         const ACTIONS = {
             1: function descending(sortingArray) {
@@ -328,25 +395,49 @@
                 sortingArray.forEach((product) => {
                     shopContainer.append(product);
                 });
-                products = productsOrder;
             }
         };
     
         sortPrice.addEventListener('change', (e) => {
             const selectedIndex = e.target.selectedIndex;
             ACTIONS[selectedIndex](products);
+            removeFilters.style.display = 'inline';
         });
         removeFilters.addEventListener('click', () => {
             ACTIONS[3](productsOrder);
+            removeFilters.style.display = '';
+            sortPrice.selectedIndex = 0;
         });
         
         return [products, data];
     })
-    /*  */
+    /* I need to create a function that takes an object of selected filters, display only products that have those attributes and update 'available-sorts'
+    that shows number of available sorts depending on already chosen ones */
     .then(([products, data]) => {
         const collapsibles = document.querySelectorAll('.collapsible');
-        console.log(collapsibles);
     })
+    function sort(products, filters) {
+        console.log(filters);
+        const filtersEntries = Object.entries(filters);
+
+        if(filtersEntries.length === 0) {
+            products.forEach((product) => {
+                product.style.display = 'block';
+            });
+        }
+        else {
+            products.forEach((product) => {
+                for(let n = 0; n < filtersEntries.length; n++) {
+                    if(product.getAttribute(filtersEntries[n][0]) === filtersEntries[n][1]) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                        return;
+                    }
+                }
+            })
+        }
+    };
 
     /* !!!FOR TOMORROW!!!: 
             -1. LINE 118
@@ -371,40 +462,6 @@
     closeFilter.addEventListener('click', () => {
         shopContainerFilter.style.display = '';
         overlay.style.display = '';
-    });
-/* Sort by price */
-    function sortDesc() {
-        sortingArray.sort((a, b) => {
-            const priceA = parseFloat(a.querySelector('.product-price').innerHTML.replace('&euro;', ''));
-            const priceB = parseFloat(b.querySelector('.product-price').innerHTML.replace('&euro;', ''));
-            return priceB - priceA;
-        })
-        sortingArray.forEach(item => shopContainer.appendChild(item));
-    };
-    function sortAsc() {
-        sortingArray.sort((a, b) => {
-            const priceA = parseFloat(a.querySelector('.product-price').innerHTML.replace('&euro', ''));
-            const priceB = parseFloat(b.querySelector('.product-price').innerHTML.replace('&euro', ''));
-            return priceA - priceB;
-        })
-        sortingArray.forEach(item => shopContainer.appendChild(item));
-    };
-    const sortOut = document.querySelector('#sort');
-    sortOut.addEventListener('change', (e) => {
-        removeFilters.style.display = 'inline';
-        if(e.target.value == 'price-descending')
-            sortDesc();
-        else
-            sortAsc();
-    })
-/* Remove filters */
-    removeFilters.addEventListener('click', function() {
-        removeFilters.style.display = 'none';
-        sortOut.selectedIndex = 0;
-        shopItems.forEach((item) => {
-            shopContainer.appendChild(item);
-            item.style.display = 'block';
-        });
     });
 }
 /* Filter-block */
