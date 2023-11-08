@@ -1,5 +1,11 @@
 'use strict'
 {
+    /* Checks wether user is using phone or pc, use touchstart/mousedown */
+    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const eventStart = isMobile ? 'touchstart' : 'mousedown';
+    const eventMove = isMobile ? 'touchmove' : 'mousemove';
+    const eventEnd = isMobile ? 'touchend' : 'mouseup';
+
     /* Products creation and JSON insertion from fetch */
     function createProducts(item) {
         /* Declare const for elements creation */
@@ -46,12 +52,9 @@
 
         return newProduct;
     };
-    /* Checks wether user is using phone or pc, use touchstart/mousedown */
-    const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const eventStart = isMobile ? 'touchstart' : 'mousedown';
-    const eventMove = isMobile ? 'touchmove' : 'mousemove';
-    const eventEnd = isMobile ? 'touchend' : 'mouseup';
-
+    /* HTML Element for removing filters, used later in both Price filter and Attributes filters */
+    const removeFilters = document.querySelector('.remove-filters');
+    /* Height for products' desc containers */
     const containerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--descContainerHeight').replace('px', ''));
     /* Checks if products need scrolls to be added or removed */
     function scrollCheck(products) {
@@ -112,13 +115,13 @@
                 const label = document.createElement('label');
                 label.setAttribute('for', `${filter + i}`);
                 label.innerHTML = `${nameUpperCase}`;
-                const availableSorts = document.createElement('div');
-                availableSorts.className = 'available-sorts';
+                const possibleSorts = document.createElement('div');
+                possibleSorts.className = 'possible-sorts';
 
                 collapsibleContent.append(collapsibleItem);
                 collapsibleItem.append(input);
                 collapsibleItem.append(label);
-                collapsibleItem.append(availableSorts);
+                collapsibleItem.append(possibleSorts);
             });
         }
     };
@@ -157,8 +160,58 @@
         }
         return filterBy;
     };
-    /* HTML Element for removing filters, used later in both Price filter and Attributes filters */
-    const removeFilters = document.querySelector('.remove-filters');
+    function removeNumber(word) {
+        return word.replace(/\d+$/, '');
+    };
+    function sort(products, filters) {
+        const filtersEntries = Object.entries(filters);
+
+        if(filtersEntries.length === 0) {
+            products.forEach((product) => {
+                product.style.display = 'block';
+            });
+        }
+        else {
+            products.forEach((product) => {
+                for(let n = 0; n < filtersEntries.length; n++) {
+                    if(product.getAttribute(filtersEntries[n][0]) === filtersEntries[n][1]) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                        return;
+                    }
+                }
+            })
+        }
+        updatePossibleSorts(products);
+    };
+    function updatePossibleSorts(products) {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach((checkbox) => {
+            const possibleSort = checkbox.parentElement.querySelector('.possible-sorts');
+            const collapsibleItem = checkbox.parentElement;
+            let num = 0;
+
+            products.forEach((product) => {
+                if(getComputedStyle(product).display == 'block') {
+                    if(product.getAttribute(removeNumber(checkbox.id)) === checkbox.name) {
+                        num++;
+                    }
+                }
+                possibleSort.innerHTML = `(${num})`;
+            })
+            if(num == 0) {
+                checkbox.disabled = true;
+                collapsibleItem.style.color = 'rgb(180, 180, 180)';
+            } else {
+                checkbox.disabled = false;
+                collapsibleItem.style.color = '';
+            }
+        });
+    };
+    
+
     /* Fetch request */
     const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
     const loadAndCreate = new Promise((resolve, reject) => {
@@ -182,7 +235,7 @@
         });
         return [elementsCreated, data];
     })
-    /* Add scroll on created products if necessary + functionality for scroll */
+    /* Add scrolls on created products + it's functionality */
     .then(([products, data]) => {
         scrollCheck(products);
         products.forEach((product) => {
@@ -264,7 +317,7 @@
             });
         return [products, data];
     })
-    /* Checks each product for it's attributes, collects all attributes depending on which creates filters for sorting
+    /* Checks each product for it's attributes, of those attributes CREATES FILTERS
        + Shrinking/Expanding filter's content on click
        + Checkboxes, only 1 of a group can be selected, onchange it calls sort() */
     .then(([products, data]) => {
@@ -293,15 +346,19 @@
         });
 
         createFilters(filters);
-        /* Shrinking/Expanding content on clicks */
+        /* filtersContainer's picked and display style twice changed for smaller screens so it wouldn't be 'none' so we can pick up heights for items */
         const collapsibleContents = document.querySelectorAll('.collapsible-content');
         const collapsibleTriggers = document.querySelectorAll('.collapsible-trigger');
         const arrows = document.querySelectorAll('.fa-caret-up');
+        const filtersContainer = document.querySelector('#shop-container-filter');
 
+        /* Shrinking/Expanding content on clicks */        
+        filtersContainer.style.display = 'block';
         for(let n = 0; n < collapsibleTriggers.length; n++) {
             const height = getComputedStyle(collapsibleContents[n]).height;
             collapsibleContents[n].style.height = '0px';
-            collapsibleTriggers[n].addEventListener('click', () => {
+
+            collapsibleTriggers[n].addEventListener('click', () => {console.log(1);
                 if(getComputedStyle(collapsibleContents[n]).height == '0px') {
                     collapsibleContents[n].style.height = height;
                     arrows[n].style.transform = 'rotate(180deg)';
@@ -312,15 +369,14 @@
                 }
             });
         };
+        filtersContainer.style.display = '';
+
         /* Can select only 1 checkbox in group(collapsibleContents)
            On checkbox change sort() is called and filter is passed */
         function anyCheck() {
             const allChecks = document.querySelectorAll('input[type="checkbox"]');
             const isChecked = Array.from(allChecks).some(checkbox => checkbox.checked);
             return isChecked;
-        };
-        function removeNumber(word) {
-            return word.replace(/\d+$/, '');
         };
         let sendFilter = {};
         collapsibleContents.forEach((group) => {
@@ -359,6 +415,8 @@
             sendFilter = {};
             sort(products, sendFilter);
         });
+        /* Show number of products that satisfy  */
+        updatePossibleSorts(products);
         return [products, data];
     })
     /* Sort by price, RESET button for filters */
@@ -411,148 +469,28 @@
         
         return [products, data];
     })
-    /* I need to create a function that takes an object of selected filters, display only products that have those attributes and update 'available-sorts'
-    that shows number of available sorts depending on already chosen ones */
-    .then(([products, data]) => {
-        const collapsibles = document.querySelectorAll('.collapsible');
-    })
-    function sort(products, filters) {
-        console.log(filters);
-        const filtersEntries = Object.entries(filters);
-
-        if(filtersEntries.length === 0) {
-            products.forEach((product) => {
-                product.style.display = 'block';
-            });
-        }
-        else {
-            products.forEach((product) => {
-                for(let n = 0; n < filtersEntries.length; n++) {
-                    if(product.getAttribute(filtersEntries[n][0]) === filtersEntries[n][1]) {
-                        product.style.display = 'block';
-                    } else {
-                        product.style.display = 'none';
-                        return;
-                    }
-                }
-            })
-        }
-    };
-
     /* !!!FOR TOMORROW!!!: 
-            -1. LINE 118
-            -0. PASS CHECKBOXES TO NEXT '.THEN' AND MAKE <RESET> FUNCTION UNCHECK THEM ALL
             0. MAKE MULTIPLE PAGES OF PRODUCTS
-            1. ADD INDICATOR HOW MANY POSSIBLE CHOICES THERE ARE FOR FILTERS > CHANGES ON EACH CHECK
-            2. FIGURE PRODUCTS' BUY BUTTONS AND CART */
+            1. FIGURE PRODUCTS' BUY BUTTONS AND CART */
 }
-/* Filters */
+/* Filter container toggle for certain screen-widths*/
 {
-
-    const shopContainer = document.querySelector('#shop-container'), shopItems = shopContainer.querySelectorAll('.product'), filterContainer = document.querySelector('#filter-container'), shopContainerFilter = document.querySelector('#shop-container-filter'), removeFilters = document.querySelector('.remove-filters'), closeFilter = document.querySelector('#close-filter .fa'), overlay = document.querySelector('#overlay');
-    let sortingArray = Array.from(shopItems);
-/* Display/Hide filterBlock */
-    filterContainer.addEventListener('click', (e) => {
-        if(getComputedStyle(shopContainerFilter).display == 'none')
-            {
-                shopContainerFilter.style.display = 'block';
-                overlay.style.display = 'block';
-            }
-        });
-    closeFilter.addEventListener('click', () => {
-        shopContainerFilter.style.display = '';
-        overlay.style.display = '';
-    });
-}
-/* Filter-block */
-{
-    const shopContainerFilter = document.querySelector('#shop-container-filter'), collapsibleTrigger = document.querySelectorAll('.collapsible-trigger'), collapsibleContent = document.querySelectorAll('.collapsible-content'), collapsibleCaret = document.querySelectorAll('.fa-caret-up'), shopItems = document.querySelectorAll('.product'), removeFilters = document.querySelector('.remove-filters'), checkBoxes = document.querySelectorAll('input');
+    const filterContainer = document.querySelector('#shop-container-filter');
+    const openFilters = document.querySelector('#filter-container'), closeFilters = document.querySelector('.fa-xmark');
+    const overlay = document.querySelector('#overlay');
     
-    shopContainerFilter.style.display = 'block';
-/* Expand/Shrink Content */
-    for(let i = 0; i < collapsibleTrigger.length; i++) {
-        let height = getComputedStyle(collapsibleContent[i]).height.replace('px', '');
-        collapsibleContent[i].style.height = '0px';
-        collapsibleTrigger[i].addEventListener('click', () => {
-            if(getComputedStyle(collapsibleContent[i]).height == '0px')
-                {
-                collapsibleCaret[i].style.transform = 'rotate(180deg)';
-                collapsibleContent[i].style.height = `${height}px`;
-                }
-            else
-                {
-                collapsibleCaret[i].style.transform = 'rotate(0deg)';
-                collapsibleContent[i].style.height = '0px';
-                }
-        });
+    function removeFilters() {
+        filterContainer.style.display = '';
+        overlay.style.display = '';
     };
-    shopContainerFilter.style.display = '';
-/* Select filter */
-    const collapsibleItems = document.querySelectorAll('.collapsible-item input');
-    collapsibleItems.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            let inputs = e.target.parentElement.parentElement.children;
-            for(let i = 0; i < inputs.length; i++)
-            {
-                if(e.target.parentElement != inputs[i])
-                    inputs[i].firstChild.checked = false;
-            }
-        })
+    openFilters.addEventListener('click', () => {
+        if(getComputedStyle(filterContainer).display == 'none') {
+            filterContainer.style.display = 'block';
+            overlay.style.display = 'block';
+        }
     });
-
-    let sortObject = {}, isFulfilled;
-    function sortCheck() {
-        if(Object.keys(sortObject).length > 0)
-            {
-                shopItems.forEach((item) => {
-                    for(let i = 0; i < Object.keys(sortObject).length; i++)
-                    {
-                        if(item.getAttribute('data-' + Object.keys(sortObject)[i]) == Object.values(sortObject)[i])
-                            isFulfilled = true;
-                        else
-                            {
-                                isFulfilled = false;
-                                break;
-                            }
-                    }
-                    if(isFulfilled == true)
-                        item.style.display = '';
-                    else
-                        item.style.display = 'none';
-                })
-            }
-        else
-            {
-                shopItems.forEach((item) => {
-                    item.style.display = '';})
-            }
-    }
-    const inputs = document.querySelectorAll('.collapsible-item input');
-    inputs.forEach((input) => {
-        input.addEventListener('change', (e) => {
-            removeFilters.style.display = 'block';
-            if(e.target.checked == true)
-                {
-                    let newType = e.target.parentElement.parentElement.parentElement.querySelector('.collapsible-trigger').innerHTML.replace('<i class="fa fa-caret-up" style="transform: rotate(180deg);"></i>', '').toLowerCase().replace(' ', '-');
-                    let newData = e.target.name.toLowerCase();
-                    sortObject[newType] = newData;
-                    sortCheck();
-                }
-            else 
-                {
-                    let oldType = e.target.parentElement.parentElement.parentElement.querySelector('.collapsible-trigger').innerHTML.replace('<i class="fa fa-caret-up" style="transform: rotate(180deg);"></i>', '').toLowerCase().replace(' ', '-');
-                    delete sortObject[oldType];
-                    sortCheck();
-                }
-        });
-    });
-
-    removeFilters.addEventListener('click', () => {
-        checkBoxes.forEach((item) => {
-            item.checked = false;
-        });
-        sortObject = {};
-    });
+    closeFilters.addEventListener('click', removeFilters);
+    overlay.addEventListener('click', removeFilters);
 }
 /* Buy buttons and cart */
 {
