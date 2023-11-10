@@ -545,18 +545,7 @@ const cartModify = function(cartNumber, cartDesc, cartPrice) {
 products.forEach(function(product) {
     product.querySelector('button').addEventListener('click', (e) => addCart(e.target.parentElement.parentElement))
 });
-
-if(localStorage.length) {
-    for(let i = 0; i < localStorage.length; i++) {
-        cartItem.name = JSON.parse(localStorage.getItem(i)).name;
-        cartItem.price = JSON.parse(localStorage.getItem(i)).price;
-        cartModify(i, cartItem.name, cartItem.price);
-    }
-}
 })
-    /* !!!FOR TOMORROW!!!: 
-            0. MAKE MULTIPLE PAGES OF PRODUCTS
-            1. FIGURE PRODUCTS' BUY BUTTONS AND CART */
 
 /* Filter container toggle show/hide */
 {
@@ -577,3 +566,6 @@ if(localStorage.length) {
     closeFilters.addEventListener('click', removeFilters);
     overlay.addEventListener('click', removeFilters);
 }
+/* !!!FOR TOMORROW!!!: 
+            0. MAKE MULTIPLE PAGES OF PRODUCTS
+            1. FIGURE PRODUCTS' BUY BUTTONS AND CART */

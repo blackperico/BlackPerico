@@ -5,7 +5,17 @@ const cartBlock = document.querySelector('#cart-block');
 const cartCount = document.querySelector('#cart-count');
 cartCount.innerHTML = localStorage.length;
 const cartIcon = document.querySelector('.fa-cart-shopping');
+let cartItem = {name: undefined,
+    price: undefined};
 
+const cartModify = function(cartNumber, cartDesc, cartPrice) {
+    const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
+    createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
+    createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
+    cartBlock.append(createCartContainer);
+    createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
+    createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
+};
 function displayCartBlock() {
     cartBlock.style.display = 'block';
     cart.style.borderTopLeftRadius = '0px';
@@ -52,3 +62,11 @@ cart.addEventListener('click', function(e) {
         displayCartBlock();
     }
 });
+
+if(localStorage.length) {
+    for(let i = 0; i < localStorage.length; i++) {
+        cartItem.name = JSON.parse(localStorage.getItem(i)).name;
+        cartItem.price = JSON.parse(localStorage.getItem(i)).price;
+        cartModify(i, cartItem.name, cartItem.price);
+    }
+}
