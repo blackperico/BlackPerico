@@ -5,16 +5,66 @@ const cartBlock = document.querySelector('#cart-block');
 const cartCount = document.querySelector('#cart-count');
 cartCount.innerHTML = localStorage.length;
 const cartIcon = document.querySelector('.fa-cart-shopping');
+let key = localStorage.length;
 let cartItem = {name: undefined,
     price: undefined};
 
+function isCartCountOne() {
+    if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
+        cartBlock.style.borderBottomRightRadius = '0px';
+    else
+        cartBlock.style.borderRadius = '10px 0 10px 10px';
+    if(cartCount.innerHTML == 0) {
+        cartBlock.style.display = 'none';
+        cart.style.borderTopLeftRadius = '23px';
+        cart.style.borderBottomLeftRadius = '23px';
+    }
+};
+const storageModify = function(e) {
+    let selectDelete = +(e.target.parentElement.querySelector('.cart-number').innerHTML);
+    if(e.target.parentElement.nextSibling != null) {
+        e.target.parentElement.replaceWith(e.target.parentElement.nextSibling);
+        localStorage.removeItem(selectDelete);
+        for(let i = selectDelete; i < cartBlock.children.length; i++) {
+            if(cartBlock.children[i].querySelector('.cart-number').innerHTML != i) 
+            {
+                cartBlock.children[i].querySelector('.cart-number').innerHTML = i;
+                localStorage.setItem(i, localStorage.getItem(i + 1));
+                localStorage.removeItem(i + 1);
+            }
+        }
+        }
+        else 
+        {
+            e.target.parentElement.remove();
+            localStorage.removeItem(selectDelete);
+        }
+        key = localStorage.length;
+        cartCount.innerHTML = localStorage.length;
+        isCartCountOne();
+};
 const cartModify = function(cartNumber, cartDesc, cartPrice) {
     const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
     createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
     createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
     cartBlock.append(createCartContainer);
     createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
-    createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
+    createCartButton.addEventListener('click', (e) => {
+        storageModify(e);
+        cartDropAnimation()
+    });
+};
+function wiggleAnimation() {
+    cartIcon.className = 'fa fa-cart-shopping';
+        requestAnimationFrame(() => {
+            cartIcon.classList.add('cart-wiggle');
+        });
+}; 
+function cartDropAnimation() {
+    cartIcon.className = 'fa fa-cart-shopping';
+    requestAnimationFrame(() => {
+        cartIcon.classList.add('cart-drop');
+    });
 };
 function displayCartBlock() {
     cartBlock.style.display = 'block';
