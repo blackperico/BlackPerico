@@ -532,7 +532,7 @@ loadAndCreate
             key = localStorage.length;
             cartCount.innerHTML = localStorage.length;
             isCartCountOne();
-};
+    };
 const cartModify = function(cartNumber, cartDesc, cartPrice) {
     const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
     createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
