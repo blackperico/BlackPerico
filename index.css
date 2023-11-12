@@ -60,7 +60,8 @@ nav ul li svg {padding-left: 25px;}
 nav ul li:hover {background-color: rgb(222, 235, 46);}
 nav ul li a {color: #000;
     text-decoration: none;}
-nav ul li:last-child {margin-left: auto;
+nav ul li:last-child {position: relative;
+    margin-left: auto;
     min-width: 50px;}
 nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
 #search {height: 25px;
@@ -69,6 +70,44 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     padding: 5px;
     border: 1px solid rgb(100, 100, 0);
     border-radius: 17px;}
+.search-container {display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 200px;
+    position: absolute;
+    top: 48px;
+    left: 12px;
+    overflow: hidden;
+    border-radius: 10px;}
+.search-response {display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 17px;
+    height: 70px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(94, 94, 94, 0.603);
+    cursor: pointer;}
+.search-response img {height: 100%;
+    width: 50px;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column: 1;
+    object-fit: cover;}
+.search-response .search-name {height: 18px;
+    width: 100%;
+    grid-row: 1;
+    grid-column: 2;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 2px 0 0 2px;
+    overflow: hidden;}
+.search-response .search-price {height: 100%;
+    width: calc(100% - 2px);
+    grid-row: 2;
+    grid-column: 2;
+    font-size: 15px;
+    text-align: end;}
 
 
 
