@@ -568,4 +568,5 @@ products.forEach(function(product) {
 }
 /* !!!FOR TOMORROW!!!: 
             0. MAKE MULTIPLE PAGES OF PRODUCTS
-            1. FIGURE PRODUCTS' BUY BUTTONS AND CART */
+            1. FIGURE PRODUCTS' BUY BUTTONS AND CART 
+            2. SEARCH BAR */
