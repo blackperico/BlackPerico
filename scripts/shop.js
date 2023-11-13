@@ -433,7 +433,7 @@ loadAndCreate
             sortingArray.sort((a, b) => {
                 a = parseFloat(a.querySelector('.product-price').innerHTML);
                 b = parseFloat(b.querySelector('.product-price').innerHTML);
-                return a - b;
+                return b - a;
             });
             sortingArray.forEach((product) => {
                 shopContainer.append(product);
@@ -443,7 +443,7 @@ loadAndCreate
             sortingArray.sort((a, b) => {
                 a = parseFloat(a.querySelector('.product-price').innerHTML);
                 b = parseFloat(b.querySelector('.product-price').innerHTML);
-                return b - a;
+                return a - b;
             });
             sortingArray.forEach((product) => {
                 shopContainer.append(product);
@@ -566,7 +566,3 @@ products.forEach(function(product) {
     closeFilters.addEventListener('click', removeFilters);
     overlay.addEventListener('click', removeFilters);
 }
-/* !!!FOR TOMORROW!!!: 
-            0. MAKE MULTIPLE PAGES OF PRODUCTS
-            1. FIGURE PRODUCTS' BUY BUTTONS AND CART 
-            2. SEARCH BAR */
