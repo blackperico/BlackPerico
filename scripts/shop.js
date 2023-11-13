@@ -215,7 +215,7 @@ function updatePossibleSorts(products) {
 /* Fetch request */
 const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
 const loadAndCreate = new Promise((resolve, reject) => {
-    fetch('../../products.json')
+    fetch('../JSON/products.json')
     .then(response => {
         if(!response.ok)
             reject('Network problem.');

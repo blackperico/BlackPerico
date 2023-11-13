@@ -28,7 +28,7 @@
         else
         alert('Error: ' + xmlhttp.status);
     };
-    xmlhttp.open('GET', '../products.json', true);
+    xmlhttp.open('GET', '../JSON/products.json', true);
     xmlhttp.send();
 
     function main() {
@@ -281,7 +281,7 @@
             createSideElementGames(index, gamesInsert[index]);
         mainSideElements();
     };
-    xmlhttp.open("GET", "../products.json", true);
+    xmlhttp.open("GET", "../JSON/products.json", true);
     xmlhttp.send();
 /* Side elements JSON insertion */
 
@@ -510,7 +510,7 @@
     };
 
     const getCategory = new Promise((resolve, reject) => {
-        fetch('../products.json')
+        fetch('../JSON/products.json')
             .then(response => {
                 if(!response.ok) {
                     reject('Network problem.');
