@@ -45,6 +45,7 @@
     });
     searchBox.addEventListener('input', function(e) {
         let searchValue = e.target.value.trim();
+        searchValue = searchValue.split(' ');
         const searchFor = {
             title: 'title',
             name: 'name'
@@ -56,20 +57,32 @@
             });
             answerBlock = [];
         }
-        if(searchValue.length > 1)
+        if(searchValue.join().length > 1)
         for (const key in serverResponse) {
             const category = serverResponse[key];
-            for (const product of category) {
+            categoryLoop: for (const product of category) {
                 if(product.title) {
                     const title = product.title;
-                    if((title.toLowerCase()).includes(searchValue.toLowerCase()) && answerBlock.length < 5) {
-                        answerBlock.push(outputSearch(product, searchFor.title));
+                    for(const word of searchValue) {
+                        if((title.toLowerCase()).includes(word.toLowerCase()) && answerBlock.length < 5) {
+                            if(word == searchValue[searchValue.length - 1])
+                                answerBlock.push(outputSearch(product, searchFor.title));
+                        }
+                        else {
+                            continue categoryLoop;
+                        }
                     }
                 } else
                 if(product.name) {
                     const name = product.name;
-                    if((name.toLowerCase()).includes(searchValue.toLowerCase()) && answerBlock.length < 5) {
-                        answerBlock.push(outputSearch(product, searchFor.name));
+                    for(const word of searchValue) {
+                        if((name.toLowerCase()).includes(word.toLowerCase()) && answerBlock.length < 5) {
+                            if(word == searchValue[searchValue.length - 1])
+                                answerBlock.push(outputSearch(product, searchFor.name));
+                        }
+                        else {
+                            continue categoryLoop;
+                        }
                     }
                 }
             }
