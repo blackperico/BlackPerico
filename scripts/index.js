@@ -18,15 +18,15 @@
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
         if(xmlhttp.status == 200) {
-            const imagesObject = JSON.parse(this.response).adsContainer;
-            imagesObject.forEach((image, index) => {
+            const items = JSON.parse(this.response).adsContainer;
+            items.forEach((image, index) => {
                 createDots(index);
                 images.push(image.attributes);
             });
             main();
         }
         else
-        alert('Error: ' + xmlhttp.status);
+        alert('Ads load Error: ' + xmlhttp.status);
     };
     xmlhttp.open('GET', '../JSON/products.json', true);
     xmlhttp.send();
@@ -123,588 +123,530 @@
         };
     };
 }
-/* Ads */
-{
-/* Buy buttons and cart */
-    const cart = document.querySelector('#cart'), cartBlock = document.querySelector('#cart-block'), cartCount = document.querySelector('#cart-count'), cartIcon = document.querySelector('.fa-cart-shopping');
-    let cartItem = {name: undefined,
-        price: undefined};
-    let key = localStorage.length;
-    cartCount.innerHTML = key;
+
+let promise1, promise2;
+const fetchJSON =  new Promise((resolve, reject) => {
+    fetch('../JSON/products.json')
+    .then(response => {
+        if(!response.ok) {
+            reject('Network problem trying to load products.json.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        resolve(data);
+    })
+    .catch(error => {
+        reject(error);
+    })
+});
+/* GAMES SIDE ELEMENTS */
+const gamesLeft = document.querySelector('#games-left');
+const gamesRight = document.querySelector('#games-right');
+
+function createSideElementGames(index, game) {
+    const sideElement = document.createElement('div');
+    sideElement.className = 'side-element';
+    const title = document.createElement('p');
+    title.classList.add('side-element-title');
+    const wrap = document.createElement('div');
+    wrap.classList.add('side-element-wrap');
+    const developer = document.createElement('p');
+    developer.classList.add('side-element-developer');
+    const genre = document.createElement('p');
+    genre.classList.add('side-element-tags');
+    const date = document.createElement('p');
+    date.classList.add('side-element-release-date');
+    const image = document.createElement('img');
+
+    sideElement.setAttribute('data-id', `${index}`);
+    sideElement.setAttribute('data-price', `${game.attributes.price}`);
+    sideElement.setAttribute('data-text', `${game.attributes.text}`);
+    title.innerText = game.title;
+    developer.innerText = game.developers;
+    genre.innerText = game.genre;
+    date.innerText = game.date;
+    image.setAttribute('src', `${game.image.src}`);
+    image.setAttribute('draggable', 'false');
+    image.setAttribute('alt', `${game.image.alt}`);
+
+    const gamesTop = document.querySelector('#games-top');
+    const gamesTopWrap = document.querySelector('#games-top-wrap');
     
-    function wiggleAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-            requestAnimationFrame(() => {
-                cartIcon.classList.add('cart-wiggle');
-            });
-    };
-    function cartDropAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-        requestAnimationFrame(() => {
-            cartIcon.classList.add('cart-drop');
-        });
-    };
-    function isCartCountOne() {
-        if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
-            cartBlock.style.borderBottomRightRadius = '0px';
+    if(getComputedStyle(gamesTop).display == 'block')
+        gamesTopWrap.append(sideElement);
+    else
+    if(getComputedStyle(gamesTop).display == 'none' && index < 4)
+        gamesLeft.append(sideElement);
         else
-            cartBlock.style.borderRadius = '10px 0 10px 10px';
-        if(cartCount.innerHTML == 0) {
-            cartBlock.style.display = 'none';
-            cart.style.borderTopLeftRadius = '23px';
-            cart.style.borderBottomLeftRadius = '23px';}
-    };
-    function addCart(type, item) {
-        switch(type){
-            case 1: { 
-                cartItem.name = document.querySelector('#games-middle').querySelector('.cat-title').innerHTML;
-                cartItem.price = document.querySelector('#games-middle').querySelector('.cat-price').innerHTML;
-                window.localStorage.setItem(key, JSON.stringify(cartItem));
-                cartModify(key, cartItem.name, cartItem.price);
-                key++;
-                cartCount.innerHTML = key;
-                wiggleAnimation();
-                isCartCountOne();
-                break;
-            }
-            case 2: {
-                cartItem.name = item.querySelector('.specs-title').innerHTML;
-                cartItem.price = item.getAttribute('data-price');
-                window.localStorage.setItem(key, JSON.stringify(cartItem));
-                cartModify(key, cartItem.name, cartItem.price);
-                key++;
-                cartCount.innerHTML = key;
-                wiggleAnimation();
-                isCartCountOne();
-                break;
-            }
-            default:
-                return;
-        }
-    };
-    const storageModify = function(e) {
-        let selectDelete = +(e.target.parentElement.querySelector('.cart-number').innerHTML);
-        if(e.target.parentElement.nextSibling != null) {
-            e.target.parentElement.replaceWith(e.target.parentElement.nextSibling);
-            localStorage.removeItem(selectDelete);
-            for(let i = selectDelete; i < cartBlock.children.length; i++) {
-                if(cartBlock.children[i].querySelector('.cart-number').innerHTML != i) 
-                {
-                    cartBlock.children[i].querySelector('.cart-number').innerHTML = i;
-                    localStorage.setItem(i, localStorage.getItem(i + 1));
-                    localStorage.removeItem(i + 1);
-                }
-            }
-            }
-            else 
-            {
-                e.target.parentElement.remove();
-                localStorage.removeItem(selectDelete);
-            }
-            key = localStorage.length;
-            cartCount.innerHTML = localStorage.length;
-            isCartCountOne();
-    };
-    const cartModify = function(cartNumber, cartDesc, cartPrice) {
-        const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
-        createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
-        createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
-        cartBlock.append(createCartContainer);
-        createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
-        createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
-    };
+        gamesRight.append(sideElement);
 
-    window.addEventListener('DOMContentLoaded', function(e) {
-        if(localStorage.length) {
-            for(let i = 0; i < localStorage.length; i++) {
-                cartItem.name = JSON.parse(localStorage.getItem(i)).name;
-                cartItem.price = JSON.parse(localStorage.getItem(i)).price;
-                cartModify(i, cartItem.name, cartItem.price);
-            }
-        }
-    });
-/* Buy buttons and cart */
-
-/* Side elements JSON insertion */
-    const gamesLeft = document.querySelector('#games-left');
-    const gamesRight = document.querySelector('#games-right');
-
-    function createSideElementGames(index, game) {
-        const newSideElement = document.createElement('div');
-        newSideElement.className = 'side-element';
-        const newTitle = document.createElement('p');
-        newTitle.classList.add('side-element-title');
-        const newWrap = document.createElement('div');
-        newWrap.classList.add('side-element-wrap');
-        const newDeveloper = document.createElement('p');
-        newDeveloper.classList.add('side-element-developer');
-        const newGenre = document.createElement('p');
-        newGenre.classList.add('side-element-tags');
-        const newDate = document.createElement('p');
-        newDate.classList.add('side-element-release-date');
-        const newImg = document.createElement('img');
-
-        newSideElement.setAttribute('data-id', `${index}`);
-        newSideElement.setAttribute('data-price', `${game.attributes.price}`);
-        newSideElement.setAttribute('data-text', `${game.attributes.text}`);
-        newTitle.innerText = game.title;
-        newDeveloper.innerText = game.developers;
-        newGenre.innerText = game.genre;
-        newDate.innerText = game.date;
-        newImg.setAttribute('src', `${game.image.src}`);
-        newImg.setAttribute('draggable', 'false');
-        newImg.setAttribute('alt', `${game.image.alt}`);
-
-        const gamesTop = document.querySelector('#games-top');
-        const gamesTopWrap = document.querySelector('#games-top-wrap');
+    sideElement.append(title);
+    sideElement.append(wrap);
+    wrap.append(developer);
+    wrap.append(genre);
+    wrap.append(date);
+    sideElement.append(image);
+    
+    return sideElement;
+};
+ 
+promise1 = fetchJSON
+/* Create and insert side elements */
+.then(({gamesContainer}) => {
+    const sideElements = [];
+    for(const index in gamesContainer)
+        sideElements.push(createSideElementGames(index, gamesContainer[index]));
+    return sideElements;
+})
+/* Title scroll on hover */
+.then((sideElements) => {
+    sideElements.forEach(function(sideElement) {
+        let increment = 0, titleTimeOut;
+        let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+        let sideElementTitle = sideElement.querySelector('.side-element-title');
+        let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+        let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
         
-        if(getComputedStyle(gamesTop).display == 'block')
-            gamesTopWrap.append(newSideElement);
-        else
-        if(getComputedStyle(gamesTop).display == 'none' && index < 4)
-            gamesLeft.append(newSideElement);
-            else
-            gamesRight.append(newSideElement);
-
-        newSideElement.append(newTitle);
-        newSideElement.append(newWrap);
-        newWrap.append(newDeveloper);
-        newWrap.append(newGenre);
-        newWrap.append(newDate);
-        newSideElement.append(newImg);
-    };
-    
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-        const gamesInsert = JSON.parse(this.response).gamesContainer;
-        for(const index in gamesInsert)
-            createSideElementGames(index, gamesInsert[index]);
-        mainSideElements();
-    };
-    xmlhttp.open("GET", "../JSON/products.json", true);
-    xmlhttp.send();
-/* Side elements JSON insertion */
-
-/* Side elements title scroll on hover, looping and middle element animations */
-    function mainSideElements() {
-        const sideElements = document.querySelectorAll('.side-element');
-        /* Title scroll */
-        sideElements.forEach(function(sideElement) {
-            let increment = 0, titleTimeOut;
-            let sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-            let sideElementTitle = sideElement.querySelector('.side-element-title');
-            let sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-            let sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-            
-            let mouseOverSideElement = function(e) {
+        let mouseOverSideElement = function(e) {
+            clearTimeout(titleTimeOut);
+            sideElementTitle.style.transform = `translateX(${increment}px)`;
+            increment--;
+            titleTimeOut = setTimeout(mouseOverSideElement, 15);
+            if(increment <= (sideElementTitleOffset))
                 clearTimeout(titleTimeOut);
-                sideElementTitle.style.transform = `translateX(${increment}px)`;
-                increment--;
-                titleTimeOut = setTimeout(mouseOverSideElement, 15);
-                if(increment <= (sideElementTitleOffset))
-                    clearTimeout(titleTimeOut);
-                };
-            let mouseLeaveSideElement = function() {
-                clearTimeout(titleTimeOut);
-                sideElementTitle.style.transform = `translateX(${increment}px)`;
-                increment++;
-                titleTimeOut = setTimeout(mouseLeaveSideElement, 15);
-                    if(increment >= 0)
-                        clearTimeout(titleTimeOut);
             };
-            if(sideElementTitleOffset < 0) 
-            {
+        let mouseLeaveSideElement = function() {
+            clearTimeout(titleTimeOut);
+            sideElementTitle.style.transform = `translateX(${increment}px)`;
+            increment++;
+            titleTimeOut = setTimeout(mouseLeaveSideElement, 15);
+                if(increment >= 0)
+                    clearTimeout(titleTimeOut);
+        };
+        if(sideElementTitleOffset < 0) 
+        {
+            sideElement.addEventListener('mouseenter', mouseOverSideElement)
+            sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
+        }
+
+        window.addEventListener('resize', function(e) {
+            sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
+            sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
+            sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
+            if(sideElementTitleOffset < 0) {
                 sideElement.addEventListener('mouseenter', mouseOverSideElement)
                 sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
             }
-
-            window.addEventListener('resize', function(e) {
-                sideElementWidth = Number(getComputedStyle(sideElement).width.replace('px', ''));
-                sideElementTitleWidth = Number(getComputedStyle(sideElementTitle).width.replace('px', ''));
-                sideElementTitleOffset = sideElementWidth - sideElementTitleWidth;
-                if(sideElementTitleOffset < 0) {
-                    sideElement.addEventListener('mouseenter', mouseOverSideElement)
-                    sideElement.addEventListener('mouseleave', mouseLeaveSideElement)
-                }
-                else 
-                {
-                    sideElement.removeEventListener('mouseenter', mouseOverSideElement)
-                    sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
-                }
-            });
-        });
-        /* Title scroll */
-        /* Side elements looping */
-        const timerLoop = getComputedStyle(document.documentElement).getPropertyValue('--sideElementLoopTimer').replace('ms', '');
-        const timerSelect = getComputedStyle(document.documentElement).getPropertyValue('--sideElementSelectTimer').replace('ms', '');
-        const gamesMiddle = document.querySelector('#games-middle'), gamesMiddleImg = gamesMiddle.querySelector('img'), gamesMiddleTitle = gamesMiddle.querySelector('.cat-title'), gamesMiddlePrice = gamesMiddle.querySelector('.cat-price'), gamesMiddleText = gamesMiddle.querySelector('.cat-text');
-        const animationContainer = document.querySelector('#animation-container');
-        const gamesMiddleBuy = gamesMiddle.querySelector('.buy-button');
-        gamesMiddleBuy.addEventListener('click', () => addCart(1));
-        let loopThrough, sideElementId = 0;
-        let info = {
-            src: undefined,
-            title: undefined,
-            price: undefined,
-            text: undefined,
-        };
-
-        function gamesMiddleAnimation() {
-            gamesMiddleText.className = 'cat-text';
-            gamesMiddlePrice.className = 'cat-price';
-            animationContainer.className = '';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    animationContainer.classList.add('games-middle-animation');
-                    gamesMiddleText.classList.add('games-middle-children-animation');
-                    gamesMiddlePrice.classList.add('games-middle-children-animation');
-                });
-            });
-        };
-        function loopSelect(sideElementId) {
-            sideElements.forEach(sideElement => sideElement.className = 'side-element');
-            requestAnimationFrame(() => {
-                sideElements[sideElementId].classList.add('side-element-loading');
-            });
-        };
-        function userSelect() {
-            sideElements.forEach((sideElement) => sideElement.className = 'side-element')
-            requestAnimationFrame(() => {
-                sideElements[sideElementId].classList.add('side-element-selected-loading');
-            });
-        };
-        function modifyGamesMiddle (info) {
-            gamesMiddleAnimation()
-            gamesMiddleImg.src = info.src;
-            gamesMiddleTitle.innerHTML = info.title;
-            gamesMiddlePrice.innerHTML = info.price;
-            gamesMiddleText.innerHTML = info.text;
-        };
-        function collectInfo() {
-            info = {
-                src: sideElements[sideElementId].querySelector('img').src,
-                title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
-                price: sideElements[sideElementId].getAttribute('data-price').replace('', '&euro;'),
-                text: sideElements[sideElementId].getAttribute('data-text'),
-            };
-            modifyGamesMiddle(info);
-        };
-        function iterateOver() {
-            collectInfo();
-            loopSelect(sideElementId);
-            if(sideElementId < sideElements.length - 1)
-                sideElementId++;
-            else
-                sideElementId = 0;
-            loopThrough = setTimeout(() => iterateOver(), timerLoop);
-        };
-
-        iterateOver();
-        
-        sideElements.forEach(function(sideElement) {
-            sideElement.addEventListener('click', (e) => {
-                sideElementId = sideElement.getAttribute('data-id');
-                collectInfo();
-                userSelect();
-                clearTimeout(loopThrough);
-                loopThrough = setTimeout(() => {
-                    if(sideElementId < sideElements.length - 1)
-                        sideElementId++;
-                    else
-                        sideElementId = 0;
-                    iterateOver();
-                }, timerSelect);
-            });
-        });
-        /* Side elements looping */
-/* Side elements title scroll on hover, looping and middle element animations */
-
-/* Responsiveness gamesContainer */
-        const sides = document.querySelectorAll('.games-side'), gamesTop = document.querySelector('#games-top'), gamesTopWrap = document.querySelector('#games-top-wrap');
-        let gamesTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), gamesTopWrapWidth = gamesTopWrap.clientWidth, isClicked, drag = 0;
-    
-        gamesTop.addEventListener('mousedown', () => {
-            isClicked = 1;
-        });
-        window.addEventListener('mouseup', () => {
-            isClicked = 0;
-        });
-        window.addEventListener('mousemove', (e) => {
-            if(isClicked == 1)
+            else 
             {
-                gamesTopWrap.style.transform = `translateX(${drag}px)`;
-                drag = drag + e.movementX;
-                if(drag > 0)
-                    drag = 0;
-                if(drag < -(gamesTopWrapWidth - gamesTopWidth))
-                    drag = -(gamesTopWrapWidth - gamesTopWidth);
+                sideElement.removeEventListener('mouseenter', mouseOverSideElement)
+                sideElement.removeEventListener('mouseleave', mouseLeaveSideElement)
             }
         });
-
-        window.addEventListener('resize', (e) => {
-            drag = 0;
-            gamesTopWidth = gamesTop.clientWidth;
-            gamesTopWrapWidth = gamesTopWrap.clientWidth;
-            gamesTopWrap.style.transform = `translateX(${drag}px)`;
-
-            if(getComputedStyle(gamesTop).display == 'block')
-                {
-                    if(gamesTopWrap.children.length < 8)
-                        sideElements.forEach((sideElement) => {
-                            gamesTopWrap.append(sideElement);
-                        });
-                }
-                else
-                {
-                    if(sides[0].children.length < 4)
-                    for(let i = 0; i < 4; i++) {
-                        sides[0].append(sideElements[i]);
-                    }
-                    if(sides[1].children.length < 4)
-                    for(let i = 4; i < 8; i++) {
-                        sides[1].append(sideElements[i]);
-                    }
-                }
-        });
-    }
-/* Responsiveness gamesContainer */
-
-/* Category elements */
-    function createCategoryItem(item, index) {
-        const upper = document.querySelector('#category-upper');
-        const lower = document.querySelector('#category-lower');
-
-        const newItem = document.createElement('div');
-        newItem.className = 'category-item';
-        newItem.setAttribute('data-price', `${item.price}`);
-        const newImg = document.createElement('img');
-        newImg.setAttribute('src', `${item.image.src}`);
-        newImg.setAttribute('alt', `${item.image.alt}`);
-        newImg.setAttribute('draggable', 'false');
-        const newSpecs = document.createElement('div');
-        newSpecs.className = 'specs';
-        const newTitle = document.createElement('p');
-        newTitle.className = 'specs-title';
-        newTitle.innerHTML = `${item.title}`;
-        const newSpecsDesc = document.createElement('ul');
-        newSpecsDesc.className = 'specs-desc';
-        const newButton = document.createElement('button');
-        newButton.className = 'buy-button';
-        newButton.innerHTML = 'Buy';
-        
-        if(index < 4)
-            upper.append(newItem);
-        else
-            lower.append(newItem)
-
-        newItem.append(newImg);
-        newItem.append(newSpecs);
-        newSpecs.append(newTitle);
-        newSpecs.append(newSpecsDesc);
-        newSpecs.append(newButton);
-        for(let desc of item.desc) {
-            const descLi = document.createElement('li');
-            descLi.innerHTML = desc;
-            newSpecsDesc.append(descLi);
-        }
-    };
-
-    const getCategory = new Promise((resolve, reject) => {
-        fetch('../JSON/products.json')
-            .then(response => {
-                if(!response.ok) {
-                    reject('Network problem.');
-                }
-                return  response.json();
-            })
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            })
     });
 
-    getCategory
-    .then(({category}) => {
-        category.forEach((item, index) => {
-            createCategoryItem(item, index)
-        });
-    })
-    .then(() => {
-        const upper = Array.from(document.querySelector('#category-upper').children), lower = Array.from(document.querySelector('#category-lower').children), categoryArray = upper.concat(lower);
-        const category = document.querySelector('#category');
-        const specs = category.querySelector('.specs'), specsWidth = (+getComputedStyle(specs).width.replace('px', '')), specsTitles = category.querySelectorAll('.specs-title');
-        let specsTitleWidth = [];
-        
-        for(let i = 0; i < specsTitles.length; i++) {
-            let enterRecall, leaveRecall, stopSlide = 0, leaveRecallDelay, n = 0;
-            specsTitleWidth[i] = (+getComputedStyle(specsTitles[i]).width.replace('px', ''));
+    return sideElements;
+})
+/* Looping through elements */
+.then((sideElements) => {
+    const timerLoop = getComputedStyle(document.documentElement).getPropertyValue('--sideElementLoopTimer').replace('ms', '');
+    const timerSelect = getComputedStyle(document.documentElement).getPropertyValue('--sideElementSelectTimer').replace('ms', '');
+    const gamesMiddle = document.querySelector('#games-middle'), gamesMiddleImg = gamesMiddle.querySelector('img'), gamesMiddleTitle = gamesMiddle.querySelector('.cat-title'), gamesMiddlePrice = gamesMiddle.querySelector('.cat-price'), gamesMiddleText = gamesMiddle.querySelector('.cat-text');
+    const animationContainer = document.querySelector('#animation-container');
+    
+    let loopThrough, sideElementId = 0;
+    let info = {
+        src: undefined,
+        title: undefined,
+        price: undefined,
+        text: undefined,
+    };
 
-            function mouseEnter(widthDiff, div) {
-                mouseEnterSlide(widthDiff, div);
-            };
-            function mouseEnterSlide(widthDiff, div) {
-                if(n > widthDiff) {
-                    div.style.transform = `translateX(${n}px)`;
-                    n = n + (100/widthDiff);
+    function gamesMiddleAnimation() {
+        gamesMiddleText.className = 'cat-text';
+        gamesMiddlePrice.className = 'cat-price';
+        animationContainer.className = '';
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                animationContainer.classList.add('games-middle-animation');
+                gamesMiddleText.classList.add('games-middle-children-animation');
+                gamesMiddlePrice.classList.add('games-middle-children-animation');
+            });
+        });
+    };
+    function loopSelect(sideElementId) {
+        sideElements.forEach(sideElement => sideElement.className = 'side-element');
+        requestAnimationFrame(() => {
+            sideElements[sideElementId].classList.add('side-element-loading');
+        });
+    };
+    function userSelect() {
+        sideElements.forEach((sideElement) => sideElement.className = 'side-element')
+        requestAnimationFrame(() => {
+            sideElements[sideElementId].classList.add('side-element-selected-loading');
+        });
+    };
+    function modifyGamesMiddle (info) {
+        gamesMiddleAnimation()
+        gamesMiddleImg.src = info.src;
+        gamesMiddleTitle.innerHTML = info.title;
+        gamesMiddlePrice.innerHTML = info.price;
+        gamesMiddleText.innerHTML = info.text;
+    };
+    function collectInfo() {
+        info = {
+            src: sideElements[sideElementId].querySelector('img').src,
+            title: sideElements[sideElementId].querySelector('.side-element-title').innerHTML,
+            price: sideElements[sideElementId].getAttribute('data-price').replace('', '&euro;'),
+            text: sideElements[sideElementId].getAttribute('data-text'),
+        };
+        modifyGamesMiddle(info);
+    };
+    function iterateOver() {
+        collectInfo();
+        loopSelect(sideElementId);
+        if(sideElementId < sideElements.length - 1)
+            sideElementId++;
+        else
+            sideElementId = 0;
+        loopThrough = setTimeout(() => iterateOver(), timerLoop);
+    };
+
+    iterateOver();
+    
+    sideElements.forEach(function(sideElement) {
+        sideElement.addEventListener('click', (e) => {
+            sideElementId = sideElement.getAttribute('data-id');
+            collectInfo();
+            userSelect();
+            clearTimeout(loopThrough);
+            loopThrough = setTimeout(() => {
+                if(sideElementId < sideElements.length - 1)
+                    sideElementId++;
+                else
+                    sideElementId = 0;
+                iterateOver();
+            }, timerSelect);
+        });
+    });
+
+    return sideElements;
+})
+/* Responsiveness gamesContainer */
+.then((sideElements) => {
+    const sides = document.querySelectorAll('.games-side'), gamesTop = document.querySelector('#games-top'), gamesTopWrap = document.querySelector('#games-top-wrap');
+    let gamesTopWidth = Number(getComputedStyle(gamesTop).width.replace('px', '')), gamesTopWrapWidth = gamesTopWrap.clientWidth, isClicked, drag = 0;
+
+    gamesTop.addEventListener('mousedown', () => {
+        isClicked = 1;
+    });
+    window.addEventListener('mouseup', () => {
+        isClicked = 0;
+    });
+    window.addEventListener('mousemove', (e) => {
+        if(isClicked == 1)
+        {
+            gamesTopWrap.style.transform = `translateX(${drag}px)`;
+            drag = drag + e.movementX;
+            if(drag > 0)
+                drag = 0;
+            if(drag < -(gamesTopWrapWidth - gamesTopWidth))
+                drag = -(gamesTopWrapWidth - gamesTopWidth);
+        }
+    });
+
+    window.addEventListener('resize', (e) => {
+        drag = 0;
+        gamesTopWidth = gamesTop.clientWidth;
+        gamesTopWrapWidth = gamesTopWrap.clientWidth;
+        gamesTopWrap.style.transform = `translateX(${drag}px)`;
+
+        if(getComputedStyle(gamesTop).display == 'block')
+            {
+                if(gamesTopWrap.children.length < 8)
+                    sideElements.forEach((sideElement) => {
+                        gamesTopWrap.append(sideElement);
+                    });
+            }
+            else
+            {
+                if(sides[0].children.length < 4)
+                for(let i = 0; i < 4; i++) {
+                    sides[0].append(sideElements[i]);
                 }
-                enterRecall = setTimeout(mouseEnterSlide, (1200/(-widthDiff)),widthDiff, div);
-                if(n <= widthDiff || stopSlide == 1)
-                    clearTimeout(enterRecall);
-            };
-            function mouseLeave(div, widthDiff) {
-                leaveRecallDelay = setTimeout(mouseLeaveSlide, 2000, div, widthDiff);
-            };
-            function mouseLeaveSlide(div, widthDiff) {
+                if(sides[1].children.length < 4)
+                for(let i = 4; i < 8; i++) {
+                    sides[1].append(sideElements[i]);
+                }
+            }
+    });
+})
+
+/* CATEGORY ELEMENTS */
+function createCategoryItem(index, product) {
+    const upper = document.querySelector('#category-upper');
+    const lower = document.querySelector('#category-lower');
+
+    const newItem = document.createElement('div');
+    newItem.className = 'category-item';
+    newItem.setAttribute('data-price', `${product.price}`);
+    const image = document.createElement('img');
+    image.setAttribute('src', `${product.image.src}`);
+    image.setAttribute('alt', `${product.image.alt}`);
+    image.setAttribute('draggable', 'false');
+    const specs = document.createElement('div');
+    specs.className = 'specs';
+    const title = document.createElement('p');
+    title.className = 'specs-title';
+    title.innerHTML = `${product.title}`;
+    const specsDesc = document.createElement('ul');
+    specsDesc.className = 'specs-desc';
+    const button = document.createElement('button');
+    button.className = 'buy-button';
+    button.innerHTML = 'Buy';
+    
+    if(index < 4)
+        upper.append(newItem);
+    else
+        lower.append(newItem)
+
+    newItem.append(image);
+    newItem.append(specs);
+    specs.append(title);
+    specs.append(specsDesc);
+    specs.append(button);
+    for(let desc of product.desc) {
+        const descLi = document.createElement('li');
+        descLi.innerHTML = desc;
+        specsDesc.append(descLi);
+    }
+};
+
+promise2 = fetchJSON
+/* Create and insert Category elements */
+.then(({category}) => {
+    for(const index in category)
+        createCategoryItem(index, category[index]);
+})
+/* Title scroll on hover */
+.then(() => {
+    const specs = category.querySelector('.specs');
+    const specsWidth = (+getComputedStyle(specs).width.replace('px', '')), specsTitles = category.querySelectorAll('.specs-title');
+    let specsTitleWidth = [];
+
+    for(let i = 0; i < specsTitles.length; i++) {
+        let enterRecall, leaveRecall, stopSlide = 0, leaveRecallDelay, n = 0;
+        specsTitleWidth[i] = (+getComputedStyle(specsTitles[i]).width.replace('px', ''));
+
+        function mouseEnter(widthDiff, div) {
+            mouseEnterSlide(widthDiff, div);
+        };
+        function mouseEnterSlide(widthDiff, div) {
+            if(n > widthDiff) {
                 div.style.transform = `translateX(${n}px)`;
                 n = n + (100/widthDiff);
-                leaveRecall = setTimeout(mouseLeaveSlide, (1200/(widthDiff)), div, widthDiff);
-                if(n >= 0 || stopSlide == 0)
-                    clearTimeout(leaveRecall);
-            };
-
-            if(specsTitleWidth[i] > specsWidth) {
-                specsTitles[i].addEventListener('mouseenter', function(e) {
-                    clearTimeout(leaveRecallDelay);
-                    stopSlide = 0
-                    mouseEnter(-(specsTitleWidth[i] - specsWidth), specsTitles[i]);
-                });
-                specsTitles[i].addEventListener('mouseleave', function(e) {
-                    stopSlide = 1;
-                    mouseLeave(specsTitles[i], (specsTitleWidth[i] - specsWidth));
-                });
             }
+            enterRecall = setTimeout(mouseEnterSlide, (1200/(-widthDiff)),widthDiff, div);
+            if(n <= widthDiff || stopSlide == 1)
+                clearTimeout(enterRecall);
+        };
+        function mouseLeave(div, widthDiff) {
+            leaveRecallDelay = setTimeout(mouseLeaveSlide, 2000, div, widthDiff);
+        };
+        function mouseLeaveSlide(div, widthDiff) {
+            div.style.transform = `translateX(${n}px)`;
+            n = n + (100/widthDiff);
+            leaveRecall = setTimeout(mouseLeaveSlide, (1200/(widthDiff)), div, widthDiff);
+            if(n >= 0 || stopSlide == 0)
+                clearTimeout(leaveRecall);
+        };
+
+        if(specsTitleWidth[i] > specsWidth) {
+            specsTitles[i].addEventListener('mouseenter', function(e) {
+                clearTimeout(leaveRecallDelay);
+                stopSlide = 0
+                mouseEnter(-(specsTitleWidth[i] - specsWidth), specsTitles[i]);
+            });
+            specsTitles[i].addEventListener('mouseleave', function(e) {
+                stopSlide = 1;
+                mouseLeave(specsTitles[i], (specsTitleWidth[i] - specsWidth));
+            });
         }
+    }
+})
+/* Shrink/Expand element on click */
+.then(() => {
+    const upper = Array.from(document.querySelector('#category-upper').children), lower = Array.from(document.querySelector('#category-lower').children);
+    const categoryArray = upper.concat(lower);
 
-        function shrink(categoryItem) {
-            categoryItem.querySelector('.specs').style.height = '35px';
-            categoryItem.querySelector('.specs').style.borderTopLeftRadius = '0px';
-            categoryItem.querySelector('.specs').style.borderTopRightRadius = '0px';
-            categoryItem.querySelector('img').style.filter = 'blur(0px)';
-        };
-        function expand(categoryItem) {
-            categoryItem.querySelector('.specs').style.height = '100%';
-            categoryItem.querySelector('.specs').style.borderRadius = '5px';
-            categoryItem.querySelector('img').style.filter = 'blur(5px)';
-        };
+    function shrink(element) {
+        element.querySelector('.specs').style.height = '35px';
+        element.querySelector('.specs').style.borderTopLeftRadius = '0px';
+        element.querySelector('.specs').style.borderTopRightRadius = '0px';
+        element.querySelector('img').style.filter = 'blur(0px)';
+    };
+    function expand(element) {
+        element.querySelector('.specs').style.height = '100%';
+        element.querySelector('.specs').style.borderRadius = '5px';
+        element.querySelector('img').style.filter = 'blur(5px)';
+    };
 
-        for (let i = 0; i < categoryArray.length; i++) {
-            categoryArray[i].querySelector('.specs').addEventListener('click', function(e) {
-                if(categoryArray[i].querySelector('.specs').style.height == '100%')
-                    shrink(categoryArray[i])
-                else 
-                    expand(categoryArray[i]);
-                
-                for(let n = 0; n < categoryArray.length; n++) {
-                    if(n != i) 
-                        shrink(categoryArray[n]);
-                }
-            })
-        };
-
-        let isClicked, drag = 0;
-        const categoryUpper = document.querySelector('#category-upper'), categoryLower = document.querySelector('#category-lower');
-        let categoryWidth = Number(getComputedStyle(category).width.replace('px', '')), categoryUpperWidth = Number(getComputedStyle(categoryUpper).width.replace('px', ''));
-
-        category.addEventListener('mousedown', () => {
-            isClicked = 1;
-        });
-        window.addEventListener('mouseup', () => {
-            isClicked = 0;
-        });
-        window.addEventListener('mousemove', (e) => {
-            if(isClicked == 1)
-            {
-                categoryUpper.style.transform = `translateX(${drag}px)`;
-                categoryLower.style.transform = `translateX(${drag}px)`;
-                drag = drag + e.movementX;
-                if(drag > 0)
-                    drag = 0;
-                if(drag < (categoryWidth - categoryUpperWidth))
-                    drag = (categoryWidth - categoryUpperWidth);
+    for (let i = 0; i < categoryArray.length; i++) {
+        categoryArray[i].querySelector('.specs').addEventListener('click', function() {
+            if(categoryArray[i].querySelector('.specs').style.height == '100%')
+                shrink(categoryArray[i])
+            else 
+                expand(categoryArray[i]);
+            
+            for(let n = 0; n < categoryArray.length; n++) {
+                if(n != i) 
+                    shrink(categoryArray[n]);
             }
-        });
-        window.addEventListener('resize', (e) => {
-            if(drag <= (categoryWidth - categoryUpperWidth))
-            {
-                drag = categoryWidth - categoryUpperWidth;
-                categoryUpper.style.transform = `translateX(${drag}px)`;
-                categoryLower.style.transform = `translateX(${drag}px)`;
-            }
-            if(drag == 1)
+        })
+    };
+})
+/* Container dragging for responsiveness */
+.then(() => {
+    const category = document.querySelector('#category'), upper = document.querySelector('#category-upper'), lower = document.querySelector('#category-lower');
+    let categoryWidth = Number(getComputedStyle(category).width.replace('px', '')), upperWidth = Number(getComputedStyle(upper).width.replace('px', ''));
+    let isClicked, drag = 0;
+
+    category.addEventListener('mousedown', () => {
+        isClicked = 1;
+    });
+    window.addEventListener('mouseup', () => {
+        isClicked = 0;
+    });
+    window.addEventListener('mousemove', (e) => {
+        if(isClicked == 1)
+        {
+            upper.style.transform = `translateX(${drag}px)`;
+            lower.style.transform = `translateX(${drag}px)`;
+            drag = drag + e.movementX;
+            if(drag > 0)
                 drag = 0;
-            categoryWidth = Number(getComputedStyle(category).width.replace('px', ''));
-            categoryUpperWidth = Number(getComputedStyle(categoryUpper).width.replace('px', ''));
-        });
-    })
-    .then(() => {
-        const categoryItems = document.querySelectorAll('.category-item');
-        categoryItems.forEach(function(item) {
-            const button = item.querySelector('.buy-button');
-            button.addEventListener('click', () => addCart(2, item));
-        });
-    })
-    .catch(error => {
-        console.error('Error', error);
-    });
-    
-/* Category elements */
-}
-/* Cart design */
-{
-    const cart = document.querySelector('#cart');
-    const cartBlock = document.querySelector('#cart-block');
-    const cartCount = document.querySelector('#cart-count');
-    const cartIcon = document.querySelector('.fa-cart-shopping');
-
-    function displayCartBlock() {
-        cartBlock.style.display = 'block';
-        cart.style.borderTopLeftRadius = '0px';
-        cart.style.borderBottomLeftRadius = '0px';
-        sessionStorage.setItem('cart', 'block');
-    };
-    function hideCartBlock() {
-        cartBlock.style.display = 'none';
-        cart.style.borderRadius = '23px';
-        sessionStorage.setItem('cart', 'none');
-    };
-
-    if(cartCount.innerHTML == 0)
-        cartBlock.style.display = 'none';
-        else
-        cartBlock.style.display = sessionStorage.getItem('cart');
-    if(cartCount.innerHTML == 1)
-        cartBlock.style.borderBottomRightRadius = '0px';
-
-    const currentTop = +(getComputedStyle(cart).top.replace('px', ''));
-    window.addEventListener('scroll', function(e) {
-        if(scrollY <= 180)
-            cart.style.top = currentTop - scrollY + 'px';
-    });
-
-    if(scrollY > 180)
-        cart.style.top = '70px';
-
-    if(getComputedStyle(cartBlock).display == 'block') 
-    {
-        cart.style.borderBottomLeftRadius = '0px';
-        cart.style.borderTopLeftRadius = '0px';
-    } 
-    else 
-        cart.borderRadius = '23px';
-
-    cart.addEventListener('click', function(e) {
-        if(getComputedStyle(cartBlock).display == 'block' && (e.target == cart || e.target == cartCount || e.target == cartIcon)) 
-        {
-            hideCartBlock();
-        }
-        else if(cartBlock.children.length > 0 && (e.target == cart || e.target == cartCount || e.target == cartIcon))
-        {
-            displayCartBlock();
+            if(drag < (categoryWidth - upperWidth))
+                drag = (categoryWidth - upperWidth);
         }
     });
+    window.addEventListener('resize', () => {
+        if(drag <= (categoryWidth - upperWidth))
+        {
+            drag = categoryWidth - upperWidth;
+            upper.style.transform = `translateX(${drag}px)`;
+            lower.style.transform = `translateX(${drag}px)`;
+        }
+        if(drag == 1)
+            drag = 0;
+        categoryWidth = Number(getComputedStyle(category).width.replace('px', ''));
+        upperWidth = Number(getComputedStyle(upper).width.replace('px', ''));
+    });
+})
+
+function loadScript() {
+    const script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', '../scripts/cart.js');
+
+    document.body.append(script);
 }
+
+Promise.all([promise1, promise2])
+/* Loads script */
+.then(() => {
+    loadScript();
+})
+/* EventListener for buy buttons and cart.js functions */
+.then(() => {
+    const gamesMiddle = document.querySelector('#games-middle');
+    const gamesBuy = gamesMiddle.querySelector('.buy-button');
+    gamesBuy.addEventListener('click', () => {
+        addCart(1);
+    });
+
+    const category = document.querySelector('#category');
+    const categoryBuy = category.querySelectorAll('.buy-button');
+    categoryBuy.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            addCart(2, e.target.parentElement.parentElement);
+        });
+    });
+})
+
+/*function loadScript(src) {
+    return new Promise(function(resolve, reject) {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = src;
+
+        script.onload = () => resolve(script);
+        script.onerror = () => reject(new Error('Error'));
+
+        document.body.append(script);
+    });
+};
+/*loadScript('../scripts/test.js')
+    .then(script => {
+        return loadScript('../scripts/test2.js');
+    })
+    .then((script) => {
+        testFunction();
+        newFunction();
+    })
+let yo = fetch('../JSON/products.json');
+yo.then(response => response.json())
+.then(({category}) => console.log(category))*/
+/*loadScript('../scripts/test.js')
+.then(script => loadScript('../scripts/test2.js'))
+.then(script => {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => resolve(console.log(n)), 1000)
+})})
+.then(function(script) {
+    setTimeout(() => console.log(elementz), 1000)
+})
+.catch((error) => {
+    console.log(error);
+})
+
+Promise.any([
+    new Promise((resolve, reject) => {
+        setTimeout(() => {resolve(1)}, 1000);
+    }),
+    new Promise((resolve, reject) => {
+        setTimeout(() => {resolve(2)}, 2000);
+    }),
+    new Promise((resolve, reject) => {
+        setTimeout(() => {resolve(3)}, 3000);
+    }),
+])
+.then((yo) => {
+    console.log(yo);
+})
+.catch((error) => console.log('Error: ' + error));
+
+async function f(n) {
+    console.log(n);
+};
+setTimeout(() => {f(7)}, 1000);
+/*const niz = ['../JSON/products.json','../JSON/products.json','../JSON/products.json'];
+let requests = niz.map(item => fetch(item));
+Promise.all(requests)
+.then((test) => {
+    console.log(test);
+})*/
+
+/*
+const prom = new Promise(function(resolve, reject) {
+    setTimeout(() => reject(new Error('Whoops!')), 1000);
+});
+prom.then(
+    function(result) {console.log(result)},
+    function(error) {console.log(error)}
+);
+prom.finally(console.log('Finally!'));*/
+
 /*
 function myIterator(start, finish) {
     let index = start;
