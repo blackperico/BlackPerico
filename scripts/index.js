@@ -562,14 +562,14 @@ Promise.all([promise1, promise2])
     const gamesMiddle = document.querySelector('#games-middle');
     const gamesBuy = gamesMiddle.querySelector('.buy-button');
     gamesBuy.addEventListener('click', () => {
-        addCart(1);
+        addCart(TYPES.gamesIndex);
     });
 
     const category = document.querySelector('#category');
     const categoryBuy = category.querySelectorAll('.buy-button');
     categoryBuy.forEach((button) => {
         button.addEventListener('click', (e) => {
-            addCart(2, e.target.parentElement.parentElement);
+            addCart(TYPES.categoryIndex, e.target.parentElement.parentElement);
         });
     });
 })
