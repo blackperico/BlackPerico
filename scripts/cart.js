@@ -3,21 +3,54 @@
 const cart = document.querySelector('#cart');
 const cartBlock = document.querySelector('#cart-block');
 const cartCount = document.querySelector('#cart-count');
-cartCount.innerHTML = localStorage.length;
 const cartIcon = document.querySelector('.fa-cart-shopping');
 let key = localStorage.length;
+cartCount.innerHTML = key;
 let cartItem = {name: undefined,
     price: undefined};
+const TYPES = {
+    gamesIndex: 'gamesindex',
+    categoryIndex: 'categoryindex',
+    productShop: 'productshop'
+};
 
-function isCartCountOne() {
-    if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
-        cartBlock.style.borderBottomRightRadius = '0px';
-    else
-        cartBlock.style.borderRadius = '10px 0 10px 10px';
-    if(cartCount.innerHTML == 0) {
-        cartBlock.style.display = 'none';
-        cart.style.borderTopLeftRadius = '23px';
-        cart.style.borderBottomLeftRadius = '23px';
+function addCart(type, targetProduct) {
+    switch(type){
+        case TYPES.gamesIndex: { 
+            cartItem.name = document.querySelector('#games-middle').querySelector('.cat-title').innerHTML;
+            cartItem.price = document.querySelector('#games-middle').querySelector('.cat-price').innerHTML;
+            window.localStorage.setItem(key, JSON.stringify(cartItem));
+            cartModify(key, cartItem.name, cartItem.price);
+            key++;
+            cartCount.innerHTML = key;
+            wiggleAnimation();
+            isCartCountOne();
+            break;
+        }
+        case TYPES.categoryIndex: {
+            cartItem.name = targetProduct.querySelector('.specs-title').innerHTML;
+            cartItem.price = targetProduct.getAttribute('data-price');
+            window.localStorage.setItem(key, JSON.stringify(cartItem));
+            cartModify(key, cartItem.name, cartItem.price);
+            key++;
+            cartCount.innerHTML = key;
+            wiggleAnimation();
+            isCartCountOne();
+            break;
+        }
+        case TYPES.productShop: {
+            cartItem.name = targetProduct.querySelector('.product-name').innerHTML;
+            cartItem.price = targetProduct.querySelector('.product-price').innerHTML;
+            window.localStorage.setItem(key, JSON.stringify(cartItem));
+            cartModify(key, cartItem.name, cartItem.price);
+            key++;
+            cartCount.innerHTML = key;
+            wiggleAnimation();
+            isCartCountOne();
+            break;
+        }
+        default:
+            return;
     }
 };
 const storageModify = function(e) {
@@ -53,6 +86,17 @@ const cartModify = function(cartNumber, cartDesc, cartPrice) {
         storageModify(e);
         cartDropAnimation()
     });
+};
+function isCartCountOne() {
+    if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
+        cartBlock.style.borderBottomRightRadius = '0px';
+    else
+        cartBlock.style.borderRadius = '10px 0 10px 10px';
+    if(cartCount.innerHTML == 0) {
+        cartBlock.style.display = 'none';
+        cart.style.borderTopLeftRadius = '23px';
+        cart.style.borderBottomLeftRadius = '23px';
+    }
 };
 function wiggleAnimation() {
     cartIcon.className = 'fa fa-cart-shopping';
@@ -102,6 +146,14 @@ if(getComputedStyle(cartBlock).display == 'block')
 else 
     cart.borderRadius = '23px';
 
+if(localStorage.length) {
+    for(let i = 0; i < localStorage.length; i++) {
+        cartItem.name = JSON.parse(localStorage.getItem(i)).name;
+        cartItem.price = JSON.parse(localStorage.getItem(i)).price;
+        cartModify(i, cartItem.name, cartItem.price);
+    }
+}
+
 cart.addEventListener('click', function(e) {
     if(getComputedStyle(cartBlock).display == 'block' && (e.target == cart || e.target == cartCount || e.target == cartIcon)) 
     {
@@ -112,11 +164,3 @@ cart.addEventListener('click', function(e) {
         displayCartBlock();
     }
 });
-
-if(localStorage.length) {
-    for(let i = 0; i < localStorage.length; i++) {
-        cartItem.name = JSON.parse(localStorage.getItem(i)).name;
-        cartItem.price = JSON.parse(localStorage.getItem(i)).price;
-        cartModify(i, cartItem.name, cartItem.price);
-    }
-}
