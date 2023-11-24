@@ -10,8 +10,8 @@ const eventEnd = isMobile ? 'touchend' : 'mouseup';
 function createProducts(item) {
     /* Declare const for elements creation */
     const shopContainer = document.querySelector('#shop-container');
-    const newProduct = document.createElement('div');
-    newProduct.className = 'product';
+    const product = document.createElement('div');
+    product.className = 'product';
     const newImg = document.createElement('img');
     newImg.setAttribute('src', `${item.image.src}`);
     newImg.setAttribute('alt', `${item.image.alt}`);
@@ -33,24 +33,24 @@ function createProducts(item) {
 
     /* Insert attributes and HTML text into elements */
     for(const [attribute, value] of Object.entries(item.attributes)) {
-        newProduct.setAttribute(`${attribute}`, `${value}`);
+        product.setAttribute(`${attribute}`, `${value}`);
     };
     newProductName.innerHTML = item.name;
     newProductPrice.innerHTML = item.price;
     newProductDesc.innerHTML = item.desc;
 
     /* Creation */
-    newProduct.append(newImg);
+    product.append(newImg);
     newProductInfo.append(newProductName);
     newProductInfo.append(newProductPrice);
-    newProduct.append(newProductInfo);
+    product.append(newProductInfo);
     newDescContainer.append(newProductDesc);
-    newProduct.append(newDescContainer);
+    product.append(newDescContainer);
     newButtonContainer.append(newButton);
-    newProduct.append(newButtonContainer);
-    shopContainer.append(newProduct);
+    product.append(newButtonContainer);
+    shopContainer.append(product);
 
-    return newProduct;
+    return product;
 };
 /* HTML Element for removing filters, used later in both Price filter and Attributes filters */
 const removeFilters = document.querySelector('.remove-filters');
@@ -211,7 +211,6 @@ function updatePossibleSorts(products) {
     });
 };
 
-
 /* Fetch request */
 const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
 const loadAndCreate = new Promise((resolve, reject) => {
@@ -226,7 +225,7 @@ const loadAndCreate = new Promise((resolve, reject) => {
 });
 
 loadAndCreate
-/* Create products on page and return array of elements*/
+/* Create products */
 .then(data => {
     const elementsCreated = [];
     data.forEach((value) => {
@@ -293,12 +292,11 @@ loadAndCreate
             }, 3000);
         };
 
-        /* Add event functions to product */
         product.addEventListener(eventStart, eventStartHandler);
         window.addEventListener(eventMove, eventMoveHandler);
         window.addEventListener(eventEnd, eventEndHandler);
         /* Checks for new text height, adds/removes scrolls */
-        window.addEventListener('resize', (e) => {
+        window.addEventListener('resize', () => {
             product.removeEventListener(eventStart, eventStartHandler);
             window.removeEventListener(eventMove, eventMoveHandler);
             window.removeEventListener(eventEnd, eventEndHandler);
@@ -471,81 +469,22 @@ loadAndCreate
 })
 /* Buy buttons and cart */
 .then(([products, data]) => {
-    const cart = document.querySelector('#cart'), cartBlock = document.querySelector('#cart-block'), cartCount = document.querySelector('#cart-count'), cartIcon = document.querySelector('.fa-cart-shopping');
-    let cartItem = {name: undefined,
-        price: undefined};
-    let key = localStorage.length;
-    cartCount.innerHTML = key;
-
-    function wiggleAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-            requestAnimationFrame(() => {
-                cartIcon.classList.add('cart-wiggle');
-            });
-    }; 
-    function cartDropAnimation() {
-        cartIcon.className = 'fa fa-cart-shopping';
-        requestAnimationFrame(() => {
-            cartIcon.classList.add('cart-drop');
-        });
-    };
-    function isCartCountOne() {
-        if(cartCount.innerHTML != 0 && cartCount.innerHTML < 2)
-            cartBlock.style.borderBottomRightRadius = '0px';
-        else
-            cartBlock.style.borderRadius = '10px 0 10px 10px';
-        if(cartCount.innerHTML == 0) {
-            cartBlock.style.display = 'none';
-            cart.style.borderTopLeftRadius = '23px';
-            cart.style.borderBottomLeftRadius = '23px';
-        }
-    };
-    function addCart(product) {
-        cartItem.name = product.querySelector('.product-name').innerHTML;
-        cartItem.price = product.querySelector('.product-price').innerHTML;
-        localStorage.setItem(key, JSON.stringify(cartItem));
-        cartModify(key, cartItem.name, cartItem.price);
-        key++;
-        cartCount.innerHTML = key;
-        wiggleAnimation();
-        isCartCountOne();
-    };
-    const storageModify = function(e) {
-        let selectDelete = +(e.target.parentElement.querySelector('.cart-number').innerHTML);
-        if(e.target.parentElement.nextSibling != null) {
-            e.target.parentElement.replaceWith(e.target.parentElement.nextSibling);
-            localStorage.removeItem(selectDelete);
-            for(let i = selectDelete; i < cartBlock.children.length; i++) {
-                if(cartBlock.children[i].querySelector('.cart-number').innerHTML != i) 
-                {
-                    cartBlock.children[i].querySelector('.cart-number').innerHTML = i;
-                    localStorage.setItem(i, localStorage.getItem(i + 1));
-                    localStorage.removeItem(i + 1);
-                }
-            }
-            }
-            else 
-            {
-                e.target.parentElement.remove();
-                localStorage.removeItem(selectDelete);
-            }
-            key = localStorage.length;
-            cartCount.innerHTML = localStorage.length;
-            isCartCountOne();
-    };
-const cartModify = function(cartNumber, cartDesc, cartPrice) {
-    const createCartContainer = document.createElement('div'), createCartNumber = document.createElement('div'), createCartDesc = document.createElement('div'), createCartPrice = document.createElement('div'), createCartButton = document.createElement('button');
-    createCartContainer.className = 'cart-container', createCartNumber.className = 'cart-number', createCartDesc.className = 'cart-description', createCartPrice.className = 'cart-price', createCartButton.className = 'cart-remove-item';
-    createCartNumber.innerHTML = cartNumber, createCartDesc.innerHTML = cartDesc, createCartPrice.innerHTML = cartPrice;
-    cartBlock.append(createCartContainer);
-    createCartContainer.append(createCartNumber), createCartContainer.append(createCartDesc), createCartContainer.append(createCartPrice), createCartContainer.append(createCartButton);
-    createCartButton.addEventListener('click', (e) => {storageModify(e); cartDropAnimation()});
-};
-
-products.forEach(function(product) {
-    product.querySelector('button').addEventListener('click', (e) => addCart(e.target.parentElement.parentElement))
-});
+    loadScript();
+    products.forEach((product) => {
+        const button = product.querySelector('button');
+        button.addEventListener('click', (e) => {
+            addCart(TYPES.productShop, e.target.parentElement.parentElement);
+        })
+    })
 })
+
+function loadScript() {
+    const script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', '../scripts/cart.js');
+
+    document.body.append(script);
+}
 
 /* Filter container toggle show/hide */
 {
