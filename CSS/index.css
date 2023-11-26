@@ -152,13 +152,15 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     cursor: pointer;}
 .menu-drop-down li a {text-decoration: none;
     color: #000;}
-.menu-drop-down li {background-image: linear-gradient(#000, #000);
+.menu-drop-down li {width: fit-content;
+    background-image: linear-gradient(#000, #000);
     background-repeat: no-repeat;
-    background-position: 0% 90%;
+    background-position: 100% 90%;
     background-size: 0% 1px;
-    transition: background-size 300ms;
+    transition: background-size 350ms ease-in-out;
     width: fit-content}
-.menu-drop-down li:hover {background-size: 100% 1px;}
+.menu-drop-down li:hover {background-size: 100% 1px;
+    background-position: 0% 90%;}
 .menu-element:hover {background-color: rgb(230, 230, 230);}
 
 
