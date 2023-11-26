@@ -133,15 +133,22 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     transition: left 0.35s;
     transition-timing-function: cubic-bezier(0.9, 0.1);
     z-index: 100;}
+.menu-element .fa {float: right;
+    font-size: 22px;
+    transition: 400ms;}
+.menu-element:focus .fa {transform: rotate(180deg);}
 .menu-element p {font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     padding: 12px;}
-.menu-drop-down {display: none;
-    list-style: none;
+.menu-drop-down {display: block;
+    max-height: 0px;
     padding-left: 50px;
     font-size: 16px;
+    overflow: hidden;
+    transition: 400ms;
     line-height: 24px;
+    list-style: none;
     cursor: pointer;}
 .menu-drop-down li a {text-decoration: none;
     color: #000;}
@@ -153,8 +160,6 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     width: fit-content}
 .menu-drop-down li:hover {background-size: 100% 1px;}
 .menu-element:hover {background-color: rgb(230, 230, 230);}
-.menu-element:focus + .menu-drop-down {display: block;}
-.menu-drop-down:hover{display: block;}
 
 
 

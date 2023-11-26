@@ -27,6 +27,20 @@
             menu.style.top = navHeight + 'px';
         }
     });
+
+    const categories = document.querySelectorAll('.menu-element');
+    const dropDown = document.querySelectorAll('.menu-drop-down');
+    for(const [index, category] of categories.entries()) {
+        category.addEventListener('focus', () => {
+            const height = dropDown[index].scrollHeight;
+            dropDown[index].style.maxHeight = height + 'px';
+        });
+    };
+    for(const [index, category] of categories.entries()) {
+        category.addEventListener('blur', () => {
+            dropDown[index].style.maxHeight = '';
+        });
+    };
 }
 /* Search box */
 {
