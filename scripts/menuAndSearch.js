@@ -60,12 +60,12 @@
         if(searchValue.join().length > 1)
         for (const key in serverResponse) {
             const category = serverResponse[key];
-            categoryLoop: for (const product of category) {
+            categoryLoop: for(const product of category) {
                 if(product.title) {
                     const title = product.title;
-                    for(const word of searchValue) {
-                        if((title.toLowerCase()).includes(word.toLowerCase()) && answerBlock.length < 5) {
-                            if(word == searchValue[searchValue.length - 1])
+                    for(const [index, searchWord] of searchValue.entries()) {
+                        if((title.toLowerCase()).includes(searchWord.toLowerCase()) && answerBlock.length < 5) {
+                            if(index == searchValue.length - 1)
                                 answerBlock.push(outputSearch(product, searchFor.title));
                         }
                         else {
@@ -75,9 +75,9 @@
                 } else
                 if(product.name) {
                     const name = product.name;
-                    for(const word of searchValue) {
-                        if((name.toLowerCase()).includes(word.toLowerCase()) && answerBlock.length < 5) {
-                            if(word == searchValue[searchValue.length - 1])
+                    for(const [index, searchWord] of searchValue.entries()) {
+                        if((name.toLowerCase()).includes(searchWord.toLowerCase()) && answerBlock.length < 5) {
+                            if(index == searchValue.length - 1)
                                 answerBlock.push(outputSearch(product, searchFor.name));
                         }
                         else {

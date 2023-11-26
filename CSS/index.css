@@ -81,25 +81,27 @@ nav ul li:last-child:hover {background-color: rgb(184, 190, 89);}
     top: 48px;
     left: 12px;
     overflow: hidden;
-    border-radius: 5px;}
+    background-color: rgba(103, 107, 38, 0.9);
+    border-radius: 3px;}
 .search-response {display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr 17px;
-    height: 70px;
+    height: 80px;
     width: 100%;
-    margin-bottom: 2px;
+    padding: 5px 5px 5px 3px;
     box-sizing: border-box;
-    border-radius: 5px;
+    border: 1px solid #1a1a1a;
+    border-top: none;
     overflow: hidden;
-    cursor: pointer;
-    background-color: rgba(171, 206, 75, 0.561);}
-.search-response:last-of-type {margin-bottom: 0px;}
+    cursor: pointer;}
+.search-response:first-of-type {border-top: 1px solid #1a1a1a;}
 .search-response img {height: 100%;
-    width: 50px;
+    width: 45px;
     grid-row-start: 1;
     grid-row-end: 3;
     grid-column: 1;
-    object-fit: cover;}
+    object-fit: cover;
+    border-radius: 2px;}
 .search-response .search-name {height: 18px;
     width: 100%;
     grid-row: 1;
