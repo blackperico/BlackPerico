@@ -1,5 +1,4 @@
 'use strict'
-
 /* Checks wether user is using phone or pc, use touchstart/mousedown */
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 const eventStart = isMobile ? 'touchstart' : 'mousedown';
@@ -8,8 +7,8 @@ const eventEnd = isMobile ? 'touchend' : 'mouseup';
 
 /* Products creation and JSON insertion from fetch */
 function createProducts(item) {
-    /* Declare const for elements creation */
     const shopContainer = document.querySelector('#shop-container');
+    /* Declare const for elements creation */
     const product = document.createElement('div');
     product.className = 'product';
     const newImg = document.createElement('img');
@@ -54,6 +53,13 @@ function createProducts(item) {
 };
 /* HTML Element for removing filters, used later in both Price filter and Attributes filters */
 const removeFilters = document.querySelector('.remove-filters');
+function insertSorted(sortingArray) {
+    const shopContainer = document.querySelector('#shop-container');
+
+    sortingArray.forEach((product) => {
+        shopContainer.append(product);
+    })
+}
 /* Height for products' desc containers */
 const containerHeight = Number(getComputedStyle(document.documentElement).getPropertyValue('--descContainerHeight').replace('px', ''));
 /* Checks if products need scrolls to be added or removed */
@@ -77,6 +83,7 @@ function scrollCheck(products) {
         }
     });
 };
+
 /* Takes 'filters' object containing keys(title what to be sorted by) and values(exact product's attribute to sort by for) and creates sorting table on page */
 function createFilters(filters) {
     const filterContainer = document.querySelector('#shop-container-filter');
@@ -210,6 +217,13 @@ function updatePossibleSorts(products) {
         }
     });
 };
+function loadScript() {
+    const script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', '../scripts/cart.js');
+
+    document.body.append(script);
+};
 
 /* Fetch request */
 const searchFor = document.querySelector('.nav-path + h2').innerHTML.toLowerCase();
@@ -225,16 +239,17 @@ const loadAndCreate = new Promise((resolve, reject) => {
 });
 
 loadAndCreate
-/* Create products */
+/* Creates PRODUCTS in certain pages */
 .then(data => {
-    const elementsCreated = [];
-    data.forEach((value) => {
+    const elements = [];
+    data.forEach((value) => {            
         const element = createProducts(value);
-        elementsCreated.push(element);
+        elements.push(element);
     });
-    return [elementsCreated, data];
+
+    return [elements, data];
 })
-/* Add scrolls on created products + it's functionality */
+/* Add SCROLLS on created products + it's functionality */
 .then(([products, data]) => {
     scrollCheck(products);
     products.forEach((product) => {
@@ -313,9 +328,10 @@ loadAndCreate
             window.addEventListener(eventEnd, eventEndHandler);
         });
         });
+
     return [products, data];
 })
-/* Checks each product for it's attributes, of those attributes CREATES FILTERS
+/* FILTERS
     + Shrinking/Expanding filter's content on click
     + Checkboxes, only 1 of a group can be selected, onchange it calls sort() */
 .then(([products, data]) => {
@@ -347,23 +363,23 @@ loadAndCreate
     /* filtersContainer's picked and display style twice changed for smaller screens so it wouldn't be 'none' so we can pick up heights for items */
     const collapsibleContents = document.querySelectorAll('.collapsible-content');
     const collapsibleTriggers = document.querySelectorAll('.collapsible-trigger');
-    const arrows = document.querySelectorAll('.fa-caret-up');
     const filtersContainer = document.querySelector('#shop-container-filter');
-
+    
     /* Shrinking/Expanding content on clicks */        
     filtersContainer.style.display = 'block';
     for(let n = 0; n < collapsibleTriggers.length; n++) {
         const height = getComputedStyle(collapsibleContents[n]).height;
         collapsibleContents[n].style.height = '0px';
+        const arrow = collapsibleTriggers[n].querySelector('.fa-caret-up');
 
         collapsibleTriggers[n].addEventListener('click', () => {
             if(getComputedStyle(collapsibleContents[n]).height == '0px') {
                 collapsibleContents[n].style.height = height;
-                arrows[n].style.transform = 'rotate(180deg)';
+                arrow.style.transform = 'rotate(180deg)';
             }
             else {
                 collapsibleContents[n].style.height = '0px';
-                arrows[n].style.transform = 'rotate(0deg)';
+                arrow.style.transform = 'rotate(0deg)';
             }
         });
     };
@@ -417,40 +433,34 @@ loadAndCreate
     updatePossibleSorts(products);
     return [products, data];
 })
-/* Sort by price, RESET button for filters */
+/* SORT by PRICE, RESET button */
 .then(([products, data]) => {
     const productsOrder = [];
     products.forEach((product) => {
         productsOrder.push(product);
     });
+
     const sortPrice = document.querySelector('#sort');
-    const shopContainer = document.querySelector('#shop-container');
     
     const ACTIONS = {
-        1: function descending(sortingArray) {
-            sortingArray.sort((a, b) => {
+        1: function descending() {
+            products.sort((a, b) => {
                 a = parseFloat(a.querySelector('.product-price').innerHTML);
                 b = parseFloat(b.querySelector('.product-price').innerHTML);
                 return b - a;
             });
-            sortingArray.forEach((product) => {
-                shopContainer.append(product);
-            });
+            insertSorted(products);
         },
-        2: function ascending(sortingArray) {
-            sortingArray.sort((a, b) => {
+        2: function ascending() {
+            products.sort((a, b) => {
                 a = parseFloat(a.querySelector('.product-price').innerHTML);
                 b = parseFloat(b.querySelector('.product-price').innerHTML);
                 return a - b;
             });
-            sortingArray.forEach((product) => {
-                shopContainer.append(product);
-            });
+            insertSorted(products);
         },
-        3: function reset(sortingArray) {
-            sortingArray.forEach((product) => {
-                shopContainer.append(product);
-            });
+        3: function reset() {
+            insertSorted(productsOrder);            
         }
     };
 
@@ -460,7 +470,7 @@ loadAndCreate
         removeFilters.style.display = 'inline';
     });
     removeFilters.addEventListener('click', () => {
-        ACTIONS[3](productsOrder);
+        ACTIONS[3]();
         removeFilters.style.display = '';
         sortPrice.selectedIndex = 0;
     });
@@ -478,15 +488,7 @@ loadAndCreate
     })
 })
 
-function loadScript() {
-    const script = document.createElement('script');
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', '../scripts/cart.js');
-
-    document.body.append(script);
-}
-
-/* Filter container toggle show/hide */
+/* Filter container TOGGLE show/hide */
 {
     const filterContainer = document.querySelector('#shop-container-filter');
     const openFilters = document.querySelector('#filter-container'), closeFilters = document.querySelector('.fa-xmark');
