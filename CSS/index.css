@@ -878,6 +878,11 @@ to {transform: rotate(20deg)}}
 #sort option {font-size: 15px;
     padding: 5px;}
 #sort option:first-child {display: none;}
+@media screen and (max-width: 640px) {
+    #filter-sort-wrap {flex-direction: column;
+        align-items: normal;}
+    .remove-filters {direction: rtl;}
+}
 
 .product {height: 300px;
     max-width: 270px;
