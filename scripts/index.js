@@ -547,7 +547,7 @@ promise2 = fetchJSON
 function loadScript() {
     const script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', '../scripts/cart.js');
+    script.setAttribute('src', './scripts/cart.js');
 
     document.body.append(script);
 }
