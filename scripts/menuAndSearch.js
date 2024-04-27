@@ -139,7 +139,7 @@
     };
 
     const request = new Promise((resolve, reject) => {
-        fetch("../JSON/products.json")
+        fetch("https://blackperico.github.io/BlackPerico/JSON/products.json")
         .then((response) => {
             if(!response.ok) {
                 reject('Network problem: ' );
