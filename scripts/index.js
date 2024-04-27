@@ -28,7 +28,7 @@
         else
         alert('Ads load Error: ' + xmlhttp.status);
     };
-    xmlhttp.open('GET', '../JSON/products.json', true);
+    xmlhttp.open('GET', 'https://blackperico.github.io/BlackPerico/JSON/products.json', true);
     xmlhttp.send();
 
     function main() {
@@ -126,7 +126,7 @@
 
 let promise1, promise2;
 const fetchJSON =  new Promise((resolve, reject) => {
-    fetch('../JSON/products.json')
+    fetch('https://blackperico.github.io/BlackPerico/JSON/products.json')
     .then(response => {
         if(!response.ok) {
             reject('Network problem trying to load products.json.');

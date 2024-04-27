@@ -2,25 +2,25 @@
     "adsContainer": [
         {
             "attributes" : {
-                "src": "../images/ads/ad0.jpg",
+                "src": "./images/ads/ad0.jpg",
                 "alt": "God of War Ragnarok"
             }
         },
         {
             "attributes" : {
-                "src": "../images/ads/ad1.jpg",
+                "src": "./images/ads/ad1.jpg",
                 "alt": "Speakers Beoplay Portal"
             }
         },
         {
             "attributes" : {
-                "src": "../images/ads/ad2.jpg",
+                "src": "./images/ads/ad2.jpg",
                 "alt": "TV gifts"
             }
         },
         {
             "attributes" : {
-                "src": "../images/ads/gpu.jpg",
+                "src": "./images/ads/gpu.jpg",
                 "alt": "GPU"
             }
         }
@@ -37,7 +37,7 @@
             "genre": "Genre: RPG, Action, Adventure, Open-World",
             "date": "Released: 27. Aug 2018",
             "image": {
-                "src": "../images/sideElement/valhalla.jpg",
+                "src": "./images/sideElement/valhalla.jpg",
                 "alt": "Assassin's Creed: Valhalla Wrath of Druids"
             }
         },
@@ -52,7 +52,7 @@
             "genre": "Genre: Open-World, RPG, Shooter",
             "date": "Released: 14. Apr 2018",
             "image": {
-                "src": "../images/sideElement/wildlands.jpg",
+                "src": "./images/sideElement/wildlands.jpg",
                 "alt": "Ghost Recon's Wildlands"
             }
         },
@@ -67,7 +67,7 @@
             "genre": "Genre: Strategy",
             "date": "Released: 18. Aug 2019",
             "image": {
-                "src": "../images/sideElement/warcraft3reforged.jpg",
+                "src": "./images/sideElement/warcraft3reforged.jpg",
                 "alt": "Warcraft 3: Reforged"
             }
         },
@@ -82,7 +82,7 @@
             "genre": "Genre: Zombie Apocalypse, First-Person, RPG, Open-World",
             "date": "Released: 4. Feb 2022",
             "image": {
-                "src": "../images/sideElement/dyinglight2.jpg",
+                "src": "./images/sideElement/dyinglight2.jpg",
                 "alt": "Dying Light 2 Stay  Human"
             }
         },
@@ -97,7 +97,7 @@
             "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
             "date": "Released: 15. Feb 2019",
             "image": {
-                "src": "../images/sideElement/metroexodus.jpg",
+                "src": "./images/sideElement/metroexodus.jpg",
                 "alt": "Metro: Exodus"
             }
         },
@@ -112,7 +112,7 @@
             "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
             "date": "Released: 15. Feb 2014",
             "image": {
-                "src": "../images/sideElement/metrolastlight.jpg",
+                "src": "./images/sideElement/metrolastlight.jpg",
                 "alt": "Metro: Last Light"
             }
         },
@@ -127,7 +127,7 @@
             "genre": "Genre: Post-Nuclear, Apocalypse, Metro, Shooter",
             "date": "Released: 16. Mar 2010",
             "image": {
-                "src": "../images/sideElement/metro2033.jpg",
+                "src": "./images/sideElement/metro2033.jpg",
                 "alt": "Metro: 2033"
             }
         },
@@ -142,7 +142,7 @@
             "genre": "Genre: Open-World, RPG, Rogue-Like, Historical",
             "date": "Released: 27. Oct 2017",
             "image": {
-                "src": "../images/sideElement/origins.jpg",
+                "src": "./images/sideElement/origins.jpg",
                 "alt": "Assassin's Creed Origins"
             }
         }
@@ -159,7 +159,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/2060.jpg",
+                "src": "./images/categoryItem/2060.jpg",
                 "alt": "RTX 2060"
             }
         },
@@ -174,7 +174,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/2070.jpg",
+                "src": "./images/categoryItem/2070.jpg",
                 "alt": "RTX 2070"
             }
         },
@@ -189,7 +189,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/2070ti.jpg",
+                "src": "./images/categoryItem/2070ti.jpg",
                 "alt": "RTX 2070Ti"
             }
         },
@@ -204,7 +204,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/2080.jpg",
+                "src": "./images/categoryItem/2080.jpg",
                 "alt": "RTX 2080"
             }
         },
@@ -219,7 +219,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/550.jpg",
+                "src": "./images/categoryItem/550.jpg",
                 "alt": "RX 550"
             }
         },
@@ -234,7 +234,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/560.jpg",
+                "src": "./images/categoryItem/560.jpg",
                 "alt": "RX 560"
             }
         },
@@ -249,7 +249,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/570.jpg",
+                "src": "./images/categoryItem/570.jpg",
                 "alt": "RX 570"
             }
         },
@@ -264,7 +264,7 @@
                 "Memory Interface: 192-bit"
             ],
             "image": {
-                "src": "../images/categoryItem/580.jpg",
+                "src": "./images/categoryItem/580.jpg",
                 "alt": "RX 580"
             }
         }
