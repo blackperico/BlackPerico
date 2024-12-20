@@ -1,7 +1,9 @@
 'use strict'
 /* Ads */
 {
-    const ad = document.querySelector('#ad'), currentImage = document.querySelector('#current-image'), previousImage = document.querySelector('#previous-image');
+    const ad = document.querySelector('#ad'), 
+        currentImage = document.querySelector('#current-image'), 
+        previousImage = document.querySelector('#previous-image');
     const selectTimer = 10000, loopTimer = 3000;
     let images = [], loopThrough;
 
@@ -16,17 +18,20 @@
     };
 
     const xmlhttp = new XMLHttpRequest();
+    console.log(xmlhttp);
     xmlhttp.onload = function() {
         if(xmlhttp.status == 200) {
+            console.log(this);
             const items = JSON.parse(this.response).adsContainer;
             items.forEach((image, index) => {
+                console.log(image);
                 createDots(index);
                 images.push(image.attributes);
             });
             main();
         }
         else
-        alert('Ads load Error: ' + xmlhttp.status);
+            alert('Ads load Error: ' + xmlhttp.status);
     };
     xmlhttp.open('GET', 'https://blackperico.github.io/BlackPerico/JSON/products.json', true);
     xmlhttp.send();
