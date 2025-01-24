@@ -333,7 +333,7 @@ loadAndCreate
 })
 /* FILTERS
     + Shrinking/Expanding filter's content on click
-    + Checkboxes, only 1 of a group can be selected, onchange it calls sort() */
+    + Checkboxes, only 1 out of the whole group can be selected, onchange it calls sort() */
 .then(([products, data]) => {
     const filters = {};
     
@@ -365,12 +365,13 @@ loadAndCreate
     const collapsibleTriggers = document.querySelectorAll('.collapsible-trigger');
     const filtersContainer = document.querySelector('#shop-container-filter');
     
-    /* Shrinking/Expanding content on clicks */        
+    /* Shrinking/Expanding content on clicks */  
     filtersContainer.style.display = 'block';
     for(let n = 0; n < collapsibleTriggers.length; n++) {
         const height = getComputedStyle(collapsibleContents[n]).height;
-        collapsibleContents[n].style.height = '0px';
         const arrow = collapsibleTriggers[n].querySelector('.fa-caret-up');
+        collapsibleContents[n].style.height = height;
+        arrow.style.transform = 'rotate(180deg)';
 
         collapsibleTriggers[n].addEventListener('click', () => {
             if(getComputedStyle(collapsibleContents[n]).height == '0px') {
@@ -498,12 +499,14 @@ loadAndCreate
         filterContainer.style.display = '';
         overlay.style.display = '';
     };
-    openFilters.addEventListener('click', () => {
+    function showFilters() {
         if(getComputedStyle(filterContainer).display == 'none') {
             filterContainer.style.display = 'block';
             overlay.style.display = 'block';
         }
-    });
+    };
+    
+    openFilters.addEventListener('click', showFilters);
     closeFilters.addEventListener('click', removeFilters);
     overlay.addEventListener('click', removeFilters);
 }
